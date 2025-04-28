@@ -15,7 +15,7 @@ git config user.name "ORT Student"
 - Subir, sobre la rama `develop`, el código de la aplicación que se encuentra en siguiente `.zip`:
 
 
-<a href="./lab-githubactions.zip" download>
+<a href="./Extras/lab-githubactions.zip" download>
   <span>lab-githubactions.zip</span>
   <img src="./Extras/Imagenes/zip.png" style="vertical-align: middle; margin-left: 5px;width: 30px;height: 30px;">
 </a>
