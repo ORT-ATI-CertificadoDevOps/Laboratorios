@@ -1,0 +1,114 @@
+{
+	"info": {
+		"_postman_id": "f4ff521d-b437-4ad8-9b4b-bfc47e0d0056",
+		"name": "MonolithToMicroservicesExample",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Obtener productos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API_GATEWAY_IP}}/products",
+					"host": [
+						"{{API_GATEWAY_IP}}"
+					],
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener un producto",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API_GATEWAY_IP}}/products/123",
+					"host": [
+						"{{API_GATEWAY_IP}}"
+					],
+					"path": [
+						"products",
+						"123"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Realizar una compra",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    \"123\", \"321\", \"111\"\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API_GATEWAY_IP}}/orders",
+					"host": [
+						"{{API_GATEWAY_IP}}"
+					],
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ver estado de envío",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API_GATEWAY_IP}}/shipping/c",
+					"host": [
+						"{{API_GATEWAY_IP}}"
+					],
+					"path": [
+						"shipping",
+						"c"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "API_GATEWAY_IP",
+			"value": "172.17.0.4"
+		}
+	]
+}

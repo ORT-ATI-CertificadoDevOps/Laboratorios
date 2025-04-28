@@ -1,0 +1,50 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Staging environment template for AWS CodePipeline Step by Step - Section 5
+
+Parameters:
+  WebServerImage:
+    Type: AWS::EC2::Image::Id
+    Description: Custom AMI ID for the web server instance
+  WebServerRoleName:
+    Type: String
+    Description: The name of the IAM Role attached to the web server instance
+    Default: WebServerRole
+
+Resources:
+  WebServerInstance:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: !Ref WebServerImage
+      InstanceType: t2.micro
+      IamInstanceProfile: !Ref InstanceProfile
+      SecurityGroupIds:
+        - !Ref WebServerSecurityGroup
+      Tags:
+        -
+          Key: Name
+          Value: !Sub "${AWS::StackName}-WebServer"
+        - 
+          Key: Environment
+          Value: Staging
+
+  InstanceProfile:
+    Type: AWS::IAM::InstanceProfile
+    Properties: 
+      Roles: 
+        - !Ref WebServerRoleName
+
+  WebServerSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Security group for web servers 
+      SecurityGroupIngress: 
+        - 
+          IpProtocol: "tcp"
+          FromPort: 80
+          ToPort: 80
+          CidrIp: "0.0.0.0/0"
+
+Outputs:
+  WebServerDnsName:
+    Value: !GetAtt WebServerInstance.PublicDnsName
+    Description: Public DNS name of the web server instance
