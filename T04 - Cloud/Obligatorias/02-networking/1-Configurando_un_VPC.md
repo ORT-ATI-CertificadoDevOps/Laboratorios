@@ -5,7 +5,7 @@
 Dado el siguiente diagrama de arquitectura, se deben desplegar todos los componentes que en el se representan.
     
 <p align = "center">
-<img src = "../../../Extras/Imagenes/labNetworking/vpc/arquitectura.png">
+<img src = "./Extras/Imagenes/labNetworking/vpc/arquitectura.png">
 </p>
 
 * Crear un nuevo `VPC`

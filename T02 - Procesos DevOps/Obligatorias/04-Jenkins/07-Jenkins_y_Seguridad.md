@@ -30,7 +30,7 @@ Vamos a realizar la configuración sobre nuestro plugin instalado en el paso ant
 - Realizar login con el usuario generado y verificar que se valida pero no tiene permisos.
 
 <p align = "center">
-<img src = "../../../Extras/Imagenes/laboratorioJenkins/jenkinsPermisos.png" width=100%>
+<img src = "./Extras/Imagenes/laboratorioJenkins/jenkinsPermisos.png" width=100%>
 </p>
 
 - Generar un nuevo role llamado **read-only** con el permisos solo de **read** en todas las opciones.

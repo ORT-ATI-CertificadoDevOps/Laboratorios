@@ -71,7 +71,7 @@ Creating remote-host ... done
 >**Nota:** Ver también que el remote-host se encuentra corriendo dentro de la misma red que el servidor de Jenkins
 
 <p align = "center">
-<img src = "../../../Extras/Imagenes/laboratorioJenkins/remoteHost.png" width=100%>
+<img src = "./Extras/Imagenes/laboratorioJenkins/remoteHost.png" width=100%>
 </p>
 
 ### 4.2 Verificar conexión sobre el remote-host

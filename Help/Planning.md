@@ -1,4 +1,4 @@
-# Plan de Trabajo a 6 Semanas - Obligatorio
+# Plan de Trabajo - Obligatorio
 
 ## Semana 1: Planificación y configuración inicial
 
@@ -39,7 +39,9 @@
    - Implementar proceso de Pull Request y revisión de código
    - Configurar despliegue automatizado de infraestructura base
 
-3. **Actualización del tablero Kanban**
+3. **Documentación**
+   - Actualización del tablero Kanban
+   - Generar README.md y comenzar a documentar
 
 ## Semana 3: Containerización y CI
 
@@ -97,7 +99,7 @@
 ## Semana 6: Documentación y entrega final
 
 1. **Documentación técnica**
-   - Crear README.md completo con instrucciones
+   - Finalizar README.md completo con instrucciones
    - Generar diagramas de arquitectura
    - Documentar flujos CI/CD y estrategia de Git
    - Elaborar informe de resultados de testing con recomendaciones

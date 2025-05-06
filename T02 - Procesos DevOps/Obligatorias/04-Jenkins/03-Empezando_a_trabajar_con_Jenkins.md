@@ -3,7 +3,7 @@
 Daremos una breve explicación sobre cada opción perteneciente al dashboard para irnos familizarizando con la herramienta.
 
 <p align = "center">
-<img src = "../../../Extras/Imagenes/laboratorioJenkins/jenkinsDashboard.png" width=100%>
+<img src = "./Extras/Imagenes/laboratorioJenkins/jenkinsDashboard.png" width=100%>
 </p>
 
 1. **New Item:** Utilizado para crear nuevos elementos, nuevas tareas y mucho más, iremos viendo durante este laboratorio la gran mayoría de las opciones disponibles.

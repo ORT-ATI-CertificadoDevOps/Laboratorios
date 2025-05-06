@@ -54,23 +54,23 @@ db_host:
 - Seguir los pasos de la guía para ingresar a la consola de AWS, la guía se encuentra en Extras/Jenkins
 - Una vez generado el login, deberíamos de visualizar una interfaz muy parecida a la siguiente:
 <p align = "center">
-<img src = "../../../Extras/Imagenes/laboratorioJenkins/AwsConsola.png" width=100%>
+<img src = "./Extras/Imagenes/laboratorioJenkins/AwsConsola.png" width=100%>
 </p>
 - Dentro de la barra buscadora de la consola, escribimos s3 y elegimos la opción que muestra la imagen:
 <p align = "center">
-<img src = "../../../Extras/Imagenes/laboratorioJenkins/s3(1).png" width=100%>
+<img src = "./Extras/Imagenes/laboratorioJenkins/s3(1).png" width=100%>
 </p>
 - Generaremos un nuevo bucket s3 con el botón de Create bucket
 - <p align = "center">
-<img src = "../../../Extras/Imagenes/laboratorioJenkins/s3(2).png" width=100%>
+<img src = "./Extras/Imagenes/laboratorioJenkins/s3(2).png" width=100%>
 </p>
 - Le ponemos un nombre, dejamos todas las opciones por defecto y lo generamos:
 - <p align = "center">
-<img src = "../../../Extras/Imagenes/laboratorioJenkins/s3(3).png" width=100%>
+<img src = "./Extras/Imagenes/laboratorioJenkins/s3(3).png" width=100%>
 </p>
 - Una vez generado, realicemos una busqueda para verificar que el almacenamiento s3 bucket fue generado correctamente:
 <p align = "center">
-<img src = "../../../Extras/Imagenes/laboratorioJenkins/s3(4).png" width=100%>
+<img src = "./Extras/Imagenes/laboratorioJenkins/s3(4).png" width=100%>
 </p>
 
 ### 5.4 Obtener ACCESS_KEY_ID y SECRET_ACCESS_KEY para subir archivos al bucket s3
@@ -78,10 +78,10 @@ db_host:
 
 - Por estar en una cuenta de laboratorio, no se generar las credenciales de manera normal, las mismas se obtienen desde el portal que terminamos cada vez que hacemos inicio de sesión, verificar en las siguientes imágenes que existe una opción arriba a la derecha que dice AWS Details, debemos clickear dicha opción y ahí obtenemos el aws_access_key_id, aws_secret_access_key y aws_session_token correspondientes a nuestra cuenta.
 <p align = "center">
-<img src = "../../../Extras/Imagenes/laboratorioJenkins/iam(1).png" width=100%>
+<img src = "./Extras/Imagenes/laboratorioJenkins/iam(1).png" width=100%>
 </p>
 <p align = "center">
-<img src = "../../../Extras/Imagenes/laboratorioJenkins/iam(2).png" width=100%>
+<img src = "./Extras/Imagenes/laboratorioJenkins/iam(2).png" width=100%>
 </p>
 
 
@@ -149,7 +149,7 @@ aws s3 cp /tmp/$BACKUP s3://$BUCKET_NAME/$BACKUP
 - Agregar las contraseñas de `MYSQL_PASSWORD` y `AWS_SECRET_KEY`
 - Al finalizar debemos visualizar las siguientes claves almacenadas:
 <p align = "center">
-<img src = "../../../Extras/Imagenes/laboratorioJenkins/jenkinsCredentials.png" width=100%>
+<img src = "./Extras/Imagenes/laboratorioJenkins/jenkinsCredentials.png" width=100%>
 </p>
 
 ## Próximos pasos

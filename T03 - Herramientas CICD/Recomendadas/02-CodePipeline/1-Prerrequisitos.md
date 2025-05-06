@@ -12,7 +12,7 @@ Vamos a ver el uso de la herramienta CodePipeline, Codecommit, CodeBuild y CodeD
 Primer pipeline que se ejecutara sobre dos buckets de S3 y desplegara una simple aplicación web.
 
 <p align = "center">
-<img src = "../../../Extras/Imagenes/laboratorioCodepipeline/section1.PNG" width=100%>
+<img src = "./Extras/Imagenes/laboratorioCodepipeline/section1.PNG" width=100%>
 </p>
 
 ### Situación 2
@@ -20,7 +20,7 @@ Primer pipeline que se ejecutara sobre dos buckets de S3 y desplegara una simple
 Segundo pipeline que utilizara AWS CodeCommit para desplegar de manera automatica nuestro código a partir de un repositorio.
 
 <p align = "center">
-<img src = "../../../Extras/Imagenes/laboratorioCodepipeline/section2.PNG" width=100%>
+<img src = "./Extras/Imagenes/laboratorioCodepipeline/section2.PNG" width=100%>
 </p>
 
 ### Situación 3
@@ -28,7 +28,7 @@ Segundo pipeline que utilizara AWS CodeCommit para desplegar de manera automatic
 Tercer pipeline que utilizara AWS CodeBuild en conjunto a los servicios anteriores para realizar la construcción y testeo de nuestro código de manera automática.
 
 <p align = "center">
-<img src = "../../../Extras/Imagenes/laboratorioCodepipeline/section3.PNG" width=100%>
+<img src = "./Extras/Imagenes/laboratorioCodepipeline/section3.PNG" width=100%>
 </p>
 
 ### Situación 4
@@ -36,7 +36,7 @@ Tercer pipeline que utilizara AWS CodeBuild en conjunto a los servicios anterior
 Cuarto pipeline que utilizara AWS CodeDeploy en conjunto a los servicios anteriores para realizar el deploy de nuestra aplicación sobre una instancia EC2, que luego sera utilizada por un grupo de autoescalado (ASG).
 
 <p align = "center">
-<img src = "../../../Extras/Imagenes/laboratorioCodepipeline/section4.PNG" width=100%>
+<img src = "./Extras/Imagenes/laboratorioCodepipeline/section4.PNG" width=100%>
 </p>
 
 ### Situación 5
@@ -44,7 +44,7 @@ Cuarto pipeline que utilizara AWS CodeDeploy en conjunto a los servicios anterio
 Quinto pipeline que utilizara AWS CloudFormation en conjunto a los servicios anteriores para crear algunos ambientes y desplegar nuestras aplicaciones, también agregaremos un manual approval entre las instancias de staging y production, se veran como configurar algunas notificaciones.
 
 <p align = "center">
-<img src = "../../../Extras/Imagenes/laboratorioCodepipeline/section5.PNG" width=100%>
+<img src = "./Extras/Imagenes/laboratorioCodepipeline/section5.PNG" width=100%>
 </p>
 
 ## Próximos pasos

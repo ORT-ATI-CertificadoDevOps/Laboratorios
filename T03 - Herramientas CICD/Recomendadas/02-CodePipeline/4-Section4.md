@@ -3,7 +3,7 @@
 Vamos a configurar nuestro pipeline:
 
 <p align = "center">
-<img src = "../../../Extras/Imagenes/laboratorioCodepipeline/section4.PNG" width=100%>
+<img src = "./Extras/Imagenes/laboratorioCodepipeline/section4.PNG" width=100%>
 </p>
 
 Vamos a agregar que la intancia de deploy se realice mediante AWS CodeDeploy sobre una instancia EC2 que cuenta con un servidor web instalado.
@@ -13,7 +13,7 @@ Vamos a agregar que la intancia de deploy se realice mediante AWS CodeDeploy sob
 - Vamos a ir por consola y generaremos el role necesario para que nuestra instancia EC2 pueda comunicarse con el servicio de CodeDeploy:
 
 <p align = "center">
-<img src = "../../../Extras/Imagenes/laboratorioCodepipeline/s4(1).PNG" width=100%>
+<img src = "./Extras/Imagenes/laboratorioCodepipeline/s4(1).PNG" width=100%>
 </p>
 
 - Le ponemos el nombre de WebServerRole.
@@ -45,7 +45,7 @@ Vamos a agregar que la intancia de deploy se realice mediante AWS CodeDeploy sob
 - Debe de configurarse como muestra la imagen:
 
 <p align = "center">
-<img src = "../../../Extras/Imagenes/laboratorioCodepipeline/s4(2).PNG" width=100%>
+<img src = "./Extras/Imagenes/laboratorioCodepipeline/s4(2).PNG" width=100%>
 </p>
 
 - Vamos a tener que agregar el appsec.yml al repositorio ya que es el archivo utilizado por el CodeDeploy, también vamos a tener que agregar el directorio deploy-scripts y su contenido en la raíz del directorio.

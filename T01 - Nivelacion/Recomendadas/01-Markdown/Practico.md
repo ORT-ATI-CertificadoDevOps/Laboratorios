@@ -11,10 +11,10 @@
 - Realizar un archivo Readme.md que se asemeje a las siguientes imagenes.
 - Para irlo visualizarno el VSC instalando alguna extesión (recomendado) o directamente sobre alguna página en la web que permita ir viendo el preview.
 - >**Nota:** Hay un archivo llamado Solucion.md con la solución, no vayan directamente a visualizarlo, traten de realizar el ejercicio y luego validen que les haya quedado de manera correcta.
-<img src="../../../Extras/Imagenes/laboratorioNivelacion/Markdown/1.png" title="static">
-<img src="../../../Extras/Imagenes/laboratorioNivelacion/Markdown/2.png" title="static">
-<img src="../../../Extras/Imagenes/laboratorioNivelacion/Markdown/3.png" title="static">
-<img src="../../../Extras/Imagenes/laboratorioNivelacion/Markdown/4.png" title="static">
-<img src="../../../Extras/Imagenes/laboratorioNivelacion/Markdown/5.png" title="static">
-<img src="../../../Extras/Imagenes/laboratorioNivelacion/Markdown/6.png" title="static">
-<img src="../../../Extras/Imagenes/laboratorioNivelacion/Markdown/7.png" title="static">
+<img src="./Extras/Imagenes/laboratorioNivelacion/Markdown/1.png" title="static">
+<img src="./Extras/Imagenes/laboratorioNivelacion/Markdown/2.png" title="static">
+<img src="./Extras/Imagenes/laboratorioNivelacion/Markdown/3.png" title="static">
+<img src="./Extras/Imagenes/laboratorioNivelacion/Markdown/4.png" title="static">
+<img src="./Extras/Imagenes/laboratorioNivelacion/Markdown/5.png" title="static">
+<img src="./Extras/Imagenes/laboratorioNivelacion/Markdown/6.png" title="static">
+<img src="./Extras/Imagenes/laboratorioNivelacion/Markdown/7.png" title="static">

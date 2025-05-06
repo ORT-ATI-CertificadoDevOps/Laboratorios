@@ -13,10 +13,10 @@ Bienvenidos al práctico "Desplegando una arquitectura completa". Esto es una re
   
 Los recursos desplegados deben ser los siguientes:
 
-![Arquitectura](../../../Extras/Imagenes/laboratorioCloud_EC2/ec2/architecture02.png)
+![Arquitectura](./Extras/Imagenes/laboratorioCloud_EC2/ec2/architecture02.png)
 
 ### Parte 7b: Desplegando una arquitectura segura
 
 Ahora vamos a usar las redes privadas. La idea es desplegar las instancias en las redes privadas, conectándolas a internet a través de un `Nat Gateway` desplegado en la Red Pública (la que tiene conectividad con el `IGW`). Además, deben desplegar un bastión host para conectarse por SSH a las instancias privadas. 
 
-![Arquitectura](../../../Extras/Imagenes/laboratorioCloud_EC2/ec2/architecture-complete.png)
+![Arquitectura](./Extras/Imagenes/laboratorioCloud_EC2/ec2/architecture-complete.png)

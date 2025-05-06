@@ -3,17 +3,17 @@
 Vamos a configurar nuestro pipeline:
 
 <p align = "center">
-<img src = "../../../Extras/Imagenes/laboratorioCodepipeline/section3.PNG" width=100%>
+<img src = "./Extras/Imagenes/laboratorioCodepipeline/section3.PNG" width=100%>
 </p>
 
 Vamos a tratar de simular un pipeline que este verificando cambios sobre una cierta rama de un repo de CodeCommit pero ahora vamos a agregar el step de AWS CodeBuild para construir un artefacto que se alojara en un bucket S3 intermedio y luego se desplegara el artefacto sobre un bucket S3 productivo:
 
 <p align = "center">
-<img src = "../../../Extras/Imagenes/laboratorioCodepipeline/s3(1).PNG" width=100%>
+<img src = "./Extras/Imagenes/laboratorioCodepipeline/s3(1).PNG" width=100%>
 </p>
 
 <p align = "center">
-<img src = "../../../Extras/Imagenes/laboratorioCodepipeline/s3(2).PNG" width=100%>
+<img src = "./Extras/Imagenes/laboratorioCodepipeline/s3(2).PNG" width=100%>
 </p>
 
 ### 1 - Generación de repositorio de AWS CodeCommit
@@ -21,7 +21,7 @@ Vamos a tratar de simular un pipeline que este verificando cambios sobre una cie
 - Vamos a ir por consola y generaremos un repositorio de CodeCommit como muestra la imagen.
 
 <p align = "center">
-<img src = "../../../Extras/Imagenes/laboratorioCodepipeline/s3(3).PNG" width=100%>
+<img src = "./Extras/Imagenes/laboratorioCodepipeline/s3(3).PNG" width=100%>
 </p>
 
 - Visualizar las opciones disponibles para clonar el repositorio de CodecCommit generado y también visualizar las opciones para el recurso de CodeCommit disponibles.
@@ -79,13 +79,13 @@ Vamos a tratar de simular un pipeline que este verificando cambios sobre una cie
 - Si hicimos todo de manera correcta, deberíamos de visualizar algo parecido a lo de la imagen a continuación:
 
 <p align = "center">
-<img src = "../../../Extras/Imagenes/laboratorioCodepipeline/s3(4).PNG" width=100%>
+<img src = "./Extras/Imagenes/laboratorioCodepipeline/s3(4).PNG" width=100%>
 </p>
 
 - Si se ejecuta todo de manera correcta, deberíamos de ver la siguiente falla:
 
 <p align = "center">
-<img src = "../../../Extras/Imagenes/laboratorioCodepipeline/s3(5).PNG" width=100%>
+<img src = "./Extras/Imagenes/laboratorioCodepipeline/s3(5).PNG" width=100%>
 </p>
 
 - Esto se debe a que no configuramos el archivo buildspec.yml, necesario para la etapa de build, ya que en este archivo es donde especificamos los pasos que se tienen que realizar al momento del build.
@@ -95,12 +95,12 @@ Vamos a tratar de simular un pipeline que este verificando cambios sobre una cie
 - El buildpsec.yml se encuentra en la raíz de la carpeta del practico, vamos a mirarlo y luego lo agregamos en la raíz de nuestro repositorio y mandaremos un commit al repositorio centralizado.
 - Se debería de ejecutar el pipeline de manera automatica y no fallar, viendo lo siguiente:
 <p align = "center">
-<img src = "../../../Extras/Imagenes/laboratorioCodepipeline/s3(6).PNG" width=100%>
+<img src = "./Extras/Imagenes/laboratorioCodepipeline/s3(6).PNG" width=100%>
 </p>
 
 - Si todo se ejecuto de manera correcta, deberiamos de ver nuestra aplicación desplegada y funcionando:
 <p align = "center">
-<img src = "../../../Extras/Imagenes/laboratorioCodepipeline/s3(7).PNG" width=100%>
+<img src = "./Extras/Imagenes/laboratorioCodepipeline/s3(7).PNG" width=100%>
 </p>
 
 ### 6 - Agregar tests unitaros al pipeline
@@ -113,7 +113,7 @@ Vamos a tratar de simular un pipeline que este verificando cambios sobre una cie
 - Modificar nuestra pipeline agregando un Action group en el step de Build:
   
 <p align = "center">
-<img src = "../../../Extras/Imagenes/laboratorioCodepipeline/s3(8).PNG" width=100%>
+<img src = "./Extras/Imagenes/laboratorioCodepipeline/s3(8).PNG" width=100%>
 </p>
 
 - LLamar esta etapa UnitTest, el action provided es AWS CodeBuild, el input artifacts es el SourceArtifact y creamos un nuevo project:
@@ -122,14 +122,14 @@ Vamos a tratar de simular un pipeline que este verificando cambios sobre una cie
 - Terminar de editar y guardar, verificar que se obtiene algo parecido a la imagen:
 
 <p align = "center">
-<img src = "../../../Extras/Imagenes/laboratorioCodepipeline/s3(9).PNG" width=100%>
+<img src = "./Extras/Imagenes/laboratorioCodepipeline/s3(9).PNG" width=100%>
 </p>
 
 - Agregar el nuevo buildspec al repositorio y verificar que es lo que pasa.
 - Si todo se hizo correctamente, deberiamos de ver que fallo en la etapa de UnitTest, a qué se debe esto?
   
 <p align = "center">
-<img src = "../../../Extras/Imagenes/laboratorioCodepipeline/s3(10).PNG" width=100%>
+<img src = "./Extras/Imagenes/laboratorioCodepipeline/s3(10).PNG" width=100%>
 </p>
 
 - Verificar los logs para ver que fue lo que paso.

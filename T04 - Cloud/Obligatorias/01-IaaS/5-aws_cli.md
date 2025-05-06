@@ -23,11 +23,11 @@ Debemos de configurar los datos necesarios para conectarnos a `AWS` usando el ac
 Estos datos los podemos encontrar en la consola de Vocareum, en `AWS Details`, bajo el botón `Show`.  
 
 <p align = "center">
-<img src = "../../../Extras/Imagenes/laboratorioCloud_EC2/cli/cli01.png">
+<img src = "./Extras/Imagenes/laboratorioCloud_EC2/cli/cli01.png">
 </p>
 
 <p align = "center">
-<img src = "../../../Extras/Imagenes/laboratorioCloud_EC2/cli/cli02.png">
+<img src = "./Extras/Imagenes/laboratorioCloud_EC2/cli/cli02.png">
 </p>
 
 

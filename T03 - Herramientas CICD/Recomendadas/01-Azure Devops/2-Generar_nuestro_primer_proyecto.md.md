@@ -5,13 +5,13 @@ Vamos a generar un nuevo proyecto dentro de nuestra cuenta de Azure DevOps el cu
 - Ingresar en nuestra cuenta de **Azure DevOps**
 - Generar un nuevo proyecto, con las opciones que muestra la imagen:
 <p align = "center">
-<img src = "../../../Extras/Imagenes/laboratorioAzureDevops/newProject.png" width=100%>
+<img src = "./Extras/Imagenes/laboratorioAzureDevops/newProject.png" width=100%>
 </p>
 
 - Ingresamos al proyecto y validamos que podamos ver las siguientes opciones:
 
 <p align = "center">
-<img src = "../../../Extras/Imagenes/laboratorioAzureDevops/homeProject.png" width=100%>
+<img src = "./Extras/Imagenes/laboratorioAzureDevops/homeProject.png" width=100%>
 </p>
 
 ## Próximos pasos

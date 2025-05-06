@@ -21,7 +21,7 @@
 ## 03: How ECR works
 
 <p align = "center">
-<img src = "../../../../Extras/Imagenes/laboratorioECS/ecs08.png" width=100%>
+<img src = "./../Extras/Imagenes/laboratorioECS/ecs08.png" width=100%>
 </p>
 
 ## 04: Pre-requisites
