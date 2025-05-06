@@ -63,7 +63,7 @@
 
 - Una vez haya terminado la instalación, es necesario instalar el cliente SSH en centOS y luego en Visual Studio Code (VSC), para instalar en centOS nos logeamos mediante la consola del VBOX y ejecutamos los siguientes comandos elevados:
 
-```terminal
+```bash
 sudo yum install openssh-server
 sudo systemctl start sshd.service
 sudo systemctl enable sshd.service
