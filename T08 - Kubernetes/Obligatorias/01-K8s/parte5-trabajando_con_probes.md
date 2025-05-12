@@ -9,4 +9,4 @@ Se sugiere utilizar una prueba del tipo ***httpGet***
 
 ### Alerta de Spoiler
 
-En caso de trancarse, se puede consultar [aquí](./Extras/Soluciones/laboratorioK8s/parte5-trabajando_con_probes.md).
+En caso de trancarse, se puede consultar [aquí](/Extras/Soluciones/laboratorioK8s/parte5-trabajando_con_probes.md).

@@ -3,13 +3,13 @@
 Vamos a configurar nuestro pipeline:
 
 <p align = "center">
-<img src = "./Extras/Imagenes/laboratorioCodepipeline/section1.PNG" width=100%>
+<img src = "/Extras/Imagenes/laboratorioCodepipeline/section1.PNG" width=100%>
 </p>
 
 Buscando obtener el siguiente comportamiento:
 
 <p align = "center">
-<img src = "./Extras/Imagenes/laboratorioCodepipeline/s1(1).PNG" width=100%>
+<img src = "/Extras/Imagenes/laboratorioCodepipeline/s1(1).PNG" width=100%>
 </p>
 
 A continuación, haremos los pasos desde la interfaz gráfica para lograr el cometido y visualizar el resultado, el código de la aplicación a desplegar se encuentra dentro de la carpeta del laboratorio con el nombre `my-website.zip`
@@ -39,14 +39,14 @@ A continuación, haremos los pasos desde la interfaz gráfica para lograr el com
 - Finalizada la creación de ambos buckets, debemos de tener dos recursos de S3 como se muestran en la imagen:
 
 <p align = "center">
-<img src = "./Extras/Imagenes/laboratorioCodepipeline/s1(2).PNG" width=100%>
+<img src = "/Extras/Imagenes/laboratorioCodepipeline/s1(2).PNG" width=100%>
 </p>
 
 - Sobre el bucket de production, tendremos que habilitar en las properties para que pueda alojar static website hosting, al momento de especificar las páginas poner `index.html` para el index document y `error.html` para el error document.
 - Finalizada la configuración, deberíamos de visualizar algo como la siguiente imagen:
 
 <p align = "center">
-<img src = "./Extras/Imagenes/laboratorioCodepipeline/s1(3).PNG" width=100%>
+<img src = "/Extras/Imagenes/laboratorioCodepipeline/s1(3).PNG" width=100%>
 </p>
 
 ### 2 - Subir el código al source bucket
@@ -56,7 +56,7 @@ A continuación, haremos los pasos desde la interfaz gráfica para lograr el com
 - Finalizado el upload, debemos de obtener algo parecido a lo de la imagen:
 
 <p align = "center">
-<img src = "./Extras/Imagenes/laboratorioCodepipeline/s1(4).PNG" width=100%>
+<img src = "/Extras/Imagenes/laboratorioCodepipeline/s1(4).PNG" width=100%>
 </p>
 
 ### 3 - Crear el pipeline
@@ -70,13 +70,13 @@ A continuación, haremos los pasos desde la interfaz gráfica para lograr el com
 - Si hicimos todo de manera correcta, deberíamos de visualizar algo parecido a lo de la imagen a continuación:
 
 <p align = "center">
-<img src = "./Extras/Imagenes/laboratorioCodepipeline/s1(5).PNG" width=100%>
+<img src = "/Extras/Imagenes/laboratorioCodepipeline/s1(5).PNG" width=100%>
 </p>
 
 - Si se ejecuta todo de manera correcta, podremos utilizar la URL que tiene nuestro production bucket y deberíamos de acceder a nuestra página:
 
 <p align = "center">
-<img src = "./Extras/Imagenes/laboratorioCodepipeline/s1(6).PNG" width=100%>
+<img src = "/Extras/Imagenes/laboratorioCodepipeline/s1(6).PNG" width=100%>
 </p>
 
 ### 4 - Desactivar el pipeline y realizar cambios en el código
@@ -84,7 +84,7 @@ A continuación, haremos los pasos desde la interfaz gráfica para lograr el com
 - Vamos a desactivar el transition entre los steps de nuestro pipeline, para ello debemos de ir a los pipelines y deshabilitar la transition:
 
 <p align = "center">
-<img src = "./Extras/Imagenes/laboratorioCodepipeline/s1(7).PNG" width=100%>
+<img src = "/Extras/Imagenes/laboratorioCodepipeline/s1(7).PNG" width=100%>
 </p>
 
 - Realizaremos una modificación en el código de nuestra aplicación que se encuentra en el .zip, cambiaremos de que sea 1.0 a 2.0 en el index.html.
@@ -94,7 +94,7 @@ A continuación, haremos los pasos desde la interfaz gráfica para lograr el com
 - Una vez que el mismo haya finalizado, verificar la web nuevamente y deberíamos de visuliazar nuestra página actualizada con la version 2.0:
 
 <p align = "center">
-<img src = "./Extras/Imagenes/laboratorioCodepipeline/s1(8).PNG" width=100%>
+<img src = "/Extras/Imagenes/laboratorioCodepipeline/s1(8).PNG" width=100%>
 </p>
 
 ### 5 - Verificar detalles y history del pipeline

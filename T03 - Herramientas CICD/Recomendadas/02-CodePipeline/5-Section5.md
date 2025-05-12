@@ -3,13 +3,13 @@
 Vamos a configurar nuestro pipeline:
 
 <p align = "center">
-<img src = "./Extras/Imagenes/laboratorioCodepipeline/section5.PNG" width=100%>
+<img src = "/Extras/Imagenes/laboratorioCodepipeline/section5.PNG" width=100%>
 </p>
 
 Vamos a agregar código de ClouFormation para desplegar cierta infraestructura y que el deploy se realice de manera manual, tratando de simular el siguiente comportamiento:
 
 <p align = "center">
-<img src = "./Extras/Imagenes/laboratorioCodepipeline/s5(1).PNG" width=100%>
+<img src = "/Extras/Imagenes/laboratorioCodepipeline/s5(1).PNG" width=100%>
 </p>
 
 
@@ -19,7 +19,7 @@ Vamos a agregar código de ClouFormation para desplegar cierta infraestructura y
 - Le especificamos el nombre web-server-ami y dejamos los demas valores por defecto.
 
 <p align = "center">
-<img src = "./Extras/Imagenes/laboratorioCodepipeline/s5(8).PNG" width=100%>
+<img src = "/Extras/Imagenes/laboratorioCodepipeline/s5(8).PNG" width=100%>
 </p>
 
 
@@ -28,7 +28,7 @@ Vamos a agregar código de ClouFormation para desplegar cierta infraestructura y
 - Vamos a ir por consola y generaremos el role necesario para CloudFormation con el nombre CloudFormationRoleServiceForCodePipeline como muestra la imagen:
 
 <p align = "center">
-<img src = "./Extras/Imagenes/laboratorioCodepipeline/s5(2).PNG" width=100%>
+<img src = "/Extras/Imagenes/laboratorioCodepipeline/s5(2).PNG" width=100%>
 </p>
 
 - Modificar el role quedo con los suiguientes valores en el trusted relationships:
@@ -61,11 +61,11 @@ Vamos a agregar código de ClouFormation para desplegar cierta infraestructura y
 - Configuramos el step como muestran las imagenes:
 
 <p align = "center">
-<img src = "./Extras/Imagenes/laboratorioCodepipeline/s5(3).PNG" width=100%>
+<img src = "/Extras/Imagenes/laboratorioCodepipeline/s5(3).PNG" width=100%>
 </p>
 
 <p align = "center">
-<img src = "./Extras/Imagenes/laboratorioCodepipeline/s5(4).PNG" width=100%>
+<img src = "/Extras/Imagenes/laboratorioCodepipeline/s5(4).PNG" width=100%>
 </p>
 
 - Verificar en la siguiente imagen que se agregan parametros como argumentos, el WebServerImage corresponde a la AMI generada anteriormente y el WebServerRole al role generado para el WebServer anteriormente. Si seguimos todos los pasos, el único valor a cambiar es el de WebServerImage ya que el ID de cada instancia es único.
@@ -76,7 +76,7 @@ Vamos a agregar código de ClouFormation para desplegar cierta infraestructura y
 ```
 
 <p align = "center">
-<img src = "./Extras/Imagenes/laboratorioCodepipeline/s5(5).PNG" width=100%>
+<img src = "/Extras/Imagenes/laboratorioCodepipeline/s5(5).PNG" width=100%>
 </p>
 
 - Agregamos un Deployment group en CodeDeploy que vamos a utilizar luego en nuestro pipeline, llamado StagingInstances.
@@ -87,7 +87,7 @@ Vamos a agregar código de ClouFormation para desplegar cierta infraestructura y
 - Modificamos nuevamente nuestro pipeline en el step generado de Staging y agregamos el Deployment group generado recientemente como muestra la imagen:
 
 <p align = "center">
-<img src = "./Extras/Imagenes/laboratorioCodepipeline/s5(6).PNG" width=100%>
+<img src = "/Extras/Imagenes/laboratorioCodepipeline/s5(6).PNG" width=100%>
 </p>
 
 - Realizamos cambio en la versión de la app y agregamos la carpeta de cloudformation que se encuentra en la carpeta del laboratorio.
@@ -102,7 +102,7 @@ Vamos a agregar código de ClouFormation para desplegar cierta infraestructura y
 - Modificamos nuestro pipeline en el stage de Staging, agregando un action group al final con la configuración como muestra la imagen:
 
 <p align = "center">
-<img src = "./Extras/Imagenes/laboratorioCodepipeline/s5(7).PNG" width=100%>
+<img src = "/Extras/Imagenes/laboratorioCodepipeline/s5(7).PNG" width=100%>
 </p>
 
 - Enviamos un cambio en el codigo y veamos como se ejecuta el pipeline y luego al llegar a este punto nos va a solicitar aprobación manual para poder seguir.

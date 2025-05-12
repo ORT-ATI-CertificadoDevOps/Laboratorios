@@ -29,13 +29,13 @@
 - Si podemos llegar al sitio y obtenemos un error 403 como la imagen, estamos en lo correcto: 
 
 <p align = "center">
-<img src = "./Extras/Imagenes/laboratorioGithubActions/403.png" width=100%>
+<img src = "/Extras/Imagenes/laboratorioGithubActions/403.png" width=100%>
 </p>
 
 - Nos resta solamente habilitar permisos en el S3 bucket (buscar como solucionar permiso 403 en S3 bucket como website), cuando arreglen el error por el permiso, deberían de visualizar la siguiente imagen:
 
 <p align = "center">
-<img src = "./Extras/Imagenes/laboratorioGithubActions/200.png" width=100%>
+<img src = "/Extras/Imagenes/laboratorioGithubActions/200.png" width=100%>
 </p>
 
 - Seguir ejecutando el deployment desde CircleCI con los approval respectivos para cada ambiente y verificar que se haga el deployment de manera correcta.

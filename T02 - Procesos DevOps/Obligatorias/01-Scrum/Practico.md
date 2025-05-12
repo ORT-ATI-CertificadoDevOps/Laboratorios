@@ -13,7 +13,7 @@
 -  Se deberá de separar todas las tareas (ya sean correspondientes a desarrollo o infraestructura/cloud/devops) en un product backlog.
 -  Si sienten la necesidad de algunas tareas en sub tareas, pueden realizarlo.
 -  Si las correspondientes a desarrollo gustan evidenciarlas en formato de User Story, deberan de respetar las reglas que se muestran en la siguiente imagen:
-<img src="./Extras/Imagenes/laboratorioScrum/userStoryTemplate.jpeg" title="static">
+<img src="/Extras/Imagenes/laboratorioScrum/userStoryTemplate.jpeg" title="static">
 - **NOTA:** No se busca que sean las descripciones con lujo de detalle, la finalidad del ejercicio es generar el product backlog como tal.
 
 
@@ -114,4 +114,4 @@ Particularmente, luego de varios meses de trabajo detectaron algunos problemas c
    - Estas operaciones SOLO pueden ser llevadas a cabo por un administrador. Considere inicialmente agregar un usuario super-administrador en base de datos para poder crear futuros administradores.
 
 6) Para resolver el problema se definió la siguiente arquitectura de alto nivel:
-<img src="./Extras/Imagenes/laboratorioScrum/Arquitectura.png" title="static">
+<img src="/Extras/Imagenes/laboratorioScrum/Arquitectura.png" title="static">

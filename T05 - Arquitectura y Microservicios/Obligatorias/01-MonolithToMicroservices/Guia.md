@@ -177,7 +177,7 @@ Por esta razón la arquitectura que se plantea es con los siguientes 4 microserv
 Siendo los 4 accedidos mediante un único punto de acceso utilizando el patrón API Gateway.
 
 <p align = "center">
-<img src = "./Extras/Imagenes/laboratorioMicroservicios/microservices-arq.png" width=100%>
+<img src = "/Extras/Imagenes/laboratorioMicroservicios/microservices-arq.png" width=100%>
 </p>
 
 ## Extrar el servicio de órdenes.
@@ -186,7 +186,7 @@ El primer servicio que se va a extraer en un microservicio es el de órdenes.
 El objetivo de este paso es conseguir una arquitectura como la siguiente:
 
 <p align = "center">
-<img src = "./Extras/Imagenes/laboratorioMicroservicios/to-microservices-1-arq.png" width=100%>
+<img src = "/Extras/Imagenes/laboratorioMicroservicios/to-microservices-1-arq.png" width=100%>
 </p>
 
 Notar que en este caso, el nuevo Orders Service deberá comunicarse con los módulos de productos, pagos y envíos que aún se encuentran en el monolíto.
@@ -278,7 +278,7 @@ El segundo servicio que se va a extraer en un microservicio es el de productos.
 El objetivo de este paso es conseguir una arquitectura como la siguiente:
 
 <p align = "center">
-<img src = "./Extras/Imagenes/laboratorioMicroservicios/to-microservices-2-arq.png" width=100%>
+<img src = "/Extras/Imagenes/laboratorioMicroservicios/to-microservices-2-arq.png" width=100%>
 </p>
 
 El código y empaquetado jar de este nuevo microservicio se encuentra en el directorio products-service-example.
@@ -370,7 +370,7 @@ El tercer servicio que se va a extraer en un microservicio es el de envíos.
 El objetivo de este paso es conseguir una arquitectura como la siguiente:
 
 <p align = "center">
-<img src = "./Extras/Imagenes/laboratorioMicroservicios/to-microservices-3-arq.png" width=100%>
+<img src = "/Extras/Imagenes/laboratorioMicroservicios/to-microservices-3-arq.png" width=100%>
 </p>
 
 
@@ -473,7 +473,7 @@ El cuarto y último servicio que se va a extraer en un microservicio es el de pa
 El objetivo de este paso es conseguir una arquitectura como la siguiente:
 
 <p align = "center">
-<img src = "./Extras/Imagenes/laboratorioMicroservicios/to-microservices-4-arq.png " width=100%>
+<img src = "/Extras/Imagenes/laboratorioMicroservicios/to-microservices-4-arq.png " width=100%>
 </p>
 
 El código y empaquetado jar de este nuevo microservicio se encuentra en el directorio payments-service-example.

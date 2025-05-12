@@ -59,7 +59,7 @@ java -jar <path completo del archivo my-app-1.0-SNAPSHOT.jar>
 - Si todo funciono correctamente, deberiamos de visualizar en la consola el sigueinte mensaje al final de la ejecución del trabajo:
 
 <p align = "center">
-<img src = "./Extras/Imagenes/laboratorioJenkins/javaJar.png" width=100%>
+<img src = "/Extras/Imagenes/laboratorioJenkins/javaJar.png" width=100%>
 </p>
 
 ## 9.7 Archivar nuestro JAR construido correctamente

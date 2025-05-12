@@ -31,11 +31,11 @@ Una vez levantado el docker, validar con el comando **docker ps** que el mismo e
 Si realizaron los pasos anteriores, yendo a la dirección [localhost:8080](http://localhost:8080) en su browser de preferencia, deben de visualizar alguna de las siguientes imagenes:
 
 <p align = "center">
-<img src = "./Extras/Imagenes/laboratorioJenkins/jenkinsLogin1.png" width=100%>
+<img src = "/Extras/Imagenes/laboratorioJenkins/jenkinsLogin1.png" width=100%>
 </p>
 
 <p align = "center">
-<img src = "./Extras/Imagenes/laboratorioJenkins/jenkinsLogin2.png" width=100%>
+<img src = "/Extras/Imagenes/laboratorioJenkins/jenkinsLogin2.png" width=100%>
 </p>
 
 Si llegamos a visualizar las imágenes, vamos a necesitar la contraseña de administrador para poder continuar, la misma la obtendremos del archivo que se detalla en la pantalla anterior, ingresar al contenedor y obtener la contraseña para poder seguir.
@@ -49,7 +49,7 @@ Sobre la parte de instance configuration, por ahora dejar todo por defecto.
 Si llegaron a la imagen anterior, ya tienen instalado su servidor Jenkins desde docker para empezar a utilizar.
 
 <p align = "center">
-<img src = "./Extras/Imagenes/laboratorioJenkins/jenkinsHome.png" width=100%>
+<img src = "/Extras/Imagenes/laboratorioJenkins/jenkinsHome.png" width=100%>
 </p>
 
 ## Próximos pasos

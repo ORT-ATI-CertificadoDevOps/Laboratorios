@@ -47,11 +47,11 @@ El repositorio se organiza de la siguiente manera:
     ├── Recomendadas
 ```
 
-- [T01 - Nivelación](/T01%20-%20Nivelacion/index_nivelacion.md)
-- [T02 - Procesos DevOps](/T02%20-%20Procesos%20DevOps/index_devops.md)
-- [T03 - Herramientas CICD](/T03%20-%20Herramientas%20CICD/index_cicd.md)
-- [T04 - Cloud](/T04%20-%20Cloud/index_cloud.md)
-- [T05 - Arquitectura y Microservicios](/T05%20-%20Arquitectura%20y%20Microservicios/index_microservicios.md)
-- [T06 - Infrastructure as Code](/T06%20-%20Infrastructure%20as%20Code/index_iac.md)
-- [T07 - Containers](/T07%20-%20Containers/index_containers.md)
-- [T08 - Kubernetes](/T08%20-%20Kubernetes/index_kubernetes.md)
+- [T01 - Nivelación](/T01%20-%20Nivelacion/index.md)
+- [T02 - Procesos DevOps](/T02%20-%20Procesos%20DevOps/index.md)
+- [T03 - Herramientas CICD](/T03%20-%20Herramientas%20CICD/index.md)
+- [T04 - Cloud](/T04%20-%20Cloud/index.md)
+- [T05 - Arquitectura y Microservicios](/T05%20-%20Arquitectura%20y%20Microservicios/index.md)
+- [T06 - Infrastructure as Code](/T06%20-%20Infrastructure%20as%20Code/index.md)
+- [T07 - Containers](/T07%20-%20Containers/index.md)
+- [T08 - Kubernetes](/T08%20-%20Kubernetes/index.md)

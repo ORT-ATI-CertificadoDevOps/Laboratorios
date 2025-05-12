@@ -4,7 +4,7 @@
 ### ECS Architecture
 
 <p align = "center">
-<img src = "./Extras/Imagenes/laboratorioECS/ecs01.png" width=100%>
+<img src = "/Extras/Imagenes/laboratorioECS/ecs01.png" width=100%>
 </p>
 
 - **Container definition:** 
@@ -26,7 +26,7 @@
 
 
 <p align = "center">
-<img src = "./Extras/Imagenes/laboratorioECS/ecs02.png" width=100%>
+<img src = "/Extras/Imagenes/laboratorioECS/ecs02.png" width=100%>
 </p>
 
 - Tenemos dispinibles 3 tipos de templates de cluster para desplegar sobre ECS:
@@ -41,7 +41,7 @@
 
 
 <p align = "center">
-<img src = "./Extras/Imagenes/laboratorioECS/ecs03.png" width=100%>
+<img src = "/Extras/Imagenes/laboratorioECS/ecs03.png" width=100%>
 </p>
 
 ### Task definition and task definition parameters
@@ -63,7 +63,7 @@
     - Y varias parametrizaciones más...
 
 <p align = "center">
-<img src = "./Extras/Imagenes/laboratorioECS/ecs04.png" width=100%>
+<img src = "/Extras/Imagenes/laboratorioECS/ecs04.png" width=100%>
 </p>
 
 ## Próximos pasos
