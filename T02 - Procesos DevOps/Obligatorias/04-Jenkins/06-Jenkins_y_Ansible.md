@@ -36,7 +36,7 @@ jenkins:
 Ejecutar un `docker-compose build` validar que se genera la nueva imagen de Jenkins con Ansible y luego ejecuta un `docker-compose up -d` para recrear los contenedores. Ingresar con contenedor de jenkins y ejecutar el comando ansible para validar que todo se haya instalado de manera correcta, en ese caso deberíamos de recibir mensajes como los siguientes:
 
 <p align = "center">
-<img src = "/Extras/Imagenes/laboratorioJenkins/ansible(2).png" width=100%>
+<img src = "Extras/Imagenes/laboratorioJenkins/ansible(2).png" width=100%>
 </p>
 
 ## 6.2 - Dejar las llaves SSH como permanentes en el contenedor de Jenkins
@@ -181,7 +181,7 @@ Copiar todos los archivos necesarios para probar el script y verificar que se re
 - Ejecutar el script `feedDb.sh` y verificar en la base de datos que se encuentran los registros.
 - Verificar que los datos fueron cargados correctamente, ejecutando las sentencias `use people;` y `select * from register;`
 <p align = "center">
-<img src = "/Extras/Imagenes/laboratorioJenkins/jenkinsFeedDb.png" width=100%>
+<img src = "Extras/Imagenes/laboratorioJenkins/jenkinsFeedDb.png" width=100%>
 </p>
 
 ### 6.9.4 - Construir Docker Nginx web server + php - 1
@@ -312,7 +312,7 @@ phpinfo();
 - >Nota: En caso de querer acceder como `jenkins.local` es necesario hacer cambio en el archivo de resolución del equipo que esten usando, que de seguro es el `hosts`, en caso contrario solamente abrirmen el browser como `localhost`.
 - Si realizamos todos los pasos correctamente, abrimos un navegador y vamos a `jenkins.local` deberíamos de visualizar la siguiente imagen, que nos muestra nuestro servidor web funcionando de manera correcta:
 <p align = "center">
-<img src = "/Extras/Imagenes/laboratorioJenkins/jenkinsWebServer.png" width=100%>
+<img src = "Extras/Imagenes/laboratorioJenkins/jenkinsWebServer.png" width=100%>
 </p>
 
 ### 6.9.6 - Generar tabla usando HTMl, CSS y PHP para mostrar los usuarios
@@ -373,7 +373,7 @@ Vamos a generar una página básica en HTML para mostrar con un poco de estilo d
 - Copiar dicho archivo con la siguiente sentencia `docker cp table.j2 web:/var/www/html/index.php`
 - Verificar yendo a un navegador en la URL `jenkins.local` si se visualiza algo de estilo:
 <p align = "center">
-<img src = "/Extras/Imagenes/laboratorioJenkins/jenkinsPhpTable.png" width=100%>
+<img src = "Extras/Imagenes/laboratorioJenkins/jenkinsPhpTable.png" width=100%>
 </p>
 
 ### 6.9.7 - Integrar Nginx web server al Ansible Inventory

@@ -11,32 +11,32 @@ Vamos a ingresar en nuestra cuenta de **Microsoft Azure** y generaremos los recu
 - Buscamos **Resource group** y lo seleccionamos:
   
 <p align = "center">
-<img src = "/Extras/Imagenes/laboratorioAzureDevops/RG1.png" width=100%>
+<img src = "Extras/Imagenes/laboratorioAzureDevops/RG1.png" width=100%>
 </p>
 
 - Le ponemos el nombre que nos guste:
   
 <p align = "center">
-<img src = "/Extras/Imagenes/laboratorioAzureDevops/RG2.png" width=100%>
+<img src = "Extras/Imagenes/laboratorioAzureDevops/RG2.png" width=100%>
 </p>
 
 - Una vez creado, ingresamos al mismo.
 - Una vez ingresado le damos al botón **Create**.
 - Buscamos **web app** y lo seleccinamos el primero:
 <p align = "center">
-<img src = "/Extras/Imagenes/laboratorioAzureDevops/WebApp1.png" width=100%>
+<img src = "Extras/Imagenes/laboratorioAzureDevops/WebApp1.png" width=100%>
 </p>
 
 - Dejar los valores como figuran en la imagen, cambiando solamente **Name**:
 - 
 <p align = "center">
-<img src = "/Extras/Imagenes/laboratorioAzureDevops/WebApp2.png" width=100%>
+<img src = "Extras/Imagenes/laboratorioAzureDevops/WebApp2.png" width=100%>
 </p>
 
 - Si volvemos al **Resource group** y vemos lo siguiente, hicimos los pasos de manera correcta:
 
 <p align = "center">
-<img src = "/Extras/Imagenes/laboratorioAzureDevops/RG3.png" width=100%>
+<img src = "Extras/Imagenes/laboratorioAzureDevops/RG3.png" width=100%>
 </p>
 
 ### 4.2 Instalar Azure Agent
@@ -50,28 +50,28 @@ Vamos a generar una **Virtual Machine** en nuestra cuenta de **Microsoft Azure**
 - Buscar por **centos** y apretar en la primera opción `CentOS-based` como muestra la imagen:
 
 <p align = "center">
-<img src = "/Extras/Imagenes/laboratorioAzureDevops/centosAgent1.png" width=100%>
+<img src = "Extras/Imagenes/laboratorioAzureDevops/centosAgent1.png" width=100%>
 </p>
 
 <p align = "center">
-<img src = "/Extras/Imagenes/laboratorioAzureDevops/centosAgent2.png" width=100%>
+<img src = "Extras/Imagenes/laboratorioAzureDevops/centosAgent2.png" width=100%>
 </p>
 
 - Le ponemos nombre, dejamos los valores por defecto como muestra la imagen y le damos **Review + create**
 - Vamos a recibir el siguiente mensaje, selecionar la opción de **Download private key and create resource**, esta clase es la **privada** que vamos a utilizar para conectarnos al servidor, como hicimos en el laboratorio de Jenkins con el remote-host y las claves pública/privada.
 
 <p align = "center">
-<img src = "/Extras/Imagenes/laboratorioAzureDevops/centosAgent3.png" width=100%>
+<img src = "Extras/Imagenes/laboratorioAzureDevops/centosAgent3.png" width=100%>
 </p>
 
 - Una vez generado el recurso, vamos a ver en el centro de notificaciones como muestra la imagen que el mismo termino, una vez finalizada la creación, vamos al grupo de recursos y seleccionamos la **virtual machine**:
 
 <p align = "center">
-<img src = "/Extras/Imagenes/laboratorioAzureDevops/centosAgent4.png" width=100%>
+<img src = "Extras/Imagenes/laboratorioAzureDevops/centosAgent4.png" width=100%>
 </p>
 
 <p align = "center">
-<img src = "/Extras/Imagenes/laboratorioAzureDevops/centosAgent5.png" width=100%>
+<img src = "Extras/Imagenes/laboratorioAzureDevops/centosAgent5.png" width=100%>
 </p>
 
 - Vamos a la opción que dice **connect** y le damos en la pestaña de **ssh**, validamos la información que nos proporciona y aplicamos los comandos sugeridos.
@@ -101,7 +101,7 @@ Validar luego que el agente se encuentra bien configurado y encendido.
 - Ir a la prestaña de **Agents**
 - Debemos de visualizar una imagen parecida a la siguiente:
 <p align = "center">
-<img src = "/Extras/Imagenes/laboratorioAzureDevops/agentPool.png" width=100%>
+<img src = "Extras/Imagenes/laboratorioAzureDevops/agentPool.png" width=100%>
 </p>
 
 - Hacer click en nuestro agente.
@@ -117,25 +117,25 @@ Vamos a tener que enlazar nuestra cuenta de **Microsoft Azure** con nuestra cuen
 - Seleccionar la primer opción como muestra la imagen de **Azure App Service Deployment**
   
 <p align = "center">
-<img src = "/Extras/Imagenes/laboratorioAzureDevops/serviceConnection1.png" width=100%>
+<img src = "Extras/Imagenes/laboratorioAzureDevops/serviceConnection1.png" width=100%>
 </p>
 
 - Seleccionar donde dice **1 job, 1 task** debajo de **Stage 1**.
 - Llegaremos a esta parte, en donde dice **Azure subscription** apretar y visualizar la cuenta, seleccionarla y darle **Authorize**.
 
 <p align = "center">
-<img src = "/Extras/Imagenes/laboratorioAzureDevops/serviceConnection2.png" width=100%>
+<img src = "Extras/Imagenes/laboratorioAzureDevops/serviceConnection2.png" width=100%>
 </p>
 
 - Ir a **Project Settings** y luego a **Service connections**.
 - Cambiarle el nombre a la conexión a uno más amigable, que se usara luego en el archivo `.yml` para la construcción y deploy y dar click en el check de **Grant access permission to all pipelines** como muestra la imagen:
 
 <p align = "center">
-<img src = "/Extras/Imagenes/laboratorioAzureDevops/serviceConnection3.png" width=100%>
+<img src = "Extras/Imagenes/laboratorioAzureDevops/serviceConnection3.png" width=100%>
 </p>
 
 <p align = "center">
-<img src = "/Extras/Imagenes/laboratorioAzureDevops/serviceConnection4.png" width=100%>
+<img src = "Extras/Imagenes/laboratorioAzureDevops/serviceConnection4.png" width=100%>
 </p>
 
 
@@ -236,7 +236,7 @@ stages:
 - Si llegamos a la siguiente imagen, volver a darle **Save and run** y visualizar que es lo que pasa. Presionar sobre el trabajo para poder visualizar el log.
 
 <p align = "center">
-<img src = "/Extras/Imagenes/laboratorioAzureDevops/pipeline1.png" width=100%>
+<img src = "Extras/Imagenes/laboratorioAzureDevops/pipeline1.png" width=100%>
 </p>
 
 ### 4.4 Crear release pipeline
@@ -251,42 +251,42 @@ Vamos a generar el release pipeline para poder enganchar el build pipeline con e
 - Seleccionar la opción que se muestra en la pantalla:
 
 <p align = "center">
-<img src = "/Extras/Imagenes/laboratorioAzureDevops/releasePipeline1.png" width=100%>
+<img src = "Extras/Imagenes/laboratorioAzureDevops/releasePipeline1.png" width=100%>
 </p>
 
 - Dejar las opciones con sus sucripción y su recurso generado anteriormente:
 
 <p align = "center">
-<img src = "/Extras/Imagenes/laboratorioAzureDevops/releasePipeline2.png" width=100%>
+<img src = "Extras/Imagenes/laboratorioAzureDevops/releasePipeline2.png" width=100%>
 </p>
 
 - En la parte de **Run on agent** cambiar el **Agent pool** a **Default** como muestra la imagen:
 
 <p align = "center">
-<img src = "/Extras/Imagenes/laboratorioAzureDevops/releasePipeline3.png" width=100%>
+<img src = "Extras/Imagenes/laboratorioAzureDevops/releasePipeline3.png" width=100%>
 </p>
 
 - Guardar y volver volver al pipeline para editarlo en la parte de **Artifacts**
   
 <p align = "center">
-<img src = "/Extras/Imagenes/laboratorioAzureDevops/releasePipeline4.png" width=100%>
+<img src = "Extras/Imagenes/laboratorioAzureDevops/releasePipeline4.png" width=100%>
 </p>
 
 - Configurar las partes como muestran las imagenes a continuación:
 
 <p align = "center">
-<img src = "/Extras/Imagenes/laboratorioAzureDevops/releasePipeline5.png" width=100%>
+<img src = "Extras/Imagenes/laboratorioAzureDevops/releasePipeline5.png" width=100%>
 </p>
 
 <p align = "center">
-<img src = "/Extras/Imagenes/laboratorioAzureDevops/releasePipeline6.png" width=100%>
+<img src = "Extras/Imagenes/laboratorioAzureDevops/releasePipeline6.png" width=100%>
 </p>
 
 - Guardar y ejecutar el pipeline. Verificar que es lo que pasa.
 - Ir a la URL de la Web App, la cual figura en los logs del release y validar que la app se encuentra funcionando.
 
 <p align = "center">
-<img src = "/Extras/Imagenes/laboratorioAzureDevops/WebApp3.png" width=100%>
+<img src = "Extras/Imagenes/laboratorioAzureDevops/WebApp3.png" width=100%>
 </p>
 
 >**Nota:** En caso de obtener timeout por los yarn, hacer la solución que se dice en el sigiuiente [Link](https://stackoverflow.com/questions/54818471/react-native-init-gives-esockettimedout-error)
@@ -300,5 +300,5 @@ Vamos a eliminar el resource group con todos los recursos generados para no cons
 - Escribimos el nombre de **Resource Group** y presionamos **delete**
 
 <p align = "center">
-<img src = "/Extras/Imagenes/laboratorioAzureDevops/RG4.png" width=100%>
+<img src = "Extras/Imagenes/laboratorioAzureDevops/RG4.png" width=100%>
 </p>

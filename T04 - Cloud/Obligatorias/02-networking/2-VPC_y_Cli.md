@@ -5,7 +5,7 @@
 Re-utilizando lo aprendido en el práctico anterior, se debe crear los mismos recursos usando la interfaz de línea de comando.
     
 <p align = "center">
-<img src = "/Extras/Imagenes/labNetworking/vpc/arquitectura.png">
+<img src = "Extras/Imagenes/labNetworking/vpc/arquitectura.png">
 </p>
 
 * VPC

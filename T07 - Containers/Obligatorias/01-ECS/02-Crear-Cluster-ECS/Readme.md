@@ -5,7 +5,7 @@
 > Nota: Verificar de seleccionar la opción VPC and more y alterar el rango a 10.0.0.0/16, los demas valores se dejan por defecto.
 
 <p align = "center">
-<img src = "/Extras/Imagenes/laboratorioECS/ecs05.png" width=100%>
+<img src = "Extras/Imagenes/laboratorioECS/ecs05.png" width=100%>
 </p>       
 
 ### 02: Create Fargate Cluster
@@ -67,7 +67,7 @@ http://<PUBLIC_IP>/app1/index.html
 ```
 
 <p align = "center">
-<img src = "/Extras/Imagenes/laboratorioECS/ecs06.png" width=100%>
+<img src = "Extras/Imagenes/laboratorioECS/ecs06.png" width=100%>
 </p>  
 
 
@@ -76,7 +76,7 @@ http://<PUBLIC_IP>/app1/index.html
 - Los siguientes conceptos tenemos que manejarlos de manera correcta para trabajar con containers.
 
 <p align = "center">
-<img src = "/Extras/Imagenes/laboratorioECS/ecs07.png" width=100%>
+<img src = "Extras/Imagenes/laboratorioECS/ecs07.png" width=100%>
 </p>
 
 ## Próximos pasos

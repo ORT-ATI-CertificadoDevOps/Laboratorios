@@ -6,7 +6,7 @@ Ahora que tiene todo configurado en su ambiente, es hora de ensuciarnos las mano
 Generar en su cuenta de GitHub un repositorio con el nombre **PracticoSonarCube** y que quede de manera **pública** como se muestra en la imagen a continuación:
 
 <p align = "center">
-<img src = "/Extras/Imagenes/laboratorioSonarCloud/imagenRepo.png" width=100%>
+<img src = "Extras/Imagenes/laboratorioSonarCloud/imagenRepo.png" width=100%>
 </p>
 
 > **Nota:** Se pueden tener problemas cuando se suba el código al repositorio, es reponsabilidad del alumno ver como solucionar los problemas que puedan aparecer durante este paso.
@@ -16,7 +16,7 @@ Generar en su cuenta de GitHub un repositorio con el nombre **PracticoSonarCube*
 En este paso se va a asociar el repositorio en la cuenta de SonarCloud para poder realizar los análisis. Se debe elegir solamente el repositorio que generamos para el práctico al momento de realizar la configuración:
 
 <p align = "center">
-<img src = "/Extras/Imagenes/laboratorioSonarCloud/configSonar.png" width=100%>
+<img src = "Extras/Imagenes/laboratorioSonarCloud/configSonar.png" width=100%>
 </p>
 
 Generar la key con un nombre que recuerden y además elegir la opción **free plan**.
@@ -24,7 +24,7 @@ Generar la key con un nombre que recuerden y además elegir la opción **free pl
 Terminado lo anterior, deberían de haber llegado a la siguiente pantalla:
 
 <p align = "center">
-<img src = "/Extras/Imagenes/laboratorioSonarCloud/configSonar2.png" width=100%>
+<img src = "Extras/Imagenes/laboratorioSonarCloud/configSonar2.png" width=100%>
 </p>
 
 ### 2.3 Integrar SonarCube con GitHub actions
@@ -42,13 +42,13 @@ Configurado lo anterior, se puede validar sobre el repositorio en la sección de
 
 
 <p align = "center">
-<img src = "/Extras/Imagenes/laboratorioSonarCloud/configFinal1.png" width=100%>
+<img src = "Extras/Imagenes/laboratorioSonarCloud/configFinal1.png" width=100%>
 </p>
 
 <p align = "center">
-<img src = "/Extras/Imagenes/laboratorioSonarCloud/configFinal2.png" width=100%>
+<img src = "Extras/Imagenes/laboratorioSonarCloud/configFinal2.png" width=100%>
 </p>
 
 <p align = "center">
-<img src = "/Extras/Imagenes/laboratorioSonarCloud/configFinal3.png" width=100%>
+<img src = "Extras/Imagenes/laboratorioSonarCloud/configFinal3.png" width=100%>
 </p>

@@ -3,13 +3,13 @@
 Vamos a configurar nuestro pipeline:
 
 <p align = "center">
-<img src = "/Extras/Imagenes/laboratorioCodepipeline/section2.PNG" width=100%>
+<img src = "Extras/Imagenes/laboratorioCodepipeline/section2.PNG" width=100%>
 </p>
 
 Vamos a tratar de simular lo mismo que la situación anterior, pero en lugar de estar mirando si hay cambios sobre un S3 bucket, estaremos mirando directamente sobre un repositorio git de CodeCommit:
 
 <p align = "center">
-<img src = "/Extras/Imagenes/laboratorioCodepipeline/s2(1).PNG" width=100%>
+<img src = "Extras/Imagenes/laboratorioCodepipeline/s2(1).PNG" width=100%>
 </p>
 
 ### 1 - Generación de repositorio de AWS CodeCommit
@@ -17,7 +17,7 @@ Vamos a tratar de simular lo mismo que la situación anterior, pero en lugar de 
 - Vamos a ir por consola y generaremos un repositorio de CodeCommit como muestra la imagen.
 
 <p align = "center">
-<img src = "/Extras/Imagenes/laboratorioCodepipeline/s2(2).PNG" width=100%>
+<img src = "Extras/Imagenes/laboratorioCodepipeline/s2(2).PNG" width=100%>
 </p>
 
 - Visualizar las opciones disponibles para clonar el repositorio de CodecCommit generado y también visualizar las opciones para el recurso de CodeCommit disponibles.
@@ -27,7 +27,7 @@ Vamos a tratar de simular lo mismo que la situación anterior, pero en lugar de 
 - Para poder utilizar CodeCommit tenemos que configurar sobre algun usuario el acceso mediante alguna de las formas que vimos anteriormente, esto se activa desde las opciones del usuario. Activar la opción de `HTTPS Git credentials`
 
 <p align = "center">
-<img src = "/Extras/Imagenes/laboratorioCodepipeline/s2(3).PNG" width=100%>
+<img src = "Extras/Imagenes/laboratorioCodepipeline/s2(3).PNG" width=100%>
 </p>
 
 - Guardar las credenciales, porque no vamos a poder volver a ver la `SECRET_KEY` generada, en caso de perderla, tendremos que regenerarla nuevamente.
@@ -52,13 +52,13 @@ Vamos a tratar de simular lo mismo que la situación anterior, pero en lugar de 
 - Si hicimos todo de manera correcta, deberíamos de visualizar algo parecido a lo de la imagen a continuación:
 
 <p align = "center">
-<img src = "/Extras/Imagenes/laboratorioCodepipeline/s1(5).PNG" width=100%>
+<img src = "Extras/Imagenes/laboratorioCodepipeline/s1(5).PNG" width=100%>
 </p>
 
 - Si se ejecuta todo de manera correcta, podremos utilizar la URL que tiene nuestro production bucket y deberíamos de acceder a nuestra página:
 
 <p align = "center">
-<img src = "/Extras/Imagenes/laboratorioCodepipeline/s1(6).PNG" width=100%>
+<img src = "Extras/Imagenes/laboratorioCodepipeline/s1(6).PNG" width=100%>
 </p>
 
 ### 4 - Ejecutar el pipeline utilizando Git local

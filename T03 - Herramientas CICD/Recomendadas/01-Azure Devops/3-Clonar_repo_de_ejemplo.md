@@ -7,13 +7,13 @@ Vamos a clonar un repositorio de ejemplo público, el cual consiste en el códig
 - La Clone URL a utilizar es la siguiente `https://github.com/likeabosslearning/Flatris-LAB.git`
 - Si llegamos a tener la siguiente imagen, podemos realizar la importación del repo:
 <p align = "center">
-<img src = "/Extras/Imagenes/laboratorioAzureDevops/repoImport.png" width=100%>
+<img src = "Extras/Imagenes/laboratorioAzureDevops/repoImport.png" width=100%>
 </p>
 <p align = "center">
-<img src = "/Extras/Imagenes/laboratorioAzureDevops/repoImportStart.png" width=100%>
+<img src = "Extras/Imagenes/laboratorioAzureDevops/repoImportStart.png" width=100%>
 </p>
 <p align = "center">
-<img src = "/Extras/Imagenes/laboratorioAzureDevops/repoVisualization.png" width=100%>
+<img src = "Extras/Imagenes/laboratorioAzureDevops/repoVisualization.png" width=100%>
 </p>
 
 ## Próximos pasos
