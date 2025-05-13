@@ -13,6 +13,3 @@ Bienvenidos al práctico de instancias Windows. Lo que tendrán que hacer es lo 
 
 
 Nota: Luego de que la instancia está creada, deben usar la `Private Key` para descifrar la password de Administrador de Windows.
-
-
-![EC2-Windows](.Extras/img/laboratorioCloud_EC2/ec2/ec2_windows.png)

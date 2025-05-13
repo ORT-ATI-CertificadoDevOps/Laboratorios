@@ -11,7 +11,7 @@ Vamos a crear instancias pero esta vez a partir de un Auto Scaling Group o ASG. 
 
 * Crear un `LT`. (Se puede buscar en la barra de Servicios. Es un EC2 Feature)
   * Nombre: `test-lt-devops`
-  * AMI: `ami-02f3f602d23f1659d`
+  * AMI: `ami-0f88e80871fd81e91`
   * Instance Type: `t2.micro`
   * Key pair: el que crearon en el lab anterior
   * Security Groups: Seleccionar uno que permita el tráfico SSH

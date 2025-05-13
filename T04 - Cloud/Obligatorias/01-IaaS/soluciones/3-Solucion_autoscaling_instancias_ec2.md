@@ -12,7 +12,7 @@ Colocar el nombre del `LT`: `test-lt-devops`
 <img src = "Extras/Imagenes/laboratorioCloud_EC2/asg/asg002.png">
 </p>
 
-Usar la `AMI` con Id `ami-02f3f602d23f1659d`  
+Usar la `AMI` con Id `ami-0f88e80871fd81e91`  
 
 <p align = "center">
 <img src = "Extras/Imagenes/laboratorioCloud_EC2/asg/asg003.png">
