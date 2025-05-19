@@ -12,7 +12,8 @@
 - **Pre-condición-1:** Verificar que se tiene **default-vpc** en la región del manifest.
 - **Pre-condición-2:** Verificar que el AMI que se encuentra en el manifest existe en la región de manifest, en caso contrario, actualizar por un AMI existente en la región
 - **Pre-condición-3:** Verificar las AWS Credentials en **$HOME/.aws/credentials**
-```t
+
+```
 # Terraform Settings Block
 terraform {
   required_providers {
@@ -37,7 +38,8 @@ resource "aws_instance" "ec2demo" {
 ```
 
 ## 03 - Terraform Core Commands
-```t
+
+```
 # Initialize Terraform
 terraform init
 
@@ -58,7 +60,8 @@ terraform apply
 
 
 ## 05 - Destruir la Infraestructura
-```t
+
+```
 # Destroy EC2 Instance
 terraform destroy
 
@@ -74,7 +77,4 @@ rm -rf terraform.tfstate*
   - terraform validate
   - terraform plan
   - terraform apply
-  - terraform destroy     
-
-
-
+  - terraform destroy

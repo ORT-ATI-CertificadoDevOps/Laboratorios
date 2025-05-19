@@ -12,7 +12,8 @@
 
 
 ## 03 - Inicializar y aplicar la configuración 
-```t
+
+```
 # Initialize Terraform
 terraform init
 
@@ -25,10 +26,12 @@ terraform plan
 # Create Resources using Terraform Apply
 terraform apply
 ```
+
 - Verificar **.terraform.lock.hcl**
   - Ver el contenido del archivo
   - Comparar `.terraform.lock.hcl-ORIGINAL` & `.terraform.lock.hcl`
   - Hacer respaldo de `.terraform.lock.hcl` como `.terraform.lock.hcl-FIRST-INIT` 
+
 ```
 # Backup
 cp .terraform.lock.hcl .terraform.lock.hcl-FIRST-INIT
@@ -36,16 +39,19 @@ cp .terraform.lock.hcl .terraform.lock.hcl-FIRST-INIT
 
 ## 04 - Hacer version upgrade del AWS provider 
 - Para AWS Provider, con la version `version = ">= 2.0.0"`, va a ser actualizado a la última versióni `3.x.x` con el comando `terraform init -upgrade` 
-```t
+
+```
 # Upgrade Provider Version
 terraform init -upgrade
 ```
+
 - Revisar **.terraform.lock.hcl**
   - Discutir sobre las versiones de AWS.
   - Comparar `.terraform.lock.hcl-FIRST-INIT` & `.terraform.lock.hcl`
 
 ## 05 - Aplicar la configuración de Terraform con el último AWS Provider 
 - Debería de fallar el despliegue por los cambios realizados sobre la versión de AWS.
+
 ```
 # Terraform Apply
 terraform apply
@@ -54,6 +60,7 @@ terraform apply
 ## 06 - Comentar la región en el recurso que fallo y volver a probar
 - Cuando actualizamos a una versión mayor de provider, se pueden romper algunas funcionalidades.
 - Por eso con `.terraform.lock.hcl`, podemos evitar este tipo de problemas.
+
 ```
 # Comment Region Attribute
 # Resource Block: Create AWS S3 Bucket
@@ -69,6 +76,7 @@ terraform apply
 ```
 
 ## 07 - Clean-Up
+
 ```
 # Destroy Resources
 terraform destroy

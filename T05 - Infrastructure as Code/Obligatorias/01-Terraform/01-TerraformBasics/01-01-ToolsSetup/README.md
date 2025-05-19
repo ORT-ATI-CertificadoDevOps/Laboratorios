@@ -10,7 +10,8 @@
 ## 02 -  macOS: Instalar Terraform
 - [Download Terraform MAC](https://www.terraform.io/downloads.html)
 - [Install CLI](https://learn.hashicorp.com/tutorials/terraform/install-cli)
-- Descompromit el archivo
+- Descompromir el archivo
+
 ```
 # Copy binary zip file to a folder
 mkdir /Users/<YOUR-USER>/Documents/terraform-install
@@ -62,6 +63,7 @@ sudo rm -rf /usr/local/aws-cli
 - Generate Security Credentials using AWS Management Console
   - Go to Services -> IAM -> Users -> "Your-Admin-User" -> Security Credentials -> Create Access Key
 - Configure AWS credentials using SSH Terminal on your local desktop
+
 ```
 # Configure AWS Credentials in command line
 $ aws configure
