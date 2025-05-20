@@ -14,7 +14,8 @@
   - local names
   - source
   - version
-```t
+
+```
 # Terraform Block
 terraform {
   required_version = "~> 0.14.4"
@@ -30,13 +31,15 @@ terraform {
 
 ## 03 - Provider Block  
 - Crear un Provider Block for AWS
-```t
+
+```
 # Provider Block
 provider "aws" {
   region = "us-east-1"
   profile = "default"  # defining it is optional for default profile
 }
 ```
+
 - Verificar los tipos de [Authentication Types](https://registry.terraform.io/providers/hashicorp/aws/latest/docs#authentication) 
 - Static Credentials - NO RECOMENDADA
 - Environment variables
@@ -44,7 +47,7 @@ provider "aws" {
   - Verificar en `cat $HOME/.aws/credentials`
   - Si no lo encuentran, usar `aws configure` para configurar las credenciales de aws.
 
-```t
+```
 # Initialize Terraform
 terraform init
 
@@ -57,7 +60,8 @@ terraform plan
 
 ## 04 - Agrear un Reosource Block para crear una AWS VPC
 - [AWS VPC Resource](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc)
-```t
+
+```
 resource "aws_vpc" "myvpc" {
   cidr_block = "10.0.0.0/16"
   tags = {
@@ -67,7 +71,8 @@ resource "aws_vpc" "myvpc" {
 ```
 
 ## 05 - Ejecutar los comandos de Terraform para crear una AWS VPC
-```t
+
+```
 # Initialize Terraform
 terraform init
 
@@ -82,7 +87,8 @@ terraform apply -auto-approve
 ```  
 
 ## 06 - Clean-Up 
-```t
+
+```
 # Destroy Terraform Resources
 terraform destroy -auto-approve
 

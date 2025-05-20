@@ -5,7 +5,7 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 3.0"
+      version = "~> 5.0"
     }
   }
   # Adding Backend as S3 for Remote State Storage with State Locking
@@ -27,7 +27,7 @@ provider "aws" {
 #####################################################################
 # Block-3: Resource Block
 resource "aws_instance" "ec2demo" {
-  ami           = "ami-04d29b6f966df1537" # Amazon Linux
+  ami           = "ami-0953476d60561c955" # Amazon Linux
   instance_type = var.instance_type
 }
 #####################################################################

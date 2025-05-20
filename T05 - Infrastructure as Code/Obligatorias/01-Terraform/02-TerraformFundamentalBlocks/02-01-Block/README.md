@@ -16,6 +16,7 @@
 - `required_version` se centra en el Terraform CLI instalado en su equipo.
 - Si la versión instalada en su escritorio no coincide con las restricciones especificadas en el Terraform block, se producirá un error.
 - Cambie las versiones y ejecute `terraform init`, observe los comportamientos.
+
 ```
 Play with Terraform Version
   required_version = "~> 0.14.3" 
@@ -57,6 +58,7 @@ terraform init -upgrade
 
 
 ## 05 - Clean-Up
+
 ```
 # Delete Terraform Folders & Files
 rm -rf .terraform*
