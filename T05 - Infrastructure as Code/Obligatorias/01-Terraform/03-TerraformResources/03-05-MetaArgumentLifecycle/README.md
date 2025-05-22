@@ -14,13 +14,16 @@
   - Segundo el recurso viejo va a ser eliminado.
   - 
 - **Agregar Lifecycle Block en Resource Block para alterar el comportamiento**  
-```t
+
+```
   lifecycle {
     create_before_destroy = true
   }
 ```  
+
 ### 02-01 - Observar comportamiento sin Lifecycle Block
-```t
+
+```
 # Switch to Working Directory
 cd v1-create_before_destroy
 
@@ -48,9 +51,11 @@ Observación:
 1) Primero el recurso us-east-1a va a ser destruido.
 2) Segundo el recursos us-east-1b se creara.
 ```
+
 ### 02-02 - Con Lifecycle Block
 - Agregar Lifecycle block en resource (Descomentar lifecycle block)
-```t
+
+```
 # Generate Terraform Plan
 terraform plan
 
@@ -66,8 +71,10 @@ Observación:
 1) Primero el recurso us-east-1a se va a crear
 2) Segundo el recurso us-east-1b se destruira
 ```
+
 ### 02-03 - Clean-Up Resources
-```t
+
+```
 # Destroy Resources
 terraform destroy -auto-approve
 
@@ -82,13 +89,16 @@ rm -rf terraform.tfstate*
 - Esto se puede utilizar como una medida de seguridad contra el reemplazo accidental de objetos que pueden ser costosos de reproducir, como instancias de bases de datos.
 - Sin embargo, hará que ciertos cambios de configuración sean imposibles de aplicar e impedirá el uso del `terraform destroy` comando una vez que se crean tales objetos, por lo que esta opción debe usarse `sparingly`.
 - Dado que este argumento debe estar presente en la configuración para que se aplique la protección, tenga en cuenta que esta configuración no evita que el objeto remoto se destruya si el bloque de recursos se eliminó por completo de la configuración: en ese caso, el `prevent_destroy` se elimina junto con él, por lo que Terraform permitirá que la operación de destrucción tenga éxito.
-```t
+
+```
   lifecycle {
     prevent_destroy = true # Default is false
   }
 ```
+
 ### 03-02 - Ejecutar Terraform Commands
-```t
+
+```
 # Switch to Working Directory
 cd v2-prevent_destroy
 
@@ -128,11 +138,11 @@ rm -rf .terraform*
 rm -rf terraform.tfstate*
 ```
 
-
 ## 04 - lifecyle - ignore_changes
 ### 04-01 - Create an EC2 Changes, make manual changes and understand the behavior
 - Create EC2 Instance
-```t
+
+```
 # Switch to Working Directory
 cd v3-ignore_changes
 
@@ -148,11 +158,13 @@ terraform plan
 # Terraform Apply to Create EC2 Instance
 terraform apply 
 ```
+
 ### 04-02 - Actualizar el tag desde AWS management console
 - Agreger una new tag manualmente a instancia EC2.
 - Probar `terraform apply`
 - Terraform encontrará la diferencia en la configuración en el lado remoto cuando se compara con el local e intenta eliminar el cambio manual cuando ejecutamos `terraform apply`
-```t
+
+```
 # Add new tag manually
 WebServer = Apache
 
@@ -168,7 +180,7 @@ Observación:
 ### 04-03 - Agregar  lifecyle - ignore_changes block
 - Habilitar el block en `c2-ec2-instance.tf`
 
-```t
+```
    lifecycle {
     ignore_changes = [
       # Ignore changes to tags, e.g. because a management agent
@@ -177,8 +189,10 @@ Observación:
     ]
   }
 ```
+
 - Agregar nuevamente tags manualmente usando la AWS mgmt console para la instancia EC2.
-```t
+
+```
 # Add new tag manually
 WebServer = Apache2
 ignorechanges = test1

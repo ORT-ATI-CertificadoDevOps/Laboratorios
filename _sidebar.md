@@ -56,10 +56,14 @@
     - [T03 - Multiples providers](/T05%20-%20Infrastructure%20as%20Code/Obligatorias/01-Terraform/02-TerraformFundamentalBlocks/02-03-MultipleProviderConfigurations/README.md)
     - [T04 - Providers: Dependency Lock File](/T05%20-%20Infrastructure%20as%20Code/Obligatorias/01-Terraform/02-TerraformFundamentalBlocks/02-04-ProvidersDependencyLockFile/README.md)
   - [03-Terraform resources](/T05%20-%20Infrastructure%20as%20Code/Obligatorias/01-Terraform/03-TerraformResources/03-01-ResourceSyntaxAndBehavior/README.md)
-    - [T01 - Terraform Resource Syntax & Behavior](/T05%20-%20Infrastructure%20as%20Code/Obligatorias/01-Terraform/03-TerraformResources/03-01-ResourceSyntaxAndBehavior/README.md)
-    
-- [T06 - Arquitectura y Microservicios](/T06%20-%20Arquitectura%20y%20Microservicios/index.md)
-- [T07 - Containers](/T07%20-%20Containers/index.md)
+    - [T01 - Resource Syntax & Behavior](/T05%20-%20Infrastructure%20as%20Code/Obligatorias/01-Terraform/03-TerraformResources/03-01-ResourceSyntaxAndBehavior/README.md)
+    - [T02 - Resource Meta-Argument depends_on](/T05%20-%20Infrastructure%20as%20Code/Obligatorias/01-Terraform/03-TerraformResources/03-02-MetaArgumentDependsOn/README.md)
+    - [T03 - Resource Meta-Argument count](/T05%20-%20Infrastructure%20as%20Code/Obligatorias/01-Terraform/03-TerraformResources/03-03-MetaArgumentCount/README.md)
+    - [T04 - Resource Meta-Argument for_each](/T05%20-%20Infrastructure%20as%20Code/Obligatorias/01-Terraform/03-TerraformResources/03-04-MetaArgumentForEach/README.md)
+    - [T05 - Resource Meta-Argument lifecycle](/T05%20-%20Infrastructure%20as%20Code/Obligatorias/01-Terraform/03-TerraformResources/03-05-MetaArgumentLifecycle/README.md)
+
+- [T06 - Containers](/T06%20-%20Containers/index.md)
+- [T07 - Arquitectura y Microservicios](/T07%20-%20Arquitectura%20y%20Microservicios/index.md)
 - [T08 - Kubernetes](/T08%20-%20Kubernetes/index.md)
 
 ---

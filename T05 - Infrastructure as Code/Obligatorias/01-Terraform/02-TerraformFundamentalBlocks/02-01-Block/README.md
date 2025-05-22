@@ -10,7 +10,7 @@
 - Terraform backends
 - Experimental Language Features
 - Pasar Metadata to Providers
-- Revisar el archivo **sample-terraform-settings.tf** para mayor entendimiento
+- Revisar el archivo [sample-terraform-settings.tf](https://raw.githubusercontent.com/ORT-ATI-CertificadoDevOps/Laboratorios/refs/heads/main/T05%20-%20Infrastructure%20as%20Code/Obligatorias/01-Terraform/02-TerraformFundamentalBlocks/02-01-Block/sample-terraform-settings.tf) para mayor entendimiento
 
 ## 03 - Crear un simple terraform block y jugar con el required_version
 - `required_version` se centra en el Terraform CLI instalado en su equipo.

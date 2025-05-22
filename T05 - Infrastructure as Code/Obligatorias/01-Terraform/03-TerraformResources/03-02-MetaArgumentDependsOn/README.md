@@ -23,14 +23,14 @@
 ## 03 - c1-versions.tf - Crear Terraform & Provider Blocks 
 - Crear Terraform Block
 - Crear Provider Block
+
 ```
 # Terraform Block
 terraform {
-  required_version = "~> 0.14.6"
   required_providers {
     aws = { 
       source = "hashicorp/aws"
-      version = "~> 3.0"
+      version = "~> 5.0"
     }
   }
 }
@@ -41,6 +41,7 @@ provider "aws" {
   profile = "default"
 }
 ```
+
 ## 04 - c2-vpc.tf - Crear VPC Resources 
 ### 04-01: Crear VPC usando AWS Management Console
 - Crear una VPC de forma manual desde la consola y entender todos los recursos que se van a crear. Eliminar la VPC creada ya que empezaremos a escribir el template de creación para un VPC con Terraform
@@ -53,6 +54,7 @@ provider "aws" {
   - Crear Route en Route Table para acceso a internet
   - Asociar Route Table con la Subnet
   - Crear Security Group en la VPC con puertos 80, 22 como entrantes open
+
 ```
 # Resource Block
 # Resource-1: Crear VPC
@@ -132,6 +134,7 @@ resource "aws_security_group" "dev-vpc-sg" {
 
 ## 05 - c3-ec2-instance.tf - Crear instancia EC2 Resource
 - Review `apache-install.sh`
+
 ```sh
 #! /bin/bash
 sudo yum update -y
@@ -140,7 +143,9 @@ sudo service httpd start
 sudo systemctl enable httpd
 echo "<h1>Welcome to Practico Terraform de Federico ! AWS Infra created using Terraform in us-east-1 Region</h1>" > /var/www/html/index.html
 ```
+
 - Crear EC2 Instance Resource
+
 ```
 # Resource-8: Crear instancia EC2
 resource "aws_instance" "my-ec2-vm" {
@@ -164,6 +169,7 @@ resource "aws_instance" "my-ec2-vm" {
 ## 06 - c4-elastic-ip.tf - Crear Elastic IP Resource
 - Crear Elastic IP Resource
 - Agregar un Resource Meta-Argument `depends_on` para asugurarnos de que el el resource Elastic IP solamente se cree cuanto el AWS Internet Gateway esta presente o fue creado
+
 ```
 # Resource-9: Crear Elastic IP
 resource "aws_eip" "my-eip" {
@@ -174,6 +180,7 @@ resource "aws_eip" "my-eip" {
 ```
 
 ## 07 - Ejecutar Terraform commands para Crear los Resources usando Terraform
+
 ```
 # Initialize Terraform
 terraform init
@@ -194,12 +201,14 @@ terraform apply
 - Verificar Elastic IP
 - Revisar archivo `terraform.tfstate`
 - Acceder al Apache Webserver Static usando la Elastic IP
+
 ```
 # Access Application
 http://<AWS-ELASTIC-IP>
 ```
 
 ## 09 - Destroy Terraform Resources
+
 ```
 # Destroy Terraform Resources
 terraform destroy

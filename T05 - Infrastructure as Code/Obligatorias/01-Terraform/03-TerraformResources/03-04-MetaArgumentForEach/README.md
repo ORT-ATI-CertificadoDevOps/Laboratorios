@@ -9,7 +9,8 @@
 - **Directorio:** v1-for_each-maps
 - **Implementación:** Crear 4 S3 buckets usando for_each maps 
 - **c2-s3bucket.tf**
-```t
+
+```
 # Create S3 Bucket per environment with for_each and maps
 resource "aws_s3_bucket" "mys3bucket" {
 
@@ -32,7 +33,8 @@ resource "aws_s3_bucket" "mys3bucket" {
 ```
 
 ## 03 - Ejecutar Terraform Commands
-```t
+
+```
 # Switch to Working Directory
 cd v1-for_each-maps
 
@@ -67,12 +69,12 @@ rm -rf .terraform*
 rm -rf terraform.tfstate*
 ```
 
-
 ## 04 - Implementar for_each with toset "Strings"
 - **Directorio:** v2-for_each-toset
 - **Implementación:** Cerar 4 IAM Users usando for_each toset strings 
 - **c2-iamuser.tf**
-```t
+
+```
 # Create 4 IAM Users
 resource "aws_iam_user" "myuser" {
   for_each = toset( ["Jack", "James", "Madhu", "Dave"] )
@@ -81,7 +83,8 @@ resource "aws_iam_user" "myuser" {
 ```
 
 ## 05 - Ejecutar Terraform Commands
-```t
+
+```
 # Switch to Working Directory
 cd v2-for_each-toset
 

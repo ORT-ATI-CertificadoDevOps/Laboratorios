@@ -4,7 +4,7 @@
 - Entender la importancia de Dependency Lock File que aparece a partir de la versión de Terraforn 0.14.
 
 ## 02 - Revisar los Terraforn Manifests
-- Ver que la información em los archivos de la carpeta terraform-manifesta y validar en que difieren de los ejercicios anteriores. 
+- Ver que la información en los archivos de la carpeta [terraform-manifest](https://github.com/ORT-ATI-CertificadoDevOps/Laboratorios/tree/main/T05%20-%20Infrastructure%20as%20Code/Obligatorias/01-Terraform/02-TerraformFundamentalBlocks/02-03-MultipleProviderConfigurations/terraform-manifests) y validar en que difieren de los ejercicios anteriores. 
 
 - c1-versions.tf
 - c2-s3bucket.tf
@@ -38,7 +38,7 @@ cp .terraform.lock.hcl .terraform.lock.hcl-FIRST-INIT
 ```
 
 ## 04 - Hacer version upgrade del AWS provider 
-- Para AWS Provider, con la version `version = ">= 2.0.0"`, va a ser actualizado a la última versióni `3.x.x` con el comando `terraform init -upgrade` 
+- Para AWS Provider, con la version `version = ">= 2.0.0"`, va a ser actualizado a la última versión `5.x.x` con el comando `terraform init -upgrade` 
 
 ```
 # Upgrade Provider Version

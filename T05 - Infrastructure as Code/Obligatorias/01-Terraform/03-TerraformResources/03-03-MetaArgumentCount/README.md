@@ -9,7 +9,8 @@
 - Por lo cual, 5 instancias de EC2 en Terraform tenemos que tener definidos 5 Resources.
 - Con `Meta-Argument count` la creación de 5 instancias EC2 se vuelve de manera muy facil.
 - Veamos de que manera: 
-```t
+
+```
 # Create EC2 Instance
 resource "aws_instance" "web" {
   ami = "ami-047a51fa27710816e" # Amazon Linux
@@ -20,8 +21,10 @@ resource "aws_instance" "web" {
   }
 }
 ```
+
 - **Ejecutar Terraform Commands**
-```t
+
+```
 # Initialize Terraform
 terraform init
 
@@ -34,13 +37,15 @@ terraform plan
 # Terraform Apply to Create EC2 Instance
 terraform apply 
 ```
+
 - Verificar instancia EC2 y su nombre
 
 
 ## 03 - Entendiendo sobre count index
 - Si visualizarmos, todas nuestras instancias EC2 tienen el mismo nombre `web`
 - Vamos a cambiarles el nombre usando count index a `web-0, web-1, web-2, web-3, web-4`
-```t
+
+```
 # Create EC2 Instance
 resource "aws_instance" "web" {
   ami = "ami-047a51fa27710816e" # Amazon Linux
@@ -52,8 +57,10 @@ resource "aws_instance" "web" {
   }
 }
 ```
+
 - **Ejecutar Terraform Commands**
-```t
+
+```
 # Terraform Validate
 terraform validate
 
@@ -62,11 +69,13 @@ terraform plan
 
 # Terraform Apply to Create EC2 Instance
 terraform apply 
+
 ```
 - Verificar instancias EC2
 
 
 ## 04 - Destroy Terraform Resources
+
 ```
 # Destroy Terraform Resources
 terraform destroy

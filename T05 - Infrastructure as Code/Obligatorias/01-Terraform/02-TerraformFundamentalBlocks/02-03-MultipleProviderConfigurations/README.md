@@ -6,7 +6,8 @@
 ## 02 - ¿Cómo definir multiples configuraciones del mismo provider?  
 - Entender sobre el provider por defecto.
 - Entender y definir multiples prodivers del mismo tipo de provider.
-```t
+
+```
 # Provider-1 for us-east-1 (Default Provider)
 provider "aws" {
   region = "us-east-1"
@@ -22,7 +23,8 @@ provider "aws" {
 ```
 
 ## 03 - ¿Cómo referencias un provider que no sea el por defecto en un recurso?
-```t
+
+```
 # Resource Block to Create VPC in us-west-1
 resource "aws_vpc" "vpc-us-west-1" {
   cidr_block = "10.2.0.0/16"
@@ -35,7 +37,8 @@ resource "aws_vpc" "vpc-us-west-1" {
 ```
 
 ## 04 - Ejecutar los siguientes comandos
-```t
+
+```
 # Initialize Terraform
 terraform init
 
@@ -54,7 +57,8 @@ terraform apply -auto-approve
 ```
 
 ## 05 - Clean-Up 
-```t
+
+```
 # Destroy Terraform Resources
 terraform destroy -auto-approve
 

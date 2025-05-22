@@ -24,6 +24,9 @@
 
 
 ## 04 - Resource: Create Resource: Crear EC2 Instance
+
+Archivos a descargar: [terraform-manifiests](https://github.com/ORT-ATI-CertificadoDevOps/Laboratorios/tree/main/T05%20-%20Infrastructure%20as%20Code/Obligatorias/01-Terraform/03-TerraformResources/03-01-ResourceSyntaxAndBehavior/terraform-manifests)
+
 ```
 # Initialize Terraform
 terraform init
@@ -55,7 +58,6 @@ Observación:
 1) Se crea archivo terraform.tfstate en el directorio local de trabajo
 
 2) Se crea el recurso definido en AWS Cloud
-
 ```
 
 - **Important Note:** Aquí vimos un ejemplo de **Create Resource**
@@ -81,11 +83,13 @@ Observación:
 
 ## 07 - Resource: Update In-Place: Realizar cambios agregando tag a EC2 Instance 
 - Agregar un nuevo tag en `c2-ec2-instance.tf`
+
 ```
 # Add this for EC2 Instance tags
     "tag1" = "Update-test-1"
 ```
 - Revisar Terraform Plan
+
 ```
 # Review the terraform plan
 terraform plan 
@@ -96,18 +100,21 @@ Observación: Deberías de ver "~ update in-place"
 terraform apply -auto-approve
 Observación: "Apply complete! Resources: 0 added, 1 changed, 0 destroyed."
 ```
+
 - **Important Note:** Aquí vimos un ejemplo de **update in-place**
 
 
 ## 08 - Resource: Destroy and Re-create Resources: actualizar Availability Zone
 - Esto va a destruir la instancia EC2 en 1 AZ y la volvera a recrear en otra AZ.
+
 ```
 # Before
   availability_zone = "us-east-1a"
 
 # After
-  availability_zone = "us-east-1b"  
+  availability_zone = "us-east-1b"
 ```
+
 ```
 # Review the terraform plan
 terraform plan 
@@ -124,6 +131,7 @@ Observation: "Apply complete! Resources: 1 added, 0 changed, 1 destroyed."
 
 
 ## 09 - Resource: Destroy Resource
+
 ```
 # Destroy Resource
 terraform destroy 
@@ -139,6 +147,7 @@ Observación:
 - **Current State:**  Real Resources presentes en nuestra cloud
 
 ## 11 - Clean-Up
+
 ```
 # Destroy Resource
 terraform destroy -auto-approve 
