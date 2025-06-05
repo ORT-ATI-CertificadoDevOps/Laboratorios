@@ -16,7 +16,7 @@
     - [01-Prerrequisitos](/T02%20-%20Procesos%20DevOps/Obligatorias/04-Jenkins/01-Prerrequisitos)
     - [02-Instalación Jenkins](/T02%20-%20Procesos%20DevOps/Obligatorias/04-Jenkins/02-Instalar_nuestro_servidor_jenkins)
     - [03-Empezando_a_trabajar_con_Jenkins](/T02%20-%20Procesos%20DevOps/Obligatorias/04-Jenkins/03-Empezando_a_trabajar_con_Jenkins)
-    - [04-Jenkins_y_Docker](/T02%20-%20Procesos%20DevOps/Obligatorias/04-Jenkins/04-Jenkins_y_docker)
+    - [04-Jenkins_y_Docker](/T02%20-%20Procesos%20DevOps/Obligatorias/04-Jenkins/04-Jenkins_y_Docker)
     - [05-Jenkins_y_AWS](/T02%20-%20Procesos%20DevOps/Obligatorias/04-Jenkins/05-Jenkins_y_AWS)
     - [06-Jenkins_y_Ansible](/T02%20-%20Procesos%20DevOps/Obligatorias/04-Jenkins/06-Jenkins_y_Ansible)
     - [07-Jenkins_y_Seguridad](/T02%20-%20Procesos%20DevOps/Obligatorias/04-Jenkins/07-Jenkins_y_Seguridad)
@@ -61,8 +61,12 @@
     - [T03 - Resource Meta-Argument count](/T05%20-%20Infrastructure%20as%20Code/Obligatorias/01-Terraform/03-TerraformResources/03-03-MetaArgumentCount/README.md)
     - [T04 - Resource Meta-Argument for_each](/T05%20-%20Infrastructure%20as%20Code/Obligatorias/01-Terraform/03-TerraformResources/03-04-MetaArgumentForEach/README.md)
     - [T05 - Resource Meta-Argument lifecycle](/T05%20-%20Infrastructure%20as%20Code/Obligatorias/01-Terraform/03-TerraformResources/03-05-MetaArgumentLifecycle/README.md)
+- [T06 - Containers](/T06%20-%20Containers/Obligatorias/01-ECS/01-Conceptos/Readme.md)
+  - [T01 - Conceptos](/T06%20-%20Containers/Obligatorias/01-ECS/01-Conceptos/Readme.md)
+  - [T02 - Instalación](/T06%20-%20Containers/Obligatorias/01-ECS/02-Crear-Cluster-ECS/Readme.md)
+  - [T03 - Creación de un cluster](/T06%20-%20Containers/Obligatorias/01-ECS/03-ECR-integración/README.md)
 
-- [T06 - Containers](/T06%20-%20Containers/index.md)
+
 - [T07 - Arquitectura y Microservicios](/T07%20-%20Arquitectura%20y%20Microservicios/index.md)
 - [T08 - Kubernetes](/T08%20-%20Kubernetes/index.md)
 
