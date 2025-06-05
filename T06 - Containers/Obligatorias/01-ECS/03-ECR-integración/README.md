@@ -36,9 +36,23 @@
 - Explorar el ECR generado y ver las opciones disponibles,
 
 ## 06: Create Docker Image locally
-- Ir al **03-ECR-integración** del repo y descargar el contenido (`Dockerfile` y `index.html`).
+- Crear los siguiente archivos para el laboratorio:
+   - `Dockerfile`
+```
+FROM nginx
+COPY index.html /usr/share/nginx/html
+```
+   - `index.html`
+```
+<!DOCTYPE html>
+<html>
+<body style="background-color:lightgoldenrodyellow;">
+<h1>Welcome to ECS - ECR Lab</h1>
+<p>Integration with ECR Registry</p>
+</body>
+</html>
+```
 
-- Revisar el `index.html` y modificarlo si quiere.
 - Crear la imagen de Docker localmente.
 - Validar que la imagen funciona localmente.
 
@@ -50,16 +64,7 @@ docker run --name aws-ecr-nginx -p 80:80 --rm -d <AWS_ACCOUNT_ID_NUMBER>.dkr.ecr
 ## 07: Push Docker Image to AWS ECR
 - Pushear la imagen de docker al ECR generado anteriormente.
 
-- **AWS CLI Version 1.x**
 ```
-AWS CLI Version 1.x
-aws ecr get-login --no-include-email --region <your-region>
-Usar el output del comando anterior y ejecutarlo
-docker push <AWS_ACCOUNT_ID>.dkr.ecr.<REGION>.amazonaws.com/aws-ecr-nginx:1.0.0
-```
-- **AWS CLI Version 2.x**
-```
-AWS CLI Version 2.x
 aws ecr get-login-password --region <your-region> | docker login --username AWS --password-stdin <your-ecr-repo-url>
 
 aws ecr get-login-password --region <your-region> | docker login --username AWS --password-stdin <AWS_ACCOUNT_ID>.dkr.ecr.<REGION>.amazonaws.com/aws-ecr-nginx
@@ -77,5 +82,3 @@ docker push <AWS_ACCOUNT_ID>.dkr.ecr.<REGION>.amazonaws.com/aws-ecr-nginx:1.0.0
 - Crear un service para poder acceder a al container.
    - Create service: aws-ecr-nginx-svc.
 
-## Próximos pasos
-Para el siguiente paso del laboratorio, diríjase a [4 - Load balancing and autoscaling](../04-LoadBalancing-AutoScaling/Readme.md)
