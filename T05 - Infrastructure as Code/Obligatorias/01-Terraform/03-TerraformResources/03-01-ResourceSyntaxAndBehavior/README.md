@@ -65,8 +65,8 @@ Observación:
 
 ## 05 - Entendiendo Terraform State File
 - Qué es Terraform State ? 
-  - Es el core principa para que terraform funcione.
-  - De forma breve explicado, es la base de datos que contiene la información de los recursos que van a ser aprovisionados usando terraform.
+  - Es el core principal para que terraform funcione.
+  - De forma breve, es la base de datos que contiene la información de los recursos que van a ser aprovisionados usando terraform.
   - **Principal objetivo:** Para almacenar las relaciones entre los objetos en un sistema remoto y las instancias de recursos declaradas en la configuración
   - **Primary Purpose:** To store bindings between objects in a remote system and resource instances declared in your configuration. 
   - Cuando Terraform crea un objeto remoto en respuesta a un cambio de configuración, registrará la identidad de ese objeto remoto en una instancia de recurso en particular, y luego potencialmente actualizará o eliminará ese objeto en respuesta a futuros cambios de configuración.
