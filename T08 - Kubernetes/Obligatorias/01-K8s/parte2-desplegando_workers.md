@@ -7,31 +7,50 @@ Por restricciones de la cuenta de Academy, vamos a utilizar instancias EC2.
 
 Vamos al tab "Compute" y apretamos "Add node group"
 
-![workers01](Extras/Imagenes/laboratorioK8s/worker01.png)
+<p align = "center">
+<img src = "Extras/Imagenes/laboratorioK8s/worker01.png" width=100%>
+</p>
+
 
 Elegimos el nombre y el role ***LabRole***
 
-![workers02](Extras/Imagenes/laboratorioK8s/worker02.png)
+<p align = "center">
+<img src = "Extras/Imagenes/laboratorioK8s/worker02.png" width=100%>
+</p>
+
 
 Seleccionamos el tipo de reserva ***On-demand***, la AMI de Amazon Linux y el ***Instance Type***
 
-![workers01](Extras/Imagenes/laboratorioK8s/worker03.png)
+<p align = "center">
+<img src = "Extras/Imagenes/laboratorioK8s/worker03.png" width=100%>
+</p>
+
 
 Especficamos los parámetros para el ***Auto-scaling group*** con la cantidad de instancias a desplegar.
 
-![workers01](Extras/Imagenes/laboratorioK8s/worker04.png)
+<p align = "center">
+<img src = "Extras/Imagenes/laboratorioK8s/worker04.png" width=100%>
+</p>
+
 
 Especificamos las ***Subnets*** a presentar. Hacer check donde dice ***"Configure SSH Access..."***, de esta forma tenemos acceso SSH a las instancias de EC2 que usamos como workers.
 
-![workers01](Extras/Imagenes/laboratorioK8s/worker05.png)
+<p align = "center">
+<img src = "Extras/Imagenes/laboratorioK8s/worker05.png" width=100%>
+</p>
 
 Seleccionamos ***Keypair*** y ***Security Group*** que nos permita acceder por SSH.
 
-![workers01](Extras/Imagenes/laboratorioK8s/worker06.png)
+<p align = "center">
+<img src = "Extras/Imagenes/laboratorioK8s/worker06.png" width=100%>
+</p>
 
 Esperamos que despliegue los nodos y que el estado del ***Worker Group*** sea ***"Active"***.
 
-![workers01](Extras/Imagenes/laboratorioK8s/worker07.png)
+
+<p align = "center">
+<img src = "Extras/Imagenes/laboratorioK8s/worker07.png" width=100%>
+</p>
 
 
 Luego podemos loguearnos en el cluster usando la consola de AWS y el comando: `aws eks --region us-east-1 update-kubeconfig --name eks-cluster`
