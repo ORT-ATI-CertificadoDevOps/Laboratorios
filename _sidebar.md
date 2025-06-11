@@ -70,7 +70,7 @@
   - [01-Desplegando un cluster](/T08%20-%20Kubernetes/Obligatorias/01-K8s/parte1-desplegando_un_cluster.md)
   - [02-Desplegando workers](/T08%20-%20Kubernetes/Obligatorias/01-K8s/parte2-desplegando_workers.md)
   - [03-Desplegando una app](/T08%20-%20Kubernetes/Obligatorias/01-K8s/parte3-desplegando_una_app.md)
-  - [04-Trabajando con deployments](/T08%20-%20Kubernetes/Obligatorias/01-K8s/parte4_trabajando_con_deployments.md)
+  - [04-Trabajando con deployments](/T08%20-%20Kubernetes/Obligatorias/01-K8s/parte4-trabajando_con_deployments)
   - [05-Desplegando un cluster](/T08%20-%20Kubernetes/Obligatorias/01-K8s/parte5-trabajando_con_probes.md)
   
 
