@@ -30,7 +30,7 @@
       loadSidebar: true,
       relativePath: true,
       auto2top: true,
-      basePath: window.location.hostname === 'github.com' ? '/' : '/',
+      basePath: window.location.hostname.includes('github.io') ? '/Laboratorios/' : '',
       alias: {
         '/.*/_sidebar.md': './_sidebar.md'
       },
