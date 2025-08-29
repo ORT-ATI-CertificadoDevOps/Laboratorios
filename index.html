@@ -28,7 +28,7 @@
       name: 'DevOps - Labs',
       repo: '',
       loadSidebar: true,
-      relativePath: true, // Volvemos a true
+      relativePath: true,
       auto2top: true,
       alias: {
         '/.*/_sidebar.md': './_sidebar.md'
@@ -36,18 +36,8 @@
       plugins: [
         function(hook, vm) {
           hook.beforeEach(function(content) {
-            // Debug: mostrar en qué entorno estamos
-            console.log('Hostname:', window.location.hostname);
-            console.log('Pathname:', window.location.pathname);
-
-            // Si estamos en GitHub Pages
             if (window.location.hostname.includes('github.io')) {
-              // Convertir rutas absolutas a rutas correctas para GitHub Pages
-              content = content.replace(
-                /src="\/Extras\//g, 
-                'src="Extras/'
-              );
-              console.log('Aplicando transformación para GitHub Pages');
+              content = content.replace(/src="\/Extras\//g,'src="Extras/');
             }
             return content;
           });
