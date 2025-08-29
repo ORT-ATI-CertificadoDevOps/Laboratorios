@@ -22,7 +22,7 @@
 ## 3 - Instalar la VirtualMachine (VM)
 - Con VBOX instalado y la imagen del sistema operativo descargada, vamos a instalar la máquina virtual (VM).
 - Seleccionamos en nueva
-<img src="Extras/Imagenes/laboratorioNivelacion/Instalacion/Instalacion01.jpg" title="static">
+<img src="/Extras/Imagenes/laboratorioNivelacion/Instalacion/Instalacion01.jpg" title="static">
 - Elegimos:
   - Nombre. 
   - Carpeta en donde alojar.
