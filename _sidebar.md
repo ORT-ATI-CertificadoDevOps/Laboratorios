@@ -1,6 +1,6 @@
 - [Home](/README.md)
 - [T01 - Nivelación](/T01%20-%20Nivelacion/index.md)
-  - [00-Instalación ambiente](/T01%20-%20Nivelacion/Obligatorias/00-instalacion-ambiente/VirtualBoxYWSL)
+  - [00-Instalación ambiente](/T01%20-%20Nivelacion/Obligatorias/00-Instalacion-ambiente/VirtualBoxYWSL)
   - [01-Shell-Bash](/T01%20-%20Nivelacion/Obligatorias/01-Shell-Bash-Scripting/Practico)
   - [02-Git](/T01%20-%20Nivelacion/Obligatorias/02-Git/Practico)
 - [T02 - Procesos DevOps](/T02%20-%20Procesos%20DevOps/index.md)
@@ -72,8 +72,4 @@
   - [03-Desplegando una app](/T08%20-%20Kubernetes/Obligatorias/01-K8s/parte3-desplegando_una_app.md)
   - [04-Trabajando con deployments](/T08%20-%20Kubernetes/Obligatorias/01-K8s/parte4-trabajando_con_deployments)
   - [05-Desplegando un cluster](/T08%20-%20Kubernetes/Obligatorias/01-K8s/parte5-trabajando_con_probes.md)
-  
 
----
-
-- [Working plan](/Help/Planning)
