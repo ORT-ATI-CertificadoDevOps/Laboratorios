@@ -17,7 +17,7 @@ git config user.name "ORT Student"
 
 <a href="Extras/lab-githubactions.zip" download>
   <span>lab-githubactions.zip</span>
-  <img src="Extras/Imagenes/zip.png" style="vertical-align: middle; margin-left: 5px;width: 30px;height: 30px;">
+  <img src="/Extras/Imagenes/zip.png" style="vertical-align: middle; margin-left: 5px;width: 30px;height: 30px;">
 </a>
 
 ### 2.2 Generar S3 buckets en AWS
@@ -41,13 +41,13 @@ git config user.name "ORT Student"
 - Si podemos llegar al sitio y obtenemos un error 403 como la imagen, estamos en lo correcto: 
 
 <p align = "center">
-<img src = "Extras/Imagenes/laboratorioGithubActions/403.png" width=100%>
+<img src="/Extras/Imagenes/laboratorioGithubActions/403.png" width=100%>
 </p>
 
 - La tarea siguiente es poder investigar como solucionar el error 403, para ello, vamos a buscar en la documentación de AWS como solucionar el error 403 en un S3 bucket como website, una vez que lo solucionen, deberían de visualizar la siguiente imagen:
 
 <p align = "center">
-<img src = "Extras/Imagenes/laboratorioGithubActions/200.png" width=100%>
+<img src="/Extras/Imagenes/laboratorioGithubActions/200.png" width=100%>
 </p>
 
 > 💡 **PISTA:** La solución del problema está asociado a un problema con la política de acceso al bucket.

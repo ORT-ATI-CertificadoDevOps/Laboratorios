@@ -14,7 +14,7 @@ Bienvenidos al práctico "Desplegando una arquitectura completa". Esto es una re
 Los recursos desplegados deben ser los siguientes:
 
 <p align = "center"></p>
-<img src = "Extras/Imagenes/laboratorioCloud_EC2/ec2/architecture02.png" alt="Arquitectura">
+<img src="/Extras/Imagenes/laboratorioCloud_EC2/ec2/architecture02.png" alt="Arquitectura">
 
 ### Parte 7b: Desplegando una arquitectura segura
 

@@ -27,37 +27,37 @@ Kustomize Version: v4.5.4
 Buscamos el servicio EKS.
 
 <p align = "center">
-<img src = "Extras/Imagenes/laboratorioK8s/eks01.png" width=100%>
+<img src="/Extras/Imagenes/laboratorioK8s/eks01.png" width=100%>
 </p>
 
 Agregamos un cluster
 
 <p align = "center">
-<img src = "Extras/Imagenes/laboratorioK8s/eks02.png" width=100%>
+<img src="/Extras/Imagenes/laboratorioK8s/eks02.png" width=100%>
 </p>
 
 Le asignamos un nombre, versión y Role a usar. En este caso ***LabRole*** es el configurado para Academy.
 
 <p align = "center">
-<img src = "Extras/Imagenes/laboratorioK8s/eks03.png" width=100%>
+<img src="/Extras/Imagenes/laboratorioK8s/eks03.png" width=100%>
 </p>
 
 Para el networking debemos de seleccionar las ***Subnets*** a las cuales queremos presentar, ***Security Groups*** y si el cluster será público, privado o ambos.
 
 <p align = "center">
-<img src = "Extras/Imagenes/laboratorioK8s/eks04.png" width=100%>
+<img src="/Extras/Imagenes/laboratorioK8s/eks04.png" width=100%>
 </p>
 
 Podemos configurar el registro de logs del ***Control Plane*** para consultarlo en Cloudwatch. Dejamos desactivado porque el Role no tiene permisos para escribir en ese servicio.
 
 <p align = "center">
-<img src = "Extras/Imagenes/laboratorioK8s/eks05.png" width=100%>
+<img src="/Extras/Imagenes/laboratorioK8s/eks05.png" width=100%>
 </p>
 
 La creación del cluster puede demorar algunos minutos. Luego deberiamos de poder consultar datos del mismo en la sección ***"Clusters"***
 
 <p align = "center">
-<img src = "Extras/Imagenes/laboratorioK8s/eks06.png" width=100%>
+<img src="/Extras/Imagenes/laboratorioK8s/eks06.png" width=100%>
 </p>
 
 ### Conectarnos a nuestro cluster
