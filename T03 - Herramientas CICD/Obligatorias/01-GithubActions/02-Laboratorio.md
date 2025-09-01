@@ -5,11 +5,11 @@
 - Crear un repositorio de GitHub con un nombre a elección, como por ejemplo `lab-githubactions` y generar las ramas `develop`, `staging` y `main`:
 
 ```bash
-git clone https://github.com/ort-student/lab-githubactions.git
+git clone https://github.com/devops-ort/lab-githubactions.git
 git branch develop
 git branch staging
-git config user.email "ort-student@domain.com"
-git config user.name "ORT Student"
+git config user.email "devops-ort@domain.com"
+git config user.name "DevOps ORT"
 ```
 
 - Subir, sobre la rama `develop`, el código de la aplicación que se encuentra en siguiente `.zip`:

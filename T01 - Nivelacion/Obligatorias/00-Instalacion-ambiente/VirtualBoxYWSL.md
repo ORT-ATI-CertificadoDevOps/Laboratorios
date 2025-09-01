@@ -8,77 +8,77 @@ En esta guía vamos a configurar nuestro ambiente de trabajo para poder realizar
 ## ¿Cuándo seguir esta guía?
 
 Esta guía es **obligatoria** si:
-- Trabajas en Windows
-- Trabajas en macOS y quieres mantener tu ambiente de laboratorio aislado del sistema principal
+- Utilizamos Windows
+- Utilizamos macOS y quieres mantener tu ambiente de laboratorio aislado del sistema principal
 
 ## Opción 1: VirtualBox (Recomendada)
 
 ### Prerrequisitos importantes
 
-⚠️ **IMPORTANTE**: Debes activar la virtualización en el BIOS/UEFI de tu equipo antes de continuar. Sin esto, VirtualBox no funcionará correctamente.
+⚠️ **IMPORTANTE**: Debemos activar la virtualización en el BIOS/UEFI de nuestro equipo antes de continuar. Sin esto, VirtualBox no funcionará correctamente.
 
 ### Paso 1: Descargar e instalar VirtualBox
 
-1. Ve a la página oficial: [https://www.virtualbox.org/](https://www.virtualbox.org/)
-2. Descarga la versión correspondiente a tu sistema operativo
-3. Ejecuta el instalador y sigue las instrucciones por defecto
+1. Vamos a la página oficial: [https://www.virtualbox.org/](https://www.virtualbox.org/)
+2. Descargamos la versión correspondiente al sistema operativo
+3. Ejecutamos el instalador y seguimos las instrucciones por defecto
 
 ### Paso 2: Descargar la imagen de Linux
 
 Para este curso utilizaremos **CentOS**:
 
-1. Ve a: [https://centos.org/download/](https://centos.org/download/)
-2. Descarga la imagen ISO (archivo con extensión .iso)
-3. Guarda el archivo en una ubicación que recuerdes
+1. Vamos a: [https://centos.org/download/](https://centos.org/download/)
+2. Descargamos la imagen ISO (archivo con extensión .iso)
+3. Guardamos el archivo en una ubicación fácil de recordar
 
 ### Paso 3: Crear la máquina virtual
 
 #### 3.1 Iniciar la creación
 
-1. Abre VirtualBox
-2. Haz clic en **"Nueva"**
+1. Abrimos VirtualBox
+2. Hacemos clic en **"Nueva"**
 
 <img src="/Extras/Imagenes/laboratorioNivelacion/Instalacion/Instalacion01.jpg" title="static">
 
 #### 3.2 Configurar la VM
 
-Completa los siguientes campos:
-- **Nombre**: Escribe un nombre descriptivo (ej: "_CentOS-DevOps_").
-- **Carpeta**: Deja la ubicación por defecto o elige donde guardar la VM.
-- **Imagen ISO**: Selecciona el archivo .iso de CentOS que descargaste.
+Completamos los siguientes campos:
+- **Nombre**: Escribimos un nombre descriptivo (ej: "_CentOS-DevOps_").
+- **Carpeta**: Dejamos la ubicación por defecto o eligimos donde guardar la VM.
+- **Imagen ISO**: Seleccionamos el archivo .iso de CentOS que descargaste.
 
 > 💡 **Nota**: Los demás campos se completarán automáticamente cuando selecciones la imagen ISO.
 
-3. Haz clic en **"Siguiente"**
+3. Hacemos clic en **"Siguiente"**
 
 <img src="/Extras/Imagenes/laboratorioNivelacion/Instalacion/Instalacion02.jpg" title="static">
 
 #### 3.3 Configurar credenciales
 
-Puedes modificar el usuario y contraseña si quieres, o mantener los valores por defecto. 
+Podemos modificar el usuario y contraseña o mantener los valores por defecto. 
 
-⚠️ **IMPORTANTE**: Anota (o recordá) estos datos, los necesitarás para acceder a la VM.
+⚠️ **IMPORTANTE**: Anotar (o recordar) estos datos, serán necesarios para acceder a la VM.
 
 <img src="/Extras/Imagenes/laboratorioNivelacion/Instalacion/Instalacion03.jpg" title="static">
 
 #### 3.4 Asignar recursos del sistema
 
-Configura los siguientes valores **mínimos**:
+Configurar los siguientes valores **mínimos**:
 - **Memoria RAM**: 4096 MB (4 GB)
 - **CPUs**: 2 procesadores
 
 > 📋 **Recomendación**: Si tu equipo tiene más recursos disponibles, puedes asignar más RAM y CPUs para mejor rendimiento.
 
-Haz clic en **"Siguiente"**
+Hacer clic en **"Siguiente"**
 
 <img src="/Extras/Imagenes/laboratorioNivelacion/Instalacion/Instalacion04.jpg" title="static">
 
 #### 3.5 Configurar almacenamiento
 
 - **Tamaño del disco**: Mínimo 40 GB
-- Deja las demás opciones por defecto
+- Dejar las demás opciones por defecto
 
-Haz clic en **"Siguiente"** y luego en **"Finalizar"**
+Hacer clic en **"Siguiente"** y luego en **"Finalizar"**
 
 <img src="/Extras/Imagenes/laboratorioNivelacion/Instalacion/Instalacion05.jpg" title="static">
 
@@ -86,19 +86,19 @@ Haz clic en **"Siguiente"** y luego en **"Finalizar"**
 
 #### 4.1 Iniciar la instalación
 
-1. Selecciona tu VM recién creada
-2. Haz clic en **"Iniciar"**
-3. Deberías ver el menú de instalación de CentOS
-4. Selecciona la primera opción para instalar
+1. Seleccionar la VM recién creada
+2. Hacer clic en **"Iniciar"**
+3. El menú de instalación de CentOS tendría que aparecer
+4. Seleccionar la primera opción para instalar
 
 <img src="/Extras/Imagenes/laboratorioNivelacion/Instalacion/Instalacion06.jpg" title="static">
 
 #### 4.2 Configuraciones importantes durante la instalación
 
-Durante el proceso de instalación, asegúrate de:
+Durante el proceso de instalación, verificar lo siguiente:
 
 1. **Habilitar el usuario root**
-2. **Permitir el acceso SSH** (lo usaremos con Visual Studio Code)
+2. **Permitir el acceso SSH** (a utilizar con Visual Studio Code)
 
 <img src="/Extras/Imagenes/laboratorioNivelacion/Instalacion/Instalacion07.jpg" title="static">
 
@@ -110,12 +110,12 @@ Una vez configurados todos los valores, la instalación comenzará automáticame
 
 ### Paso 5: Configurar SSH
 
-Una vez completada la instalación, necesitamos configurar el acceso SSH.
+Una vez completada la instalación, es necesario configurar el acceso SSH.
 
 #### 5.1 Instalar y configurar SSH en CentOS
 
-1. Inicia sesión en la consola de VirtualBox con tu usuario
-2. Ejecuta los siguientes comandos:
+1. Iniciar sesión en la consola de VirtualBox con tu usuario
+2. Ejecutar los siguientes comandos:
 
 ```bash
 sudo yum install openssh-server
@@ -123,25 +123,24 @@ sudo systemctl start sshd.service
 sudo systemctl enable sshd.service
 ```
 
-3. Verifica que el servicio esté funcionando:
+3. Verificar que el servicio esté funcionando:
 
 ```bash
 sudo systemctl status sshd
 ```
 
-Deberías ver que el servicio está "active (running)".
+Debería reflejar que el servicio está "active (running)".
 
 <img src="/Extras/Imagenes/laboratorioNivelacion/Instalacion/Instalacion09.jpg" title="static">
 
 #### 5.2 Configurar la red
 
-1. En VirtualBox, ve a **Configuración** de tu VM
-2. En la sección **Red**, verifica que esté configurada como **"Adaptador puente"**
-3. Esto permitirá que la VM obtenga una IP de tu red local
+1. En VirtualBox, ir a **Configuración** de la VM
+2. En la sección **Red**, verificar que esté configurada como **"Adaptador puente"**. Esto permitirá que la VM obtenga una IP de tu red local
 
 #### 5.3 Obtener la dirección IP
 
-En la consola de la VM, ejecuta:
+En la consola de la VM, ejecutar:
 
 ```bash
 ip addr show
@@ -153,7 +152,7 @@ o el comando tradicional:
 ifconfig
 ```
 
-Anota la dirección IP que aparece (ej: 192.168.1.100).
+Anotar la dirección IP que aparece (ej: 192.168.1.100).
 
 <img src="/Extras/Imagenes/laboratorioNivelacion/Instalacion/Instalacion10.jpg" title="static">
 
@@ -161,21 +160,21 @@ Anota la dirección IP que aparece (ej: 192.168.1.100).
 
 #### 6.1 Instalar la extensión SSH
 
-1. Abre Visual Studio Code
-2. Ve a la sección de extensiones
-3. Busca e instala **"Remote - SSH"**
+1. Abrir Visual Studio Code
+2. Ir a la sección de extensiones
+3. Buscar e instalar **"Remote - SSH"**
 
 #### 6.2 Configurar la conexión
 
-1. Presiona `Ctrl+Shift+P` (o `Cmd+Shift+P` en Mac)
-2. Busca "Remote-SSH: Connect to Host"
-3. Selecciona "Add New SSH Host"
-4. Ingresa: `root@[IP_DE_TU_VM]` (ej: `root@192.168.1.100`)
-5. Sigue las instrucciones para guardar la configuración
+1. Presionar `Ctrl+Shift+P` (o `Cmd+Shift+P` en Mac)
+2. Buscar "Remote-SSH: Connect to Host"
+3. Seleccionar "Add New SSH Host"
+4. Ingresar: `root@[IP_DE_TU_VM]` (ej: `root@192.168.1.100`)
+5. Seguir las instrucciones para guardar la configuración
 
 <img src="/Extras/Imagenes/laboratorioNivelacion/Instalacion/Instalacion11.jpg" title="static">
 
-¡Listo! Ahora puedes conectarte a tu VM desde Visual Studio Code usando SSH.
+¡Listo! Ahora es posible realizar la conexión a la VM desde Visual Studio Code usando SSH.
 
 ---
 
@@ -183,26 +182,26 @@ Anota la dirección IP que aparece (ej: 192.168.1.100).
 
 ### Paso 1: Instalar WSL
 
-1. Abre **PowerShell** como administrador
-2. Ejecuta el siguiente comando:
+1. Abrir **PowerShell** como administrador
+2. Ejecutar el siguiente comando:
 
 ```powershell
 wsl --install
 ```
 
-3. **Reinicia tu equipo** cuando se complete la instalación
+3. **Reinicia el equipo** cuando se complete la instalación
 
 ### Paso 2: Configurar Ubuntu
 
-1. Después del reinicio, busca **"Ubuntu"** en el menú de inicio
-2. Ábrelo y completa la configuración inicial:
-   - Crea un nombre de usuario
-   - Establece una contraseña
-   - Confirma la contraseña
+1. Después del reinicio, buscar **"Ubuntu"** en el menú de inicio
+2. Abrir y completar la configuración inicial:
+   - Crear un nombre de usuario
+   - Establecer una contraseña
+   - Confirmar la contraseña
 
 ### Paso 3: Instalar SSH en Ubuntu
 
-Una vez dentro de Ubuntu, ejecuta:
+Una vez dentro de Ubuntu, ejecutar:
 
 ```bash
 sudo apt update
@@ -225,7 +224,7 @@ sudo systemctl status ssh
 ip addr show eth0
 ```
 
-Anota la dirección IP y úsala para conectarte desde Visual Studio Code siguiendo los mismos pasos del **Paso 6** de la opción VirtualBox.
+Anotar la dirección IP y usarla para conectarse desde Visual Studio Code siguiendo los mismos pasos del **Paso 6** de la opción VirtualBox.
 
 ---
 
@@ -233,8 +232,8 @@ Anota la dirección IP y úsala para conectarte desde Visual Studio Code siguien
 
 Para confirmar que todo funciona correctamente:
 
-1. Deberías poder conectarte a tu VM/WSL desde Visual Studio Code
-2. Puedes abrir una terminal en VS Code y ejecutar comandos Linux
-3. Tienes acceso completo al sistema de archivos
+1. Debería ser posible la conexión a la VM/WSL desde Visual Studio Code
+2. Es posible abrir una terminal en VS Code y ejecutar comandos Linux
+3. Temner acceso completo al sistema de archivos
 
-¡Tu ambiente está listo para los laboratorios del curso! 🚀
+¡El ambiente está listo para los laboratorios del curso! 🚀
