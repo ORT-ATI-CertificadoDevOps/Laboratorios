@@ -7,7 +7,6 @@ Ahora que tiene todo configurado en su ambiente, es hora de ensuciarnos las mano
 
 Para comenzar, generamos un archivo llamado docker-compose.yml y le agregamos el siguiente código:
 ```
-version: "3"
 services:
   jenkins:
     image: jenkins/jenkins
@@ -16,6 +15,7 @@ services:
       - "8080:8080"
     volumes:
       - "./jenkins:/var/jenkins_home"
+    user: root
     networks:
       - net
 networks:
