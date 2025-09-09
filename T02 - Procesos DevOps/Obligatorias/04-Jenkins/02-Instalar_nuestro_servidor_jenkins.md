@@ -15,6 +15,7 @@ services:
       - "8080:8080"
     volumes:
       - "./jenkins:/var/jenkins_home"
+    privileged: true
     user: root
     networks:
       - net
