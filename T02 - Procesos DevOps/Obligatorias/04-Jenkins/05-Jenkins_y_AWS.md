@@ -122,7 +122,8 @@ mysqldump -u root -h $DB_HOST -p$DB_PASSWORD $DB_NAME > /tmp/db-$DATE.sql
 
 - Vamos a agregar los comandos necesarios a nuestro script.sh de AWS CLI para que el respaldo se suba al bucket s3 en el instante que fue generado.
 - Modificar el script.sh y agregar lo siguiente:
-```
+
+```bash
 DATE=$(date +%H-%M-%S)
 BACKUP=db-$DATE.sql
 
