@@ -11,7 +11,8 @@ Vamos a generar un nuevo servidor en Docker, en el cual ejecutaremos comandos me
 >**Nota:** Ver en este punto, que estaremos escribiendo nuestra propia imagen de Docker, ya que vamos a instalar algunas dependencias en la misma.
 
 - El código a poner en el archivo DockerFile es el siguiente:
-```
+
+```dockerfile
 FROM centos:7
 
 RUN yum -y install openssh-server

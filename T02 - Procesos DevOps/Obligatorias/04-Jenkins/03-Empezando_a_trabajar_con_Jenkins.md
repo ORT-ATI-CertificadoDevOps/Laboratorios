@@ -53,6 +53,20 @@ LASTNAME=$2
 echo "Hola, $NAME $LASTNAME"
 ```
 
+
+Es posible hacer la copia del archivo usando el comando `docker cp`, de la siguiente manera:
+
+```
+docker cp script.sh jenkins:/tmp/script.sh
+```
+
+
+La otra alternativa es instalando un editor de texto, como por ejemplo _vi_:
+
+```
+apt update && apt install vi -y
+```
+
 - Recordar sobre que ruta fue guardado el script.sh.
 
 - Ejecutar el siguiente comando sobre el script para darle permisos de ejecución `chmod +x script.sh`

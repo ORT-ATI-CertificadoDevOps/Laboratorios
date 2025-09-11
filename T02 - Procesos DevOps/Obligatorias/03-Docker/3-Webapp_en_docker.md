@@ -279,13 +279,13 @@ Una imagen base de Docker desde la que ejecutar, la ubicación del código de su
   Comenzaremos especificando nuestra imagen base, usando el comando `FROM`:
 
   ```
-  FROM alpine:3.5
+  FROM alpine:latest
   ```
 
 2. El siguiente paso suele ser escribir los comandos para copiar los archivos e instalar las dependencias. Pero primero instalaremos el paquete pip de Python en la distribución de linux alpine. Esto no solo instalará el paquete pip, sino también cualquier otra dependencia, que incluye el intérprete de Python. Agregue el siguiente comando [RUN](https://docs.docker.com/engine/reference/builder/#run):
 
   ```
-  RUN apk add --update py2-pip
+  RUN apk add --update py3-pip
   ```
 
 3. Agreguemos los archivos que componen la aplicación Flask..
@@ -294,7 +294,7 @@ Una imagen base de Docker desde la que ejecutar, la ubicación del código de su
 
   ```
   COPY requirements.txt /usr/src/app/
-  RUN pip install --no-cache-dir -r /usr/src/app/requirements.txt
+  RUN pip install --no-cache-dir -r /usr/src/app/requirements.txt --break-system-packages
   ```
 
   Copie los archivos que ha creado anteriormente en nuestra imagen usando el comando [COPY](https://docs.docker.com/engine/reference/builder/#copy).
@@ -324,14 +324,14 @@ Una imagen base de Docker desde la que ejecutar, la ubicación del código de su
 
   ```
   # our base image
-  FROM alpine:3.5
+  FROM alpine:latest
 
   # Install python and pip
   RUN apk add --update py2-pip
 
   # install Python modules needed by the Python app
   COPY requirements.txt /usr/src/app/
-  RUN pip install --no-cache-dir -r /usr/src/app/requirements.txt
+  RUN pip install --no-cache-dir -r /usr/src/app/requirements.txt --break-system-packages
 
   # copy files required for the app to run
   COPY app.py /usr/src/app/
@@ -352,73 +352,11 @@ Cuando ejecutas el comando `docker build`, asegúrese de reemplazar`<YOUR_USERNA
 
 El comando `docker build` es bastante simple - toma un nombre de etiqueta opcional con el parametro `-t`, y la ubicación del archivo `Dockerfile` - the `.` indica el directorio en donde estoy parado:
 
-```
+```bash
 $ docker build -t <YOUR_USERNAME>/myfirstapp .
-Sending build context to Docker daemon 9.728 kB
-Step 1 : FROM alpine:latest
- ---> 0d81fc72e790
-Step 2 : RUN apk add --update py-pip
- ---> Running in 8abd4091b5f5
-fetch http://dl-4.alpinelinux.org/alpine/v3.3/main/x86_64/APKINDEX.tar.gz
-fetch http://dl-4.alpinelinux.org/alpine/v3.3/community/x86_64/APKINDEX.tar.gz
-(1/12) Installing libbz2 (1.0.6-r4)
-(2/12) Installing expat (2.1.0-r2)
-(3/12) Installing libffi (3.2.1-r2)
-(4/12) Installing gdbm (1.11-r1)
-(5/12) Installing ncurses-terminfo-base (6.0-r6)
-(6/12) Installing ncurses-terminfo (6.0-r6)
-(7/12) Installing ncurses-libs (6.0-r6)
-(8/12) Installing readline (6.3.008-r4)
-(9/12) Installing sqlite-libs (3.9.2-r0)
-(10/12) Installing python (2.7.11-r3)
-(11/12) Installing py-setuptools (18.8-r0)
-(12/12) Installing py-pip (7.1.2-r0)
-Executing busybox-1.24.1-r7.trigger
-OK: 59 MiB in 23 packages
- ---> 976a232ac4ad
-Removing intermediate container 8abd4091b5f5
-Step 3 : COPY requirements.txt /usr/src/app/
- ---> 65b4be05340c
-Removing intermediate container 29ef53b58e0f
-Step 4 : RUN pip install --no-cache-dir -r /usr/src/app/requirements.txt
- ---> Running in a1f26ded28e7
-Collecting Flask==0.10.1 (from -r /usr/src/app/requirements.txt (line 1))
-  Downloading Flask-0.10.1.tar.gz (544kB)
-Collecting Werkzeug>=0.7 (from Flask==0.10.1->-r /usr/src/app/requirements.txt (line 1))
-  Downloading Werkzeug-0.11.4-py2.py3-none-any.whl (305kB)
-Collecting Jinja2>=2.4 (from Flask==0.10.1->-r /usr/src/app/requirements.txt (line 1))
-  Downloading Jinja2-2.8-py2.py3-none-any.whl (263kB)
-Collecting itsdangerous>=0.21 (from Flask==0.10.1->-r /usr/src/app/requirements.txt (line 1))
-  Downloading itsdangerous-0.24.tar.gz (46kB)
-Collecting MarkupSafe (from Jinja2>=2.4->Flask==0.10.1->-r /usr/src/app/requirements.txt (line 1))
-  Downloading MarkupSafe-0.23.tar.gz
-Installing collected packages: Werkzeug, MarkupSafe, Jinja2, itsdangerous, Flask
-  Running setup.py install for MarkupSafe
-  Running setup.py install for itsdangerous
-  Running setup.py install for Flask
-Successfully installed Flask-0.10.1 Jinja2-2.8 MarkupSafe-0.23 Werkzeug-0.11.4 itsdangerous-0.24
-You are using pip version 7.1.2, however version 8.1.1 is available.
-You should consider upgrading via the 'pip install --upgrade pip' command.
- ---> 8de73b0730c2
-Removing intermediate container a1f26ded28e7
-Step 5 : COPY app.py /usr/src/app/
- ---> 6a3436fca83e
-Removing intermediate container d51b81a8b698
-Step 6 : COPY templates/index.html /usr/src/app/templates/
- ---> 8098386bee99
-Removing intermediate container b783d7646f83
-Step 7 : EXPOSE 5000
- ---> Running in 31401b7dea40
- ---> 5e9988d87da7
-Removing intermediate container 31401b7dea40
-Step 8 : CMD python /usr/src/app/app.py
- ---> Running in 78e324d26576
- ---> 2f7357a0805d
-Removing intermediate container 78e324d26576
-Successfully built 2f7357a0805d
 ```
 
-Si no tienes la imagen `alpine:3.5`, el cliente primero extraerá la imagen y luego creará su imagen. Por lo tanto, su salida al ejecutar el comando se verá diferente a la mía. Si todo salió bien, ¡tú imagen debería estar lista! Ejecuta `docker images` y mira si tu imagen (`<YOUR_USERNAME>/myfirstapp`).
+Si no tienes la imagen `alpine:latest`, el cliente primero extraerá la imagen y luego creará su imagen. Por lo tanto, su salida al ejecutar el comando se verá diferente a la mía. Si todo salió bien, ¡tú imagen debería estar lista! Ejecuta `docker images` y mira si tu imagen (`<YOUR_USERNAME>/myfirstapp`).
 
 ### 3.3.4 Corre tu imagen
 El siguiente paso en esta sección es ejecutar la imagen y ver si realmente funciona.
