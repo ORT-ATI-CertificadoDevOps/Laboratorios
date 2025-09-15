@@ -22,7 +22,7 @@
     - [07-Jenkins_y_Seguridad](/T02%20-%20Procesos%20DevOps/Obligatorias/04-Jenkins/07-Jenkins_y_Seguridad)
     - [08-Jenkins_y_Email](/T02%20-%20Procesos%20DevOps/Obligatorias/04-Jenkins/08-Jenkins_y_Email)
     - [09-Jenkins_y_Maven](/T02%20-%20Procesos%20DevOps/Obligatorias/04-Jenkins/09-Jenkins_y_Maven)
-    - [10-Jenkins_y_Git](/T02%20-%20Procesos%20DevOps/Obligatorias/04-Jenkins/10-Jenkins_y_Git)
+    - [10-Jenkins_y_Git](/T02%20-%20Procesos%20DevOps/Obligatorias/04-Jenkins/10-Jenkins_y_GIT)
     - [11-Jenkins_y_DSL](/T02%20-%20Procesos%20DevOps/Obligatorias/04-Jenkins/11-Jenkins_y_DSL)
     - [12-Jenkins_y_Pipelines](/T02%20-%20Procesos%20DevOps/Obligatorias/04-Jenkins/12-Jenkins_y_Pipeline_Jenkinsfile)
 - [T03 - Herramientas CICD](/T03%20-%20Herramientas%20CICD/index.md)
