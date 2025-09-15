@@ -1,4 +1,4 @@
-# 6 - Jenkins + Ansible
+# ~6 - Jenkins + Ansible~ --> No hacer!! (lo vemos en detalle en IaC)
 
 Vamos a agregar Ansible sobre nuestro servidor de Jenkins, que es una herramienta open source que se utiliza como parte de configuration managment.
 

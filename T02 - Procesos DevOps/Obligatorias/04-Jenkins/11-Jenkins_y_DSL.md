@@ -15,29 +15,34 @@ Vamos a generar un nuevo freestyle el cual usaremos para empezar a trabajar con 
 - Generar un nuevo freestyle project llamada `job-dsl`.
 - En la pestaña de `Build` elegir la opción de `Process Job DSLs`.
 - Agregar el siguiente DSL Script:
-```
+
+```Groovy
 job('job_dsl_created'){
 
 }
 ```
+
 - Ejecutar el job y verificar que se genero un nuevo job llamado `job_dsl_created`.
 - Verificar en la documentación el comando `job` de DSL y el ejemplo sugerido por la misma.
 
 ## 11.3 - Cambiar description con DSL
 
 - Modificar el código del freestyle project `job-dsl` para cambiar la description de `job_dsl_example`:
-```
+
+```Groovy
 job('job_dsl_created'){
 
     description('This is my awesome job')
 }
 ```
+
 - Ejecutar para verificar que se realizo el cambio de description.
 
 ## 11.4 - Cambiar para tener parámetros con DSL
 
 - Modificar el código del freestyle project `job-dsl` para cambiar tener parámetros en `job_dsl_example`:
-```
+
+```Groovy
 job('job_dsl_created'){
 
     description('This is my awesome job')
@@ -54,7 +59,8 @@ job('job_dsl_created'){
 ## 11.5 - Cambiar para usar SCM (Git) con DSL
 
 - Modificar el código del freestyle project `job-dsl` para cambiar usar SCM en `job_dsl_example`:
-```
+
+```Groovy
 job('job_dsl_created'){
 
     description('This is my awesome job')
@@ -70,12 +76,14 @@ job('job_dsl_created'){
     }
 }
 ```
+
 - Ejecutar para verificar que se realizo el cambio en SCM con lo detallado anteriormente.
 
 ## 11.6 - Cambiar para usar triggers con DSL
 
 - Modificar el código del freestyle project `job-dsl` para cambiar usar triggers en `job_dsl_example`:
-```
+
+```Groovy
 job('job_dsl_created'){
 
     description('This is my awesome job')
@@ -95,12 +103,14 @@ job('job_dsl_created'){
     }
 }
 ```
+
 - Ejecutar para verificar que se realizo el cambio en triggers con lo detallado anteriormente.
 
 ## 11.7 - Cambiar para usar steps con DSL
 
 - Modificar el código del freestyle project `job-dsl` para cambiar usar steps en `job_dsl_example`:
-```
+
+```Groovy
 job('job_dsl_created'){
 
     description('This is my awesome job')
@@ -124,12 +134,14 @@ job('job_dsl_created'){
     }
 }
 ```
+
 - Ejecutar para verificar que se realizo el cambio en steps con lo detallado anteriormente.
 
 ## 11.8 - Cambiar para usar mailer con DSL
 
 - Modificar el código del freestyle project `job-dsl` para cambiar usar mailer en `job_dsl_example`:
-```
+
+```Groovy
 job('job_dsl_created'){
 
     description('This is my awesome job')
@@ -157,12 +169,14 @@ job('job_dsl_created'){
     }
 }
 ```
+
 - Ejecutar para verificar que se realizo el cambio en Post-build Actions con lo detallado anteriormente.
 
-## 11.9 - Recrear el Ansible job usando DSL
+## ~11.9 - Recrear el Ansible job usando DSL~ --> No hacer!! (depende de la parte de Ansible)
 
 - Generar un nuevo freestyle project como el anterior de DSL y usar el siguiente código:
-```
+
+```Groovy
 job('ansible-users-db-dsl'){
 
     description('Update the html table based on the input')
@@ -186,6 +200,7 @@ job('ansible-users-db-dsl'){
     }
 }
 ```
+
 - Ejecutar para verificar que se realizo el cambio en el job ansible-users-db-sal y verificar su funcionamiento.
 
 ## Próximos pasos
