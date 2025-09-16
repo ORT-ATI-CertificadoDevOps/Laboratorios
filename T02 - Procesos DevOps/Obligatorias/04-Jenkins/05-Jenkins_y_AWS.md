@@ -8,7 +8,7 @@ Vamos a generar un servidor MySQL en docker, el cual vamos a utilizar como nuest
 ```
 db_host:
     container_name: db
-    image: mysql:5.7
+    image: mysql:lts
     environment:
       - "MYSQL_ROOT_PASSWORD=1234"
     volumes:
