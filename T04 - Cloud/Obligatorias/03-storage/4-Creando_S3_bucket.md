@@ -9,7 +9,7 @@ Vamos a usar la capacidad de S3 para publicar una web html sencilla.
 * Crear un bucket de S3
   * Nombre: `{napellido}-bucket` donde `napellido` es la primera letra del nombre + apellido.
   * Asignarle el perfil "WebHosting" (Luego de creado el bucket, bajo la pestañana **"Properties"**)
-* Descargar la aplicación "Cafe App" de Aulas
+* Descargar la aplicación "Cafe App" de Github: [cafeApp](https://github.com/ORT-ATI-CertificadoDevOps/cafeApp)
   * En la web de la materia > material complementario > [`Static WebSite - Cafe App`](https://aulas.ort.edu.uy/mod/resource/view.php?id=386634)
 * Probar acceso a la aplicación
 

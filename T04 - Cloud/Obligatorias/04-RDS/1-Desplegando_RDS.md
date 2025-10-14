@@ -24,7 +24,7 @@ Desplegar el servicio managed de base de datos relacionales de AWS.
 
 ```bash
 #Conectarse a una instancia de MySQL desde Amazon Linux
-$ sudo yum install mysql
+$ sudo dnf install mariadb
 $ mysql -h <endpoint_url> -u admin -p
 $ show databases; #para listar las bases creadas
 $ create database db-test;
