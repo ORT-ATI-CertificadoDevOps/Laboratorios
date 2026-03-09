@@ -28,8 +28,9 @@
 
 ## Ejercicio 2
 - Generar un archivo `ejercicio2.sh` para que ahora incluya el NOMBRE como una variable.
+- El resultado en pantalla debe ser el mismo que el del ejercicio anterior, pero esta vez el nombre debe estar almacenado en una variable dentro del script.
 - Resultado esperado (ejemplo):
- 
+
 <img src="/Extras/Imagenes/laboratorioNivelacion/Bash/Ejercicio1.png" title="static">
 
 ## Ejercicio 3
@@ -40,12 +41,14 @@
 - Generar un archivo ejercicio4.sh que valide si una determinada RUTA/PATH existe.
 - Es recomendable alojar la RUTA/PATH como una variable.
 - Si la RUTA **EXISTE**, se debe imprimir por pantalla "La ruta: RUTA existe!"
-- Si **TENGO** permisos de ejecución sobre la ruta, se debe imprimir por pantalla "Tengo permisos de ejecución sobre la ruta: RUTA"
+  - Adicionalmente, si se **TIENEN** permisos de ejecución sobre esa ruta, se debe imprimir por pantalla "Tengo permisos de ejecución sobre la ruta: RUTA"
+  - Si la ruta existe pero **NO SE TIENEN** permisos de ejecución, no es necesario imprimir nada extra.
 - Si la RUTA **NO EXISTE**, se debe de imprimir por pantalla "La ruta: RUTA no existe"
 - Ej de la solución: <img src="/Extras/Imagenes/laboratorioNivelacion/Bash/Ejercicio4.png" title="static">
 
-## Ejercico 5
-- Generar un archivo ejercicio5.sh que muestre por pantalla el nombre de 5 animales, apareciendo cada uno en una linea diferente.
+## Ejercicio 5
+- Generar un archivo ejercicio5.sh que muestre por pantalla el nombre de 5 animales, apareciendo cada uno en una línea diferente.
+- Se puede resolver usando múltiples `echo` o utilizando un array junto con un loop `for` (¡se recomienda intentar con el loop!).
 - Ej de la solución: <img src="/Extras/Imagenes/laboratorioNivelacion/Bash/Ejercicio5.png" title="static">
 
 ## Ejercicio 6
@@ -62,21 +65,28 @@
 - Ej de la solución: <img src="/Extras/Imagenes/laboratorioNivelacion/Bash/Ejercicio7.png" title="static">
 
 ## Ejercicio 8
-- Generar un archivo ejercicio8.sh que mediante el comando function, muestre por pantalla el número total de archivos existentes en el directorio donde se encuentra el archivo ejercicio8.sh
-- El nombre de function puede ser cual gusten, recomiendo que la definan como: function contar_archivos()
-- Ej de la solución: <img src="/Extras/Imagenes/laboratorioNivelacion/Bash/Ejercicio8.png" title="static">
+- A partir del ejercicio7.sh, agregar una validación al inicio del script que verifique si se recibió el parámetro `$1`.
+- Si **NO** se recibió ningún parámetro, el script debe imprimir por pantalla `"Error: debe ingresar una ruta como parámetro"` y terminar la ejecución con `exit 1`.
+- Si **SÍ** se recibió el parámetro, el script debe continuar con la lógica anterior.
+- Guardar el resultado como `ejercicio8.sh`.
 
 ## Ejercicio 9
-- Generar un archivo ejercicio9.sh a partir del archivo ejercicio8.
-- Realizar los cambios necesarios para que la function contar_archivos() pueda recibir los directorios como parametros.
-- Una vez realizadas las modificaciones, utilizar la function sobre los directorios:
+- Generar un archivo ejercicio9.sh que mediante una función, muestre por pantalla el número total de archivos existentes en el directorio donde se encuentra el archivo ejercicio9.sh.
+- Definir la función como: `function contar_archivos()`
+- Ej de la solución: <img src="/Extras/Imagenes/laboratorioNivelacion/Bash/Ejercicio8.png" title="static">
+
+## Ejercicio 10
+- Generar un archivo ejercicio10.sh a partir del archivo ejercicio9.sh.
+- Realizar los cambios necesarios para que la función `contar_archivos()` pueda recibir directorios como parámetros.
+- Una vez realizadas las modificaciones, utilizar la función sobre los directorios:
   - /etc
   - /var
   - /usr/bin
 - Ej de la solución: <img src="/Extras/Imagenes/laboratorioNivelacion/Bash/Ejercicio9.png" title="static">
 
-## Ejercicio 10
-- Generar un archivo ejercicio10.sh que muestre un número random por pantalla "El número random fue: xxxxx" (utilizar el comando RANDOM para obtener el número aleatorio).
-- Cada vez que el .sh se ejecute, debe de guardarse el mensaje desplegado con el número aleatorio obtenido en un archivo llamado ejercicio10.txt, que debe de estar alojado en /var/tmp/
+## Ejercicio 11
+- Generar un archivo ejercicio11.sh que muestre un número random por pantalla "El número random fue: xxxxx" (utilizar el comando RANDOM para obtener el número aleatorio).
+- Cada vez que el .sh se ejecute, debe de guardarse el mensaje desplegado con el número aleatorio obtenido en un archivo llamado ejercicio11.txt, que debe de estar alojado en /tmp/
+- **Nota:** Se utiliza `/tmp/` en lugar de `/var/tmp/` ya que es accesible sin permisos de superusuario en todos los sistemas.
 - Ej de la solución: <img src="/Extras/Imagenes/laboratorioNivelacion/Bash/Ejercicio10(1).png" title="static">
 - Ej de la solución: <img src="/Extras/Imagenes/laboratorioNivelacion/Bash/Ejercicio10(2).png" title="static">

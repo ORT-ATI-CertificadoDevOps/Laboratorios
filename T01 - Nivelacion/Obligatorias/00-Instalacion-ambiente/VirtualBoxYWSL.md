@@ -5,17 +5,22 @@ En esta guía vamos a configurar nuestro ambiente de trabajo para poder realizar
 - **VirtualBox** (Windows y macOS) - _**Recomendada**_
 - **WSL** (solo Windows)
 
+> ⚠️ **Nota sobre la distribución Linux**: Esta guía utiliza **CentOS** como distribución de referencia. CentOS llegó a su fin de vida (EOL) en 2021, por lo que si tienen dificultades para descargarla o utilizarla, se recomienda como alternativa **AlmaLinux** o **Rocky Linux**, que son compatibles con CentOS (mismos comandos, misma estructura) y tienen soporte activo.
+
 ## ¿Cuándo seguir esta guía?
 
 Esta guía es **obligatoria** si:
 - Utilizamos Windows
-- Utilizamos macOS y quieres mantener tu ambiente de laboratorio aislado del sistema principal
+- Utilizamos macOS con Apple Silicon (M1/M2/M3) → seguir la guía de **Colima** (ver abajo)
+- Utilizamos macOS con Intel → el ambiente puede usarse directamente sin virtualización, aunque se recomienda VirtualBox para mantenerlo aislado
 
-## Opción 1: VirtualBox (Recomendada)
+## Opción 1: VirtualBox (Recomendada para Windows)
 
 ### Prerrequisitos importantes
 
 ⚠️ **IMPORTANTE**: Debemos activar la virtualización en el BIOS/UEFI de nuestro equipo antes de continuar. Sin esto, VirtualBox no funcionará correctamente.
+
+> ⚠️ **Usuarios de Mac con Apple Silicon (M1/M2/M3)**: VirtualBox no tiene soporte estable para arquitectura ARM. Se recomienda utilizar **Colima** para emular arquitectura x86 (ver **Opción 3** al final de esta guía).
 
 ### Paso 1: Descargar e instalar VirtualBox
 
@@ -44,7 +49,7 @@ Para este curso utilizaremos **CentOS**:
 
 Completamos los siguientes campos:
 - **Nombre**: Escribimos un nombre descriptivo (ej: "_CentOS-DevOps_").
-- **Carpeta**: Dejamos la ubicación por defecto o eligimos donde guardar la VM.
+- **Carpeta**: Dejamos la ubicación por defecto o elegimos donde guardar la VM.
 - **Imagen ISO**: Seleccionamos el archivo .iso de CentOS que descargaste.
 
 > 💡 **Nota**: Los demás campos se completarán automáticamente cuando selecciones la imagen ISO.
@@ -88,7 +93,7 @@ Hacer clic en **"Siguiente"** y luego en **"Finalizar"**
 
 1. Seleccionar la VM recién creada
 2. Hacer clic en **"Iniciar"**
-3. El menú de instalación de CentOS tendría que aparecer
+3. El menú de instalación de CentOS debería aparecer
 4. Seleccionar la primera opción para instalar
 
 <img src="/Extras/Imagenes/laboratorioNivelacion/Instalacion/Instalacion06.jpg" title="static">
@@ -189,7 +194,9 @@ Anotar la dirección IP que aparece (ej: 192.168.1.100).
 wsl --install
 ```
 
-3. **Reinicia el equipo** cuando se complete la instalación
+> 💡 **Nota**: Este comando instala **Ubuntu** por defecto. En Windows 11 funciona directamente; en Windows 10 puede ser necesario habilitar WSL manualmente desde "Activar o desactivar características de Windows" antes de ejecutarlo.
+
+3. **Reiniciar el equipo** cuando se complete la instalación
 
 ### Paso 2: Configurar Ubuntu
 
@@ -224,7 +231,9 @@ sudo systemctl status ssh
 ip addr show eth0
 ```
 
-Anotar la dirección IP y usarla para conectarse desde Visual Studio Code siguiendo los mismos pasos del **Paso 6** de la opción VirtualBox.
+Anotar la dirección IP y usarla para conectarse desde Visual Studio Code.
+
+> 💡 **Alternativa más simple para WSL**: VS Code incluye la extensión **"WSL"** (buscarla en el Marketplace) que permite conectarse directamente a WSL sin necesitar SSH ni dirección IP. Es la forma recomendada para usuarios de WSL.
 
 ---
 
@@ -233,7 +242,61 @@ Anotar la dirección IP y usarla para conectarse desde Visual Studio Code siguie
 Para confirmar que todo funciona correctamente:
 
 1. Debería ser posible la conexión a la VM/WSL desde Visual Studio Code
-2. Es posible abrir una terminal en VS Code y ejecutar comandos Linux
-3. Temner acceso completo al sistema de archivos
+2. Abrir una terminal en VS Code y ejecutar el siguiente comando:
 
-¡El ambiente está listo para los laboratorios del curso! 🚀
+```bash
+uname -a
+```
+
+Debería mostrar información del sistema Linux (kernel, arquitectura, etc.).
+
+3. Tener acceso completo al sistema de archivos
+
+¡El ambiente está listo para los laboratorios del curso!
+
+---
+
+## Opción 3: Colima (Mac con Apple Silicon — M1/M2/M3)
+
+[Colima](https://github.com/abiosoft/colima) permite levantar una VM Linux emulando arquitectura x86 en Macs con Apple Silicon.
+
+### Paso 1: Instalar dependencias
+
+Asegurarse de tener [Homebrew](https://brew.sh/) instalado y luego ejecutar:
+
+```bash
+brew install colima
+brew install docker
+```
+
+### Paso 2: Iniciar Colima con emulación x86
+
+```bash
+colima start --arch x86_64 --vm-type vz --rosetta
+```
+
+> 💡 Esto levanta una VM Linux con arquitectura x86_64 usando Rosetta para emulación. El primer inicio puede tardar varios minutos.
+
+### Paso 3: Verificar que funciona
+
+```bash
+colima ssh
+```
+
+Esto abre una shell dentro de la VM. Para verificar la arquitectura:
+
+```bash
+uname -m
+# Debería mostrar: x86_64
+```
+
+### Paso 4: Conectar desde Visual Studio Code
+
+1. Instalar la extensión **"Remote - SSH"** en VS Code
+2. Obtener la IP de la VM:
+
+```bash
+colima ssh -- ip addr show col0
+```
+
+1. Conectarse con `root@<IP>` siguiendo los mismos pasos del **Paso 6** de la Opción VirtualBox.

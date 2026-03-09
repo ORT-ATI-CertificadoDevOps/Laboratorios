@@ -23,28 +23,34 @@ El repositorio se organiza de la siguiente manera:
 ├── Extras
 ├── T01 - Nivelacion
 │   ├── Obligatorias
-│   ├── Recomendadas
+│   └── Recomendadas
 ├── T02 - Procesos DevOps
 │   ├── Obligatorias
-│   ├── Recomendadas
+│   └── Recomendadas
 ├── T03 - Herramientas CICD
 │   ├── Obligatorias
-│   ├── Recomendadas
+│   └── Recomendadas
 ├── T04 - Cloud
 │   ├── Obligatorias
-│   ├── Recomendadas
-├── T05 - Arquitectura y Microservicios
+│   └── Recomendadas
+├── T05 - Infrastructure as Code
 │   ├── Obligatorias
-│   ├── Recomendadas
-├── T06 - Infrastructure as Code
+│   └── Recomendadas
+├── T06 - Containers
 │   ├── Obligatorias
-│   ├── Recomendadas
-├── T07 - Containers
+│   └── Recomendadas
+├── T07 - Kubernetes
 │   ├── Obligatorias
-│   ├── Recomendadas
-└── T08 - Kubernetes
+│   └── Recomendadas
+├── T08 - Serverless
+│   ├── Obligatorias
+│   └── Recomendadas
+├── T09 - Arquitectura y Microservicios
+│   ├── Obligatorias
+│   └── Recomendadas
+└── T10 - Observabilidad
     ├── Obligatorias
-    ├── Recomendadas
+    └── Recomendadas
 ```
 
 - [T01 - Nivelación](/T01%20-%20Nivelacion/index.md)

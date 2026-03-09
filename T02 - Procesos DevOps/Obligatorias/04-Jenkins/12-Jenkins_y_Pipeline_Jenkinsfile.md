@@ -6,7 +6,7 @@ Se deja la documentación por si hay necesidad de consultarla. [Link documentaci
 
 ## 12.1 Instalar plugin de JenkinsFile
 
-Instalar el plugin `Pipeline` como se han instalados los demás plugins anteriromente.
+Instalar el plugin `Pipeline` como se han instalados los demás plugins anteriormente.
 
 ## 12.2 Crear nuestro primer pipeline
 
