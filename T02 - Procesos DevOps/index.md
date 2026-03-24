@@ -2,9 +2,9 @@
 
 ## Obligatorias
 
-- [01-SonarCloud](Obligatorias/01-SonarCloud/1-Prerrequisitos.md)
-- [02-Docker](Obligatorias/02-Docker/1-Prerrequisitos.md)
-- [03-Jenkins](Obligatorias/03-Jenkins/01-Prerrequisitos.md)
+- [01-Docker](Obligatorias/01-Docker/1-Prerrequisitos.md)
+- [02-SonarCloud](Obligatorias/02-SonarCloud/1-Prerrequisitos.md)
+- [03-GitHub Actions](Obligatorias/03-GitHub-Actions/01-Prerrequisitos.md)
 
 ## Recomendadas
 

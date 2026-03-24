@@ -1,17 +1,36 @@
-# Preparación ambiente
+# GitHub Actions Avanzado — Prerrequisitos
 
-## Prerrequisitos
-No se necesitan habilidades específicas para este laboratorio.
+## Punto de partida
 
-Para realizar el laboratorio necesitamos lo siguiente:
+Este laboratorio extiende el pipeline construido en **T02 — Lab 03 (GitHub Actions)**. Antes de continuar, asegurarse de tener:
 
-- Tener cuenta en [GitHub](https://github.com/)
-- Tener activada la cuenta de AWS Academy.
+- El repositorio `lab-github-actions-t02` funcionando con el pipeline Build → Test → Push
+- Cuenta en [Docker Hub](https://hub.docker.com/)
+- Cuenta en [SonarCloud](https://sonarcloud.io/)
+- Cuenta en [AWS Academy](https://awsacademy.instructure.com/) activa (para el lab de deploy)
 
-## ¿Qué es Github Actions?
+## ¿Qué vamos a agregar?
 
-GitHub Actions es una plataforma de integración y despliegue continuos (CI/CD) que te permite automatizar tus compilaciones, pruebas y despliegue. Puedes crear flujos de trabajo, crear y probar cada solicitud de cambios en tu repositorio o desplegar solicitudes de cambios fusionadas a producción.
+En T02 construimos el pipeline de CI (integración continua). En este lab agregamos **CD (entrega continua)**:
 
+```
+T02:  push → Build → Test → Push artifact
+
+T03:  push → Build → Test → Push artifact → Deploy dev
+      PR merge to staging → Deploy staging
+      PR merge to main   → Deploy producción (con aprobación)
+```
+
+Los conceptos nuevos que se cubren:
+
+| Concepto | Descripción |
+|----------|-------------|
+| **Environments** | Ambientes con reglas de protección y secrets propios |
+| **Required reviewers** | Aprobación manual antes de deployar a prod |
+| **Reusable workflows** | Workflows que se llaman desde otros workflows |
+| **Cache** | Acelerar builds reutilizando dependencias entre runs |
+| **Matrix** | Ejecutar el mismo job en múltiples configuraciones |
 
 ## Próximos pasos
-Para el siguiente paso del laboratorio, diríjase a [2 - Laboratorio](02-Laboratorio.md)
+
+Continuar con [02 - Environments y Ambientes](02-Environments.md)

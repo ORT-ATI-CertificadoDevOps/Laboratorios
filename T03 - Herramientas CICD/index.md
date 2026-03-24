@@ -2,7 +2,7 @@
 
 ## Obligatorias
 
-- [01-GitHub actions](/T03%20-%20Herramientas%20CICD/Obligatorias/01-GithubActions/01-Prerrequisitos.md)
+- [01-GitHub Actions (Avanzado)](/T03%20-%20Herramientas%20CICD/Obligatorias/01-GithubActions/01-Prerrequisitos.md)
 - [02-CircleCI](/T03%20-%20Herramientas%20CICD/Obligatorias/02-CircleCI/01-Prerrequisitos.md)
 
 ## Recomendadas
