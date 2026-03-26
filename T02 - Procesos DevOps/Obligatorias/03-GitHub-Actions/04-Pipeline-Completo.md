@@ -157,3 +157,83 @@ Hacer push y observar cómo SonarCloud reporta el security hotspot.
 | Artifact | Docker Hub | Publica la imagen si pasa el quality gate |
 
 Este es el núcleo de un pipeline CI real. En T03 vamos a extenderlo con múltiples ambientes, deploy a AWS y patrones más avanzados.
+
+---
+
+## Ejercicio Integrador — Fase 3: Deploy Automático del Portfolio
+
+Ya tenés tu portfolio containerizado con Docker (Fase 2). Ahora vas a automatizar el deploy a **GitHub Pages** para que quede disponible públicamente en internet con cada push a `main`.
+
+### 5.1 Habilitar GitHub Pages en el repositorio
+
+1. Ir al repositorio `portfolio-devops` en GitHub
+2. Ir a **Settings → Pages**
+3. En **Source**, seleccionar **GitHub Actions**
+
+### 5.2 Crear el workflow de deploy
+
+Crear el archivo `.github/workflows/deploy.yml` en tu repositorio `portfolio-devops`:
+
+```yaml
+name: Deploy Portfolio
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Deploy a GitHub Pages
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Configurar Pages
+        uses: actions/configure-pages@v5
+
+      - name: Subir artefacto
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      - name: Deploy a GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+```
+
+### 5.3 Hacer push y verificar el deploy
+
+```bash
+cd portfolio-devops
+mkdir -p .github/workflows
+git add .github/workflows/deploy.yml
+git commit -m "ci: agregar workflow de deploy a GitHub Pages"
+git push origin main
+```
+
+1. Ir a la pestaña **Actions** del repositorio y observar el workflow ejecutarse
+2. Una vez completado, ir a **Settings → Pages** y copiar la URL pública
+3. Verificar que el portfolio está disponible en `https://TU_USUARIO.github.io/portfolio-devops`
+
+> **¿Qué hace este workflow?**
+> 1. Se activa en cada push a `main`
+> 2. Empaqueta el contenido del repositorio como un artefacto estático
+> 3. Lo despliega en la infraestructura de GitHub Pages
+>
+> Resultado: URL pública y permanente, actualizada automáticamente con cada commit.
+
+> **Próxima fase:** En el laboratorio de SonarCloud vas a agregar análisis de calidad como quality gate antes del deploy, para que el portfolio no se publique si tiene vulnerabilidades de seguridad.

@@ -422,3 +422,63 @@ Aquí hay un resumen rápido de los pocos comandos básicos que usamos en nuestr
 - *VOLUME:* La instrucción VOLUME crea un punto de montaje con el nombre especificado y lo marca como que contiene volúmenes montados externamente desde un host nativo u otros contenedores.
 - *USER:* La instrucción USER establece el nombre de usuario (o UID) y, opcionalmente, el grupo de usuarios (o GID) que se usará al ejecutar la imagen y para cualquier instrucción RUN, CMD y ENTRYPOINT que la siga en el Dockerfile.
 - *WORKDIR:* La instrucción WORKDIR establece el directorio de trabajo para cualquier instrucción RUN, CMD, ENTRYPOINT, COPY y ADD que le sigue en el Dockerfile. Si WORKDIR no existe, se creará incluso si no se usa en ninguna instrucción posterior de Dockerfile.
+
+---
+
+## Ejercicio Integrador — Tu Portfolio en Docker
+
+En la Fase 1 (laboratorio de Git) personalizaste y subiste tu portfolio. Ahora que sabés buildear imágenes Docker, es momento de containerizarlo.
+
+El template ya incluye un `Dockerfile` que sirve el portfolio con `nginx:alpine`:
+
+```dockerfile
+FROM nginx:alpine
+COPY index.html /usr/share/nginx/html/index.html
+COPY style.css /usr/share/nginx/html/style.css
+EXPOSE 80
+```
+
+Observá que aplica exactamente lo que vimos en este laboratorio: una imagen base liviana, los archivos estáticos copiados al directorio de nginx, y el puerto 80 expuesto.
+
+### Buildear la imagen del portfolio
+
+Posicionate en el directorio de tu portfolio (`portfolio-devops`) y construí la imagen:
+
+```bash
+cd portfolio-devops
+docker build -t portfolio-devops .
+```
+
+Verificá que la imagen fue creada:
+
+```bash
+docker images | grep portfolio-devops
+```
+
+### Correr el portfolio en un contenedor
+
+```bash
+docker run -d -p 8080:80 --name mi-portfolio portfolio-devops
+```
+
+Abrí `http://localhost:8080` — deberías ver tu portfolio corriendo dentro de nginx.
+
+### Modo desarrollo con docker-compose
+
+El template también incluye un `docker-compose.yml` para desarrollo con live-reload.
+En lugar de copiar los archivos a la imagen, monta el directorio como volumen:
+
+```bash
+docker compose up
+```
+
+Cualquier cambio en `index.html` o `style.css` se refleja en el browser sin reconstruir la imagen.
+
+### Detener y limpiar
+
+```bash
+docker stop mi-portfolio
+docker rm mi-portfolio
+```
+
+> **Próxima fase:** En el laboratorio de GitHub Actions vas a automatizar el deploy del portfolio a GitHub Pages para que quede disponible en internet con cada push a `main`.

@@ -13,9 +13,7 @@ Ya con todo configurado en el ambiente, es hora de ensuciarnos las manos 💪. E
    - **Visibilidad**: **Público**
    - **Inicializar**: Marca "Add a README file"
 
-<p align="center">
 <img src="/Extras/Imagenes/laboratorioSonarCloud/imagenRepo.png" width=100%>
-</p>
 
 ### Paso 2: Subir el código de ejemplo
 
@@ -48,9 +46,7 @@ Ya con todo configurado en el ambiente, es hora de ensuciarnos las manos 💪. E
 2. Selecciona tu cuenta de GitHub
 3. **Importante**: Solo selecciona el repositorio `PracticoSonarQube` que acabas de crear
 
-<p align="center">
 <img src="/Extras/Imagenes/laboratorioSonarCloud/configSonar.png" width=100%>
-</p>
 
 4. Haz clic en **"Install and Authorize"**
 
@@ -69,9 +65,7 @@ Ya con todo configurado en el ambiente, es hora de ensuciarnos las manos 💪. E
 
 Si todo salió bien, deberías llegar a una pantalla similar a esta:
 
-<p align="center">
 <img src="/Extras/Imagenes/laboratorioSonarCloud/configSonar2.png" width=100%>
-</p>
 
 ---
 
@@ -157,9 +151,7 @@ sonar.exclusions=**/*test*/**
 2. Haz clic en la pestaña **"Actions"**
 3. Deberías ver tu workflow ejecutándose o completado
 
-<p align="center">
 <img src="/Extras/Imagenes/laboratorioSonarCloud/configFinal1.png" width=100%>
-</p>
 
 ### Validar SonarCloud
 
@@ -170,13 +162,9 @@ sonar.exclusions=**/*test*/**
    - Coverage (si aplica)
    - Duplicaciones
 
-<p align="center">
 <img src="/Extras/Imagenes/laboratorioSonarCloud/configFinal2.png" width=100%>
-</p>
 
-<p align="center">
 <img src="/Extras/Imagenes/laboratorioSonarCloud/configFinal3.png" width=100%>
-</p>
 
 ---
 
@@ -197,3 +185,110 @@ Si llegaste hasta aquí y ves resultados similares a las imágenes, has configur
 - Prueba hacer cambios en el código y observa cómo se ejecuta el análisis automático
 
 > 💡 **Para seguir aprendiendo**: Dedica unos minutos a navegar por ambas interfaces (GitHub Actions y SonarCloud) para familiarizarte con todas las opciones disponibles.
+
+---
+
+## Ejercicio Integrador — Fase 4: Análisis de Calidad del Portfolio
+
+Ya tenés tu portfolio publicado en GitHub Pages (Fase 3). Ahora vas a conectar SonarCloud al repositorio del portfolio para analizar automáticamente su calidad en cada push.
+
+El portfolio incluye lógica JavaScript en `theme.js` con sus tests en `theme.test.js`. SonarCloud puede detectar bugs, vulnerabilidades y code smells en ese código, igual que lo hizo con el proyecto de ejemplo de este laboratorio.
+
+### Importar el repositorio del portfolio en SonarCloud
+
+1. En SonarCloud, hacer clic en **+** → **Analyze new project**
+2. Seleccionar el repositorio `portfolio-devops` de tu cuenta de GitHub
+3. Seguir el mismo proceso que hiciste para `PracticoSonarQube`
+4. Agregar el secret `SONAR_TOKEN` al repositorio `portfolio-devops`
+
+### Crear el archivo de configuración
+
+Agregar `sonar-project.properties` en la raíz del repositorio `portfolio-devops`:
+
+```properties
+sonar.projectKey=TU_USUARIO_portfolio-devops
+sonar.organization=TU_ORGANIZACION_EN_SONARCLOUD
+sonar.sources=.
+sonar.exclusions=**/*.md,**/.github/**,**/node_modules/**
+```
+
+> Reemplazar `TU_USUARIO` y `TU_ORGANIZACION_EN_SONARCLOUD` con los valores de tu proyecto en SonarCloud.
+
+### Integrar SonarCloud como quality gate en el workflow de deploy
+
+Modificar `.github/workflows/deploy.yml` para agregar un job de análisis **antes** del deploy:
+
+```yaml
+name: Portfolio CI/CD
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  quality:
+    name: Análisis de calidad (SonarCloud)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Análisis SonarCloud
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+  deploy:
+    name: Deploy a GitHub Pages
+    needs: quality
+    if: github.event_name != 'pull_request'
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Configurar Pages
+        uses: actions/configure-pages@v5
+
+      - name: Subir artefacto
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      - name: Deploy a GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+```
+
+```bash
+git add sonar-project.properties .github/workflows/deploy.yml
+git commit -m "ci: agregar SonarCloud como quality gate del portfolio"
+git push origin main
+```
+
+Con esto el pipeline del portfolio queda completo:
+
+| Etapa | Herramienta | Qué hace |
+|-------|-------------|----------|
+| Quality Gate | SonarCloud | Analiza bugs, vulnerabilidades y code smells |
+| Deploy | GitHub Pages | Publica el portfolio solo si pasa el análisis |
+
+> Si SonarCloud detecta una vulnerabilidad, el job `deploy` **no se ejecuta**. El portfolio no se publica hasta que el código esté limpio — igual que en un pipeline profesional.

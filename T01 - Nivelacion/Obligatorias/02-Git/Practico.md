@@ -455,3 +455,57 @@ git push
 - `git shortlog`
 - `git whatchanged`
 - archivo _.gitignore_
+
+---
+
+## Ejercicio Integrador — Fase 1: Tu Portfolio DevOps
+
+A lo largo del curso vas a construir y publicar tu propio **portfolio/CV online**. Este es el hilo conductor del ciclo: lo dockerizarás, desplegarás automáticamente con GitHub Actions y analizarás su calidad con SonarCloud.
+
+| Fase | Lab | Qué vas a hacer |
+|------|-----|----------------|
+| **1 — esta fase** | T01 Git | Clonar el template, personalizar, primeros commits |
+| 2 | T02 Docker | Construir y correr el portfolio dentro de nginx |
+| 3 | T02 GitHub Actions | Deploy automático a GitHub Pages |
+| 4 | T02 SonarCloud | Análisis de calidad del código |
+
+El equipo docente provee un template base listo para usar en:
+`git@github.com:ORT-ATI-CertificadoDevOps/portfolio-template.git`
+
+### Tarea: crear tu repositorio y subir el template
+
+**1. Creá tu repositorio en GitHub**
+
+- Nombre recomendado: `portfolio-devops`
+- Visibilidad: **Public** (necesario para GitHub Pages en fases siguientes)
+- Inicializalo con un `README.md`
+
+**2. Cloná el template y apuntalo a tu repositorio**
+
+```bash
+# Cloná el template del portfolio
+git clone git@github.com:ORT-ATI-CertificadoDevOps/portfolio-template.git
+cd portfolio-template
+
+# Reemplazá el remote origin por tu repositorio personal
+git remote remove origin
+git remote add origin git@github.com:TU_USUARIO/portfolio-devops.git
+git push -u origin main
+```
+
+**3. Personalizá el portfolio**
+
+Abrí `index.html` en un editor y buscá los comentarios `<!-- TODO: -->`.
+Hay **8 puntos** para personalizar: nombre, rol, descripción, habilidades, proyectos, educación y contacto.
+
+**4. Commiteá los cambios**
+
+```bash
+git add index.html style.css
+git commit -m "feat: personalizar portfolio con información propia"
+git push origin main
+```
+
+> Para la guía completa con todos los pasos y el checklist de verificación, consultá el archivo `ejercicio-integrador.md` dentro del template.
+
+> **Próximas fases:** En Docker vas a construir la imagen del portfolio en nginx. En GitHub Actions vas a automatizar el deploy a GitHub Pages con cada push.

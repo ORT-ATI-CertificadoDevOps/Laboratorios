@@ -94,3 +94,11 @@
   - [04-Trabajando con deployments](/T08%20-%20Kubernetes/Obligatorias/01-K8s/parte4-trabajando_con_deployments)
   - [05-Desplegando un cluster](/T08%20-%20Kubernetes/Obligatorias/01-K8s/parte5-trabajando_con_probes.md)
 
+<hr style="border:none;border-top:1px solid rgba(0,0,0,.1);margin:1rem 0">
+
+- [Ejercicio Integrador](/Ejercicio-Integrador.md)
+  - [Fase 1 — Git](/T01%20-%20Nivelacion/Obligatorias/02-Git/Practico)
+  - [Fase 2 — Docker](/T02%20-%20Procesos%20DevOps/Obligatorias/01-Docker/3-Webapp_en_Docker)
+  - [Fase 3 — GitHub Actions](/T02%20-%20Procesos%20DevOps/Obligatorias/03-GitHub-Actions/04-Pipeline-Completo)
+  - [Fase 4 — SonarCloud](/T02%20-%20Procesos%20DevOps/Obligatorias/02-SonarCloud/2-Generar_nuestro_primer_analisis_con_SonarCloud)
+
