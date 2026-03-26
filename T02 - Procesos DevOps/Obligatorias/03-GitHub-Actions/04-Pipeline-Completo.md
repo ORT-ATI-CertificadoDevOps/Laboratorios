@@ -3,8 +3,8 @@
 En este último paso integramos SonarCloud como etapa de **Test/Quality Gate**, completando el pipeline de T02:
 
 ```
-push → Build imagen → Scan calidad (SonarCloud) → Push a registry
-         (Docker)         (SonarCloud)               (Docker Hub)
+push → Build imagen → Scan seguridad (Trivy) → Scan calidad (SonarCloud) → Push a registry
+         (Docker)            (Trivy)               (SonarCloud)               (Docker Hub)
 ```
 
 Este pipeline une los tres labs de T02 en un flujo real de CI.
@@ -45,7 +45,15 @@ sonar.exclusions=**/*.md,**/.github/**
 
 > Reemplazar `TU_USUARIO` y `TU_ORGANIZACION_EN_SONARCLOUD` con los valores obtenidos al crear el proyecto en SonarCloud.
 
-## 4.5 Pipeline completo
+## 4.5 Escaneo de seguridad (Trivy)
+
+[Trivy](https://trivy.dev) es un escáner de vulnerabilidades open source desarrollado por Aqua Security. A diferencia de SonarCloud (que analiza el código fuente), Trivy escanea los paquetes instalados dentro de la imagen Docker final — incluyendo la imagen base — buscando CVEs conocidos.
+
+No requiere cuenta ni secrets: se ejecuta directamente en el runner con la action oficial de Aqua Security.
+
+El job `scan` reconstruye la imagen localmente (con `load: true` para que quede disponible en el runner), la escanea y falla si encuentra vulnerabilidades `CRITICAL` o `HIGH` con fix disponible.
+
+## 4.6 Pipeline completo
 
 Reemplazar `.github/workflows/pipeline.yml` con la versión final:
 
@@ -74,10 +82,36 @@ jobs:
           push: false
           tags: lab-github-actions:${{ github.sha }}
 
+  scan:
+    name: Scan de seguridad (Trivy)
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Build imagen para escaneo
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: false
+          load: true
+          tags: lab-github-actions:${{ github.sha }}
+
+      - name: Escaneo Trivy
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: lab-github-actions:${{ github.sha }}
+          format: table
+          exit-code: '1'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
+
   test:
     name: Quality Gate (SonarCloud)
     runs-on: ubuntu-latest
-    needs: build
+    needs: scan
     steps:
       - name: Checkout código
         uses: actions/checkout@v4
@@ -115,46 +149,49 @@ jobs:
             ${{ secrets.DOCKERHUB_USERNAME }}/lab-github-actions:${{ github.sha }}
 ```
 
-## 4.6 Ejecutar y analizar el resultado
+## 4.7 Ejecutar y analizar el resultado
 
 ```bash
 git add .
-git commit -m "ci: add SonarCloud quality gate to pipeline"
+git commit -m "ci: add Trivy security scan to pipeline"
 git push origin main
 ```
 
 Verificar en GitHub Actions que los jobs se ejecutan en el orden correcto:
 
 ```
-build → test → push-artifact
+build → scan → test → push-artifact
 ```
 
 En SonarCloud, ir al proyecto y observar:
+
 - **Reliability**: bugs detectados
 - **Security**: vulnerabilidades
 - **Maintainability**: code smells
 - **Coverage**: cobertura de tests (0% por ahora — no tenemos tests unitarios)
 
-## 4.7 Quality Gate como bloqueante
+## 4.8 Gates como bloqueantes
 
-Notar que si SonarCloud falla el Quality Gate (por ejemplo, si detecta una vulnerabilidad de seguridad), el job `test` falla y el step `push-artifact` **no se ejecuta**. El artefacto nunca llega al registry si no pasa la calidad.
+Si Trivy encuentra vulnerabilidades `CRITICAL` o `HIGH` con fix disponible, el job `scan` falla y ni `test` ni `push-artifact` se ejecutan. El artefacto nunca llega al registry si la imagen tiene CVEs críticos.
 
-Para probarlo, agregar código con una vulnerabilidad de seguridad obvia:
+Si SonarCloud falla el Quality Gate, el job `test` falla y `push-artifact` tampoco se ejecuta.
+
+Para probar el bloqueo de Trivy, cambiar temporalmente `severity` a `LOW` — Trivy va a encontrar algo y fallar. Para probar SonarCloud, agregar:
 
 **`credenciales.js`** (archivo de prueba — borrar después)
+
 ```javascript
 const password = "admin123";  // hardcoded password — SonarCloud lo detectará
 ```
-
-Hacer push y observar cómo SonarCloud reporta el security hotspot.
 
 ## Resumen del pipeline construido
 
 | Etapa | Herramienta | Qué hace |
 |-------|-------------|----------|
 | Build | Docker + GHA | Construye la imagen |
+| Scan | Trivy | Busca CVEs en la imagen Docker |
 | Test | SonarCloud | Analiza calidad y seguridad del código |
-| Artifact | Docker Hub | Publica la imagen si pasa el quality gate |
+| Artifact | Docker Hub | Publica la imagen si pasan ambos gates |
 
 Este es el núcleo de un pipeline CI real. En T03 vamos a extenderlo con múltiples ambientes, deploy a AWS y patrones más avanzados.
 
@@ -237,3 +274,19 @@ git push origin main
 > Resultado: URL pública y permanente, actualizada automáticamente con cada commit.
 
 > **Próxima fase:** En el laboratorio de SonarCloud vas a agregar análisis de calidad como quality gate antes del deploy, para que el portfolio no se publique si tiene vulnerabilidades de seguridad.
+
+---
+
+## Ejercicio Integrador — Fase 5: Security Gate con Trivy
+
+Ya tenés el portfolio desplegándose automáticamente con el workflow de la Fase 3 y el quality gate de SonarCloud de la Fase 4. Ahora vas a agregar **Trivy como security gate**: la imagen Docker del portfolio se escanea antes del deploy, y si tiene CVEs críticos o altos con fix disponible, el pipeline se detiene.
+
+La versión final del workflow (con todos los gates integrados) está en la sección [Fase 5](/Ejercicio-Integrador#fase-5-trivy-security-gate) del Ejercicio Integrador.
+
+### ¿Por qué escanear si el portfolio es HTML estático?
+
+El portfolio corre sobre `nginx:alpine`. Aunque el código fuente sea solo HTML/CSS/JS, la imagen base trae dependencias del sistema operativo que pueden tener CVEs conocidos. Trivy escanea la imagen completa — imagen base incluida — no solo el código propio.
+
+### Verificar el resultado
+
+Después del push, en la pestaña **Actions** del repositorio vas a ver el job `scan` ejecutarse primero. Si la imagen base de nginx está actualizada, Trivy debería pasar. Para probar el bloqueo, podés cambiar temporalmente `severity` a `LOW` y verificar que el deploy queda cancelado.

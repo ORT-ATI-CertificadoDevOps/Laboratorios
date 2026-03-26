@@ -7,5 +7,5 @@
 
 ## Recomendadas
 
-- [01-Azure DevOps](Recomendadas/01-Azure%20Devops/1-Prerrequisitos.md)
-- [02-Code Pipeline](Recomendadas/02-CodePipeline/1-Prerrequisitos.md)
+- [01-Azure DevOps](/T03%20-%20Herramientas%20CICD/Recomendadas/01-Azure%20Devops/1-Prerrequisitos.md)
+- [02-Code Pipeline](/T03%20-%20Herramientas%20CICD/Recomendadas/02-CodePipeline/1-Prerrequisitos.md)

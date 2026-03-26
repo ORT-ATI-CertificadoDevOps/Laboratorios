@@ -15,8 +15,9 @@ El template base está disponible en:
 | **2** | Docker | Construir y correr el portfolio dentro de un contenedor nginx | [T02 Docker](/T02%20-%20Procesos%20DevOps/Obligatorias/01-Docker/3-Webapp_en_Docker) |
 | **3** | GitHub Actions | Publicar en GitHub Pages con deploy automático en cada push | [T02 GitHub Actions](/T02%20-%20Procesos%20DevOps/Obligatorias/03-GitHub-Actions/04-Pipeline-Completo) |
 | **4** | SonarCloud | Quality gate: el portfolio solo se publica si pasa el análisis | [T02 SonarCloud](/T02%20-%20Procesos%20DevOps/Obligatorias/02-SonarCloud/2-Generar_nuestro_primer_analisis_con_SonarCloud) |
+| **5** | Trivy | Security gate: escanear la imagen Docker en busca de CVEs antes del deploy | [T02 GitHub Actions](/T02%20-%20Procesos%20DevOps/Obligatorias/03-GitHub-Actions/04-Pipeline-Completo) |
 
-Al final del curso vas a tener un portfolio real, con URL pública, pipeline de CI/CD completo y análisis de calidad automatizado.
+Al final del curso vas a tener un portfolio real, con URL pública, pipeline de CI/CD completo, análisis de calidad y escaneo de seguridad automatizados.
 
 ---
 
@@ -122,6 +123,93 @@ Extender el workflow para que SonarCloud actúe como quality gate: si falla, el 
 
 ---
 
+## Fase 5 — Trivy: Security Gate
+
+**Lab:** [T02 GitHub Actions — Ejercicio Integrador](/T02%20-%20Procesos%20DevOps/Obligatorias/03-GitHub-Actions/04-Pipeline-Completo) (al final del laboratorio)
+
+El portfolio usa `nginx:alpine` como imagen base. Trivy va a escanear esa imagen antes del deploy para detectar CVEs conocidos. Si encuentra vulnerabilidades `CRITICAL` o `HIGH` con fix disponible, el deploy queda bloqueado.
+
+Reemplazar `.github/workflows/deploy.yml` con la versión final que incluye todos los gates:
+
+```yaml
+name: Deploy Portfolio
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  scan:
+    name: Security Gate (Trivy)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build imagen para escaneo
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: false
+          load: true
+          tags: portfolio-devops:${{ github.sha }}
+
+      - name: Escaneo Trivy
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: portfolio-devops:${{ github.sha }}
+          format: table
+          exit-code: '1'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
+
+  quality-gate:
+    name: Quality Gate (SonarCloud)
+    runs-on: ubuntu-latest
+    needs: scan
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+  deploy:
+    name: Deploy a GitHub Pages
+    runs-on: ubuntu-latest
+    needs: quality-gate
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+      - id: deployment
+        uses: actions/deploy-pages@v4
+```
+
+Orden de ejecución: `scan → quality-gate → deploy`. Si Trivy falla, ni SonarCloud ni el deploy se ejecutan.
+
+> **¿Por qué escanear una imagen de portfolio estático?** La imagen base `nginx:alpine` tiene dependencias del sistema operativo que pueden tener CVEs conocidos. Trivy los detecta aunque el código fuente sea solo HTML/CSS/JS. Es una buena práctica escanear siempre la imagen completa, no solo el código propio.
+
+---
+
 ## Bonus — Dominio personalizado
 
 GitHub Pages permite asociar un dominio propio al portfolio en lugar de usar la URL por defecto (`TU_USUARIO.github.io/portfolio-devops`). Es una práctica habitual en el mundo profesional y tiene ventajas concretas.
@@ -180,17 +268,21 @@ La propagación DNS puede tomar entre unos minutos y 48 horas. Una vez propagado
 
 ## Pipeline final
 
-Una vez completadas las 4 fases, cada push a `main` en el repositorio `portfolio-devops` dispara:
+Una vez completadas las 5 fases, cada push a `main` en el repositorio `portfolio-devops` dispara:
 
 ```mermaid
 flowchart TD
     A([push a main]) --> B
 
-    B["🔍 SonarCloud\n(quality gate)"]
+    B["🛡️ Trivy\n(security gate)"]
     B -->|pasa ✓| C
-    B -->|falla ✗| D([deploy cancelado])
+    B -->|falla ✗| F([deploy cancelado])
 
-    C["🚀 GitHub Pages\ndeploy"]
-    C --> E(["`**https://TU_USUARIO.github.io/portfolio-devops**
+    C["🔍 SonarCloud\n(quality gate)"]
+    C -->|pasa ✓| D
+    C -->|falla ✗| F
+
+    D["🚀 GitHub Pages\ndeploy"]
+    D --> E(["`**https://TU_USUARIO.github.io/portfolio-devops**
     *(o tu dominio propio)*`"])
 ```

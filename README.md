@@ -39,16 +39,10 @@ El repositorio se organiza de la siguiente manera:
 ├── T06 - Containers
 │   ├── Obligatorias
 │   └── Recomendadas
-├── T07 - Kubernetes
+├── T07 - Arquitectura y Microservicios
 │   ├── Obligatorias
 │   └── Recomendadas
-├── T08 - Serverless
-│   ├── Obligatorias
-│   └── Recomendadas
-├── T09 - Arquitectura y Microservicios
-│   ├── Obligatorias
-│   └── Recomendadas
-└── T10 - Observabilidad
+└── T08 - Kubernetes
     ├── Obligatorias
     └── Recomendadas
 ```
@@ -57,7 +51,7 @@ El repositorio se organiza de la siguiente manera:
 - [T02 - Procesos DevOps](/T02%20-%20Procesos%20DevOps/index.md)
 - [T03 - Herramientas CICD](/T03%20-%20Herramientas%20CICD/index.md)
 - [T04 - Cloud](/T04%20-%20Cloud/index.md)
-- [T05 - Arquitectura y Microservicios](/T05%20-%20Arquitectura%20y%20Microservicios/index.md)
-- [T06 - Infrastructure as Code](/T06%20-%20Infrastructure%20as%20Code/index.md)
-- [T07 - Containers](/T07%20-%20Containers/index.md)
+- [T05 - Infrastructure as Code](/T05%20-%20Infrastructure%20as%20Code/index.md)
+- [T06 - Containers](/T06%20-%20Containers/index.md)
+- [T07 - Arquitectura y Microservicios](/T07%20-%20Arquitectura%20y%20Microservicios/index.md)
 - [T08 - Kubernetes](/T08%20-%20Kubernetes/index.md)
