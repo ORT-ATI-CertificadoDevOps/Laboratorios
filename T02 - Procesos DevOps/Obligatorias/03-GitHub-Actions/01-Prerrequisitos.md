@@ -31,15 +31,15 @@ Los workflows viven en `.github/workflows/` dentro del repositorio. Cada archivo
 ```yaml
 name: Mi Pipeline
 
-on:                          # trigger
+on:                                             # trigger
   push:
     branches: [main]
 
 jobs:
-  build:                     # nombre del job
-    runs-on: ubuntu-latest   # runner
+  build:                                        # nombre del job
+    runs-on: ubuntu-latest                      # runner
     steps:
-      - uses: actions/checkout@v4          # action del marketplace
+      - uses: actions/checkout@v4               # action del marketplace
       - name: Mi primer step
         run: echo "Hola desde GitHub Actions"   # comando shell
 ```

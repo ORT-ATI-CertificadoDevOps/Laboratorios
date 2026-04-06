@@ -108,7 +108,7 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
-  workflow_dispatch:    # permite ejecutar desde la UI de GitHub
+  workflow_dispatch:        # permite ejecutar desde la UI de GitHub
 ```
 
 Hacer push del cambio y verificar que aparece el botón **Run workflow** en la pestaña Actions.
