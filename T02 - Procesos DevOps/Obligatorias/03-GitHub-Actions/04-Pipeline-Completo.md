@@ -193,7 +193,11 @@ const password = "admin123";  // hardcoded password — SonarCloud lo detectará
 | Test | SonarCloud | Analiza calidad y seguridad del código |
 | Artifact | Docker Hub | Publica la imagen si pasan ambos gates |
 
-Este es el núcleo de un pipeline CI real. En T03 vamos a extenderlo con múltiples ambientes, deploy a AWS y patrones más avanzados.
+Este es el núcleo de un pipeline CI real.
+
+## Próximos pasos
+
+Continuar con [05 - Variables y Artefactos](05-Variables-y-Artefactos.md)
 
 ---
 

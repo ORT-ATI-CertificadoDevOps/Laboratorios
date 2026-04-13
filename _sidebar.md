@@ -19,7 +19,7 @@
 - [T03 - Herramientas CICD](/T03%20-%20Herramientas%20CICD/index.md)
   - [01-GitHub Actions](/T03%20-%20Herramientas%20CICD/Obligatorias/01-GithubActions/01-Prerrequisitos.md)
     - [1-Prerrequisitos](/T03%20-%20Herramientas%20CICD/Obligatorias/01-GithubActions/01-Prerrequisitos.md)
-    - [2-Environments](/T03%20-%20Herramientas%20CICD/Obligatorias/01-GithubActions/02-Environment.md)
+    - [2-Environments](/T03%20-%20Herramientas%20CICD/Obligatorias/01-GithubActions/02-Environments.md)
     - [3-Optimizacion](/T03%20-%20Herramientas%20CICD/Obligatorias/01-GithubActions/03-Optimizacion.md)
   - [02-CircleCI](/T03%20-%20Herramientas%20CICD/Obligatorias/02-CircleCI/01-Prerrequisitos.md)
     - [1-Prerrequisitos](/T03%20-%20Herramientas%20CICD/Obligatorias/02-CircleCI/01-Prerrequisitos.md)
