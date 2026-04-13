@@ -206,6 +206,8 @@ jobs:
 
 Orden de ejecución: `scan → quality-gate → deploy`. Si Trivy falla, ni SonarCloud ni el deploy se ejecutan.
 
+> **¿Qué hacer si Trivy falla?** Ver la sección [4.9 del laboratorio](/T02%20-%20Procesos%20DevOps/Obligatorias/03-GitHub-Actions/04-Pipeline-Completo#49-qué-hacer-si-trivy-falla) — las opciones incluyen cambiar la imagen base a `cgr.dev/chainguard/nginx` (cero CVEs), usar `.trivyignore` para CVEs aceptados, o bajar el umbral de bloqueo.
+
 > **¿Por qué escanear una imagen de portfolio estático?** La imagen base `nginx:alpine` tiene dependencias del sistema operativo que pueden tener CVEs conocidos. Trivy los detecta aunque el código fuente sea solo HTML/CSS/JS. Es una buena práctica escanear siempre la imagen completa, no solo el código propio.
 
 ---

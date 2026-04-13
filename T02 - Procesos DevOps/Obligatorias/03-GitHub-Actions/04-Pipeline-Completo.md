@@ -184,6 +184,39 @@ Para probar el bloqueo de Trivy, cambiar temporalmente `severity` a `LOW` — Tr
 const password = "admin123";  // hardcoded password — SonarCloud lo detectará
 ```
 
+## 4.9 ¿Qué hacer si Trivy falla?
+
+Que el job `scan` falle significa que Trivy encontró CVEs `CRITICAL` o `HIGH` con fix disponible — el gate está funcionando correctamente. Hay tres formas de resolverlo:
+
+**Opción A — Usar una imagen base sin CVEs conocidos (recomendada)**
+
+`nginx:alpine` es una tag flotante que no siempre recibe patches de seguridad a tiempo. La alternativa más robusta es usar la imagen oficial de [Chainguard](https://edu.chainguard.dev/chainguard/chainguard-images/getting-started/nginx/), diseñada explícitamente para pasar scanners de seguridad con cero CVEs conocidos:
+
+```dockerfile
+# antes
+FROM nginx:alpine
+
+# después
+FROM cgr.dev/chainguard/nginx
+```
+
+El path de los archivos estáticos es el mismo (`/usr/share/nginx/html/`), por lo que no hay que cambiar los `COPY`.
+
+**Opción B — Aceptar CVEs específicos con `.trivyignore`**
+
+Si se decidió aceptar el riesgo de un CVE concreto (por ejemplo porque el fix upstream todavía no llegó a Alpine), se puede ignorar explícitamente creando `.trivyignore` en la raíz del repositorio:
+
+```
+# CVE aceptado — sin fix disponible en la imagen base a la fecha
+CVE-XXXX-YYYY
+```
+
+Trivy ignora los CVEs listados en ese archivo. En un equipo real, cada entrada debería tener un comentario con la justificación y la fecha de revisión.
+
+**Opción C — Solo reportar, sin bloquear**
+
+Cambiar `exit-code: '1'` a `exit-code: '0'` hace que el job siempre pase pero siga mostrando el reporte en los logs. Útil para empezar a medir sin bloquear, pero pierde el valor del security gate.
+
 ## Resumen del pipeline construido
 
 | Etapa | Herramienta | Qué hace |
