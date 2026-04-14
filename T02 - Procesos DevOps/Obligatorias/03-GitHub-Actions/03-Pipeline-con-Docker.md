@@ -11,9 +11,10 @@ push → Build imagen Docker → Push a Docker Hub (registry)
 ## 3.1 Crear credenciales en Docker Hub
 
 1. Ingresar a [hub.docker.com](https://hub.docker.com)
-2. Ir a **Account Settings → Security → New Access Token**
-3. Nombre del token: `github-actions-lab`
-4. Copiar el token generado (se muestra una sola vez)
+2. Ir a **Account Settings → Settings → Personal access tokens → Generate new token**
+3. En **Access token description**, escribir: `github-actions-lab`
+4. En **Access permissions**, seleccionar **Read & Write**
+5. Copiar el token generado (se muestra una sola vez)
 
 ## 3.2 Agregar secrets en GitHub
 

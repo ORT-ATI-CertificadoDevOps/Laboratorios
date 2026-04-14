@@ -45,17 +45,82 @@ sonar.exclusions=**/*.md,**/.github/**
 
 > Reemplazar `TU_USUARIO` y `TU_ORGANIZACION_EN_SONARCLOUD` con los valores obtenidos al crear el proyecto en SonarCloud.
 
-## 4.5 Escaneo de seguridad (Trivy)
+## 4.5 Agregar el job de SonarCloud al pipeline
+
+Agregar el job `test` en `.github/workflows/pipeline.yml`, después del job `build` existente:
+
+```yaml
+  test:
+    name: Quality Gate (SonarCloud)
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # necesario para análisis completo de historial
+
+      - name: Análisis SonarCloud
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+```
+
+```bash
+git add .
+git commit -m "ci: add SonarCloud quality gate"
+git push origin main
+```
+
+En SonarCloud, ir al proyecto y observar:
+
+- **Reliability**: bugs detectados
+- **Security**: vulnerabilidades
+- **Maintainability**: code smells
+- **Coverage**: cobertura de tests (0% por ahora — no tenemos tests unitarios)
+
+## 4.6 Escaneo de seguridad (Trivy)
 
 [Trivy](https://trivy.dev) es un escáner de vulnerabilidades open source desarrollado por Aqua Security. A diferencia de SonarCloud (que analiza el código fuente), Trivy escanea los paquetes instalados dentro de la imagen Docker final — incluyendo la imagen base — buscando CVEs conocidos.
 
 No requiere cuenta ni secrets: se ejecuta directamente en el runner con la action oficial de Aqua Security.
 
-El job `scan` reconstruye la imagen localmente (con `load: true` para que quede disponible en el runner), la escanea y falla si encuentra vulnerabilidades `CRITICAL` o `HIGH` con fix disponible.
+Agregar el job `scan` en `.github/workflows/pipeline.yml`, entre `build` y `test`. También actualizar `needs` del job `test` de `build` a `scan`:
 
-## 4.6 Pipeline completo
+```yaml
+  scan:
+    name: Scan de seguridad (Trivy)
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
 
-Reemplazar `.github/workflows/pipeline.yml` con la versión final:
+      - name: Build imagen para escaneo
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: false
+          load: true
+          tags: lab-github-actions:${{ github.sha }}
+
+      - name: Escaneo Trivy
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: lab-github-actions:${{ github.sha }}
+          format: table
+          exit-code: '1'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
+```
+
+> El job `scan` reconstruye la imagen localmente con `load: true` para que quede disponible en el runner, y falla si encuentra vulnerabilidades `CRITICAL` o `HIGH` con fix disponible.
+
+## 4.7 Pipeline completo
+
+El pipeline final con todos los jobs integrados:
 
 ```yaml
 name: Pipeline DevOps
@@ -116,7 +181,7 @@ jobs:
       - name: Checkout código
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0   # necesario para análisis completo de historial
+          fetch-depth: 0
 
       - name: Análisis SonarCloud
         uses: SonarSource/sonarcloud-github-action@master
@@ -149,8 +214,6 @@ jobs:
             ${{ secrets.DOCKERHUB_USERNAME }}/lab-github-actions:${{ github.sha }}
 ```
 
-## 4.7 Ejecutar y analizar el resultado
-
 ```bash
 git add .
 git commit -m "ci: add Trivy security scan to pipeline"
@@ -163,59 +226,47 @@ Verificar en GitHub Actions que los jobs se ejecutan en el orden correcto:
 build → scan → test → push-artifact
 ```
 
-En SonarCloud, ir al proyecto y observar:
+## 4.8 Trivy va a fallar — y eso es lo esperado
 
-- **Reliability**: bugs detectados
-- **Security**: vulnerabilidades
-- **Maintainability**: code smells
-- **Coverage**: cobertura de tests (0% por ahora — no tenemos tests unitarios)
+Al hacer push del pipeline completo, el job `scan` va a fallar. `nginx:alpine` es una tag flotante que acumula CVEs conocidos con fix disponible, exactamente lo que Trivy está configurado para bloquear.
 
-## 4.8 Gates como bloqueantes
+En la pestaña **Actions** se va a ver el job `scan` en rojo, con una tabla similar a esta en los logs:
 
-Si Trivy encuentra vulnerabilidades `CRITICAL` o `HIGH` con fix disponible, el job `scan` falla y ni `test` ni `push-artifact` se ejecutan. El artefacto nunca llega al registry si la imagen tiene CVEs críticos.
+```
+2024-XX-XX nginx:alpine (alpine 3.x)
+===========================================
+Total: 3 (HIGH: 3, CRITICAL: 0)
 
-Si SonarCloud falla el Quality Gate, el job `test` falla y `push-artifact` tampoco se ejecuta.
-
-Para probar el bloqueo de Trivy, cambiar temporalmente `severity` a `LOW` — Trivy va a encontrar algo y fallar. Para probar SonarCloud, agregar:
-
-**`credenciales.js`** (archivo de prueba — borrar después)
-
-```javascript
-const password = "admin123";  // hardcoded password — SonarCloud lo detectará
+┌──────────┬────────────────┬──────────┬──────────────────┬───────────────┐
+│ Library  │ Vulnerability  │ Severity │ Installed Version│ Fixed Version │
+├──────────┼────────────────┼──────────┼──────────────────┼───────────────┤
+│ libssl3  │ CVE-XXXX-XXXXX │ HIGH     │ 3.x.x-rX         │ 3.x.x-rX+1   │
+└──────────┴────────────────┴──────────┴──────────────────┴───────────────┘
 ```
 
-## 4.9 ¿Qué hacer si Trivy falla?
+Los jobs `test` y `push-artifact` quedan cancelados automáticamente — la imagen nunca llega al registry. El gate está funcionando.
 
-Que el job `scan` falle significa que Trivy encontró CVEs `CRITICAL` o `HIGH` con fix disponible — el gate está funcionando correctamente. Hay tres formas de resolverlo:
+## 4.9 Corregir la imagen base
 
-**Opción A — Usar una imagen base sin CVEs conocidos (recomendada)**
+La solución es reemplazar `nginx:alpine` por una imagen diseñada para pasar scanners de seguridad. [Chainguard](https://edu.chainguard.dev/chainguard/chainguard-images/getting-started/nginx/) mantiene imágenes con cero CVEs conocidos, actualizadas continuamente ante nuevas vulnerabilidades.
 
-`nginx:alpine` es una tag flotante que no siempre recibe patches de seguridad a tiempo. La alternativa más robusta es usar la imagen oficial de [Chainguard](https://edu.chainguard.dev/chainguard/chainguard-images/getting-started/nginx/), diseñada explícitamente para pasar scanners de seguridad con cero CVEs conocidos:
+En el `Dockerfile`, cambiar la imagen base:
 
 ```dockerfile
-# antes
-FROM nginx:alpine
-
-# después
 FROM cgr.dev/chainguard/nginx
 ```
 
-El path de los archivos estáticos es el mismo (`/usr/share/nginx/html/`), por lo que no hay que cambiar los `COPY`.
+El path de los archivos estáticos es el mismo (`/usr/share/nginx/html/`), por lo que los `COPY` no cambian.
 
-**Opción B — Aceptar CVEs específicos con `.trivyignore`**
-
-Si se decidió aceptar el riesgo de un CVE concreto (por ejemplo porque el fix upstream todavía no llegó a Alpine), se puede ignorar explícitamente creando `.trivyignore` en la raíz del repositorio:
-
-```
-# CVE aceptado — sin fix disponible en la imagen base a la fecha
-CVE-XXXX-YYYY
+```bash
+git add Dockerfile
+git commit -m "fix: use Chainguard nginx image to pass Trivy scan"
+git push origin main
 ```
 
-Trivy ignora los CVEs listados en ese archivo. En un equipo real, cada entrada debería tener un comentario con la justificación y la fecha de revisión.
+Esta vez el job `scan` pasa, `test` analiza el código con SonarCloud y, si el quality gate pasa también, `push-artifact` publica la imagen en Docker Hub.
 
-**Opción C — Solo reportar, sin bloquear**
-
-Cambiar `exit-code: '1'` a `exit-code: '0'` hace que el job siempre pase pero siga mostrando el reporte en los logs. Útil para empezar a medir sin bloquear, pero pierde el valor del security gate.
+> **SonarCloud también puede bloquear el pipeline.** Para verlo en acción, crear un archivo `credenciales.js` con `const password = "admin123"` — SonarCloud lo detecta como hardcoded credential y falla el quality gate. Borrar el archivo después de la prueba.
 
 ## Resumen del pipeline construido
 
