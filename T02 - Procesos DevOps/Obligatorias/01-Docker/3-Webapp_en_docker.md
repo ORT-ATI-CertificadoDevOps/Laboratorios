@@ -228,7 +228,7 @@ if __name__ == "__main__":
 Para instalar los módulos de Python necesarios para nuestra aplicación, necesitamos crear un archivo llamado **requirements.txt** and add the following line to that file:
 
 ```
-Flask==0.10.1
+Flask==3.1.3
 ```
 
 #### templates/index.html
@@ -327,7 +327,7 @@ Una imagen base de Docker desde la que ejecutar, la ubicación del código de su
   FROM alpine:latest
 
   # Install python and pip
-  RUN apk add --update py2-pip
+  RUN apk add --update py3-pip
 
   # install Python modules needed by the Python app
   COPY requirements.txt /usr/src/app/
