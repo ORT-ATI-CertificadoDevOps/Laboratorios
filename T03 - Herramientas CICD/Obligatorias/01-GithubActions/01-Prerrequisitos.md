@@ -25,6 +25,9 @@ Los conceptos nuevos que se cubren:
 
 | Concepto | Descripción |
 |----------|-------------|
+| **Variables y contextos** | Pasar datos entre jobs y steps; variables por nivel |
+| **Artefactos** | Archivos generados por el pipeline, descargables desde la UI |
+| **Branch Protection** | El código solo entra a `main` si el pipeline pasó primero |
 | **Environments** | Ambientes con reglas de protección y secrets propios |
 | **Required reviewers** | Aprobación manual antes de deployar a prod |
 | **Reusable workflows** | Workflows que se llaman desde otros workflows |
@@ -33,4 +36,4 @@ Los conceptos nuevos que se cubren:
 
 ## Próximos pasos
 
-Continuar con [02 - Environments y Ambientes](02-Environments.md)
+Continuar con [02 - Variables y Artefactos](02-Variables-y-Artefactos.md)

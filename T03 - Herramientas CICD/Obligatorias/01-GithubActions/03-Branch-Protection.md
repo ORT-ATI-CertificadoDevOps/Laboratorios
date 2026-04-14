@@ -9,7 +9,7 @@ feature → [PR] → pipeline corre → [todos los checks OK] → merge habilita
                                 → [algún check falla]  → merge bloqueado
 ```
 
-## 6.1 Activar Branch Protection
+## 3.1 Activar Branch Protection
 
 1. En el repositorio, ir a **Settings → Branches**
 2. Hacer clic en **Add branch protection rule**
@@ -24,7 +24,7 @@ feature → [PR] → pipeline corre → [todos los checks OK] → merge habilita
 
 5. Hacer clic en **Save changes**
 
-## 6.2 Agregar los status checks requeridos
+## 3.2 Agregar los status checks requeridos
 
 Después de activar **Require status checks**, aparece un campo de búsqueda. GitHub solo muestra checks que ya corrieron al menos una vez en el repositorio.
 
@@ -35,7 +35,7 @@ Buscar y agregar:
 
 > Si los checks no aparecen, hacer un push a una branch (no a `main`) para que corran primero, y luego volver a configurar.
 
-## 6.3 Ajustar el workflow para PRs
+## 3.3 Ajustar el workflow para PRs
 
 Con branch protection activa, el flujo cambia: los pushes van a branches de feature, y el pipeline corre en el PR. Es importante que los jobs de escaneo corran también en PRs, no solo en pushes a `main`.
 
@@ -56,7 +56,7 @@ Este trigger hace que el pipeline corra:
 - En PRs hacia `main` (todos los jobs excepto `push-artifact`)
 - En pushes directos a `main` (todos los jobs, incluyendo `push-artifact`)
 
-## 6.4 Probar el flujo con un PR
+## 3.4 Probar el flujo con un PR
 
 ```bash
 # Crear una branch de feature
@@ -77,7 +77,7 @@ GitHub va a mostrar en el PR los checks corriendo en tiempo real. El botón **Me
 
 Una vez que todos los checks están en verde, el botón se habilita. Hacer merge.
 
-## 6.5 Probar el bloqueo
+## 3.5 Probar el bloqueo
 
 Para verificar que el gate funciona, introducir un fallo intencional:
 
@@ -107,7 +107,7 @@ git commit -m "test: remove test file"
 git push origin feature/test-block
 ```
 
-## 6.6 Protección adicional: CODEOWNERS
+## 3.6 Protección adicional: CODEOWNERS
 
 El archivo `CODEOWNERS` define quién debe revisar cambios en partes específicas del repositorio. Cuando está configurado junto con **Require review from Code Owners** en branch protection, nadie puede hacer merge a `main` sin aprobación del owner del área modificada.
 
@@ -125,9 +125,9 @@ Crear `.github/CODEOWNERS`:
 
 Para activarlo en GitHub, en **Settings → Branches → [regla de main]**, activar **Require review from Code Owners**.
 
-## 6.7 Resumen del pipeline como gate
+## 3.7 Resumen del pipeline como gate
 
-Con branch protection activa, el proceso completo de T02 queda así:
+Con branch protection activa, el proceso CI completo queda así:
 
 ```
 Developer → git push → PR → pipeline corre en PR
@@ -148,7 +148,7 @@ Developer → git push → PR → pipeline corre en PR
 | Build reproducible | Docker | En el PR, antes del merge |
 | Publicación del artefacto | Docker Hub | Solo en main, post-merge |
 
-> **Próximos pasos:** En T03 vas a extender este modelo a múltiples ambientes (dev / staging / production) con aprobaciones manuales entre stages y deploy a AWS S3.
+Continuar con [04 - Environments y Ambientes](04-Environments.md)
 
 ---
 

@@ -12,7 +12,7 @@ build → [outputs el tag] → scan → [usa el tag] → push
          descargable desde Actions UI
 ```
 
-## 5.1 GitHub Contexts
+## 2.1 GitHub Contexts
 
 GitHub Actions expone información del entorno a través de **contextos**, accesibles con la sintaxis `${{ context.propiedad }}`.
 
@@ -37,7 +37,7 @@ Agregar un step al pipeline existente para imprimir contexto útil:
     echo "Runner OS: ${{ runner.os }}"
 ```
 
-## 5.2 Variables de entorno
+## 2.2 Variables de entorno
 
 Las variables de entorno se pueden definir en tres niveles. El nivel más específico tiene precedencia.
 
@@ -70,7 +70,7 @@ env:
   IMAGE_TAG: ${{ github.sha }}
 ```
 
-## 5.3 Step outputs
+## 2.3 Step outputs
 
 Un step puede exportar valores para que los steps siguientes del mismo job los usen.
 
@@ -90,7 +90,7 @@ steps:
 
 > El formato es `nombre=valor` — sin espacios alrededor del `=`.
 
-## 5.4 Job outputs
+## 2.4 Job outputs
 
 Para pasar datos de un job a otro, se usa una combinación de step output + job output + `needs`:
 
@@ -115,7 +115,7 @@ jobs:
         run: echo "Escaneando imagen con tag ${{ needs.build.outputs.image-tag }}"
 ```
 
-## 5.5 Artefactos
+## 2.5 Artefactos
 
 Los **artefactos** son archivos generados durante un workflow que quedan disponibles para descarga desde la UI de Actions durante 90 días. Son útiles para:
 
@@ -159,7 +159,7 @@ Los **artefactos** son archivos generados durante un workflow que quedan disponi
         run: cat reports/build-report.txt
 ```
 
-## 5.6 Aplicar al pipeline
+## 2.6 Aplicar al pipeline
 
 Actualizar `.github/workflows/pipeline.yml` para incorporar lo aprendido: el job `build` genera un tag corto como output y lo usa el job `scan`; además se genera un reporte de build como artefacto.
 
@@ -283,7 +283,7 @@ jobs:
             ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.APP_NAME }}:${{ needs.build.outputs.image-tag }}
 ```
 
-## 5.7 Verificar
+## 2.7 Verificar
 
 ```bash
 git add .
@@ -300,4 +300,4 @@ En la pestaña **Actions**, al abrir el run:
 
 ## Próximos pasos
 
-Continuar con [06 - Branch Protection](06-Branch-Protection.md)
+Continuar con [03 - Branch Protection](03-Branch-Protection.md)

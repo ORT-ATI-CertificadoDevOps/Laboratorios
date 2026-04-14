@@ -281,7 +281,7 @@ Este es el núcleo de un pipeline CI real.
 
 ## Próximos pasos
 
-Continuar con [05 - Variables y Artefactos](05-Variables-y-Artefactos.md)
+Continuar con [T03 — GitHub Actions Avanzado](/T03%20-%20Herramientas%20CICD/Obligatorias/01-GithubActions/01-Prerrequisitos)
 
 ---
 

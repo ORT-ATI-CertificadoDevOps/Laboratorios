@@ -2,7 +2,7 @@
 
 Con el pipeline funcionando, este lab cubre tres patrones que aparecen en pipelines de producción real: **cache**, **matrix builds** y **reusable workflows**.
 
-## 3.1 Cache de dependencias
+## 5.1 Cache de dependencias
 
 Cada run de un workflow parte desde cero. El cache permite reutilizar archivos entre runs para acelerar los builds.
 
@@ -49,7 +49,7 @@ Si la aplicación usara Node.js:
 
 La clave del cache incluye el hash del `package-lock.json`. Si el archivo no cambia, se reutiliza el cache. Si cambia (nuevas dependencias), se invalida automáticamente.
 
-## 3.2 Matrix builds
+## 5.2 Matrix builds
 
 El matrix strategy ejecuta el mismo job múltiples veces con diferentes parámetros. Útil para testear en múltiples versiones de un lenguaje o múltiples OS.
 
@@ -88,7 +88,7 @@ Esto genera 3 jobs en paralelo: uno por cada versión de Node. Si falla en Node 
           node: 18   # excluir combinaciones específicas
 ```
 
-## 3.3 Reusable Workflows
+## 5.3 Reusable Workflows
 
 Un reusable workflow es un workflow que puede ser llamado por otros workflows. Evita duplicar la lógica de CI/CD en múltiples repositorios.
 
@@ -146,7 +146,7 @@ jobs:
 
 > En organizaciones con múltiples microservicios, el equipo de plataforma mantiene workflows reutilizables centralizados. Los equipos de producto los consumen sin tener que entender los detalles de CI/CD.
 
-## 3.4 Resumen: comparativa Jenkins vs GitHub Actions
+## 5.4 Resumen: comparativa Jenkins vs GitHub Actions
 
 | Aspecto | Jenkins | GitHub Actions |
 |---------|---------|----------------|

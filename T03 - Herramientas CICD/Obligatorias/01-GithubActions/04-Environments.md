@@ -10,13 +10,13 @@ develop → staging → main
 
 Cada ambiente puede tener sus propios secrets, variables y reglas de protección.
 
-## 2.1 Crear el repositorio de trabajo
+## 4.1 Crear el repositorio de trabajo
 
 Crear un nuevo repositorio `lab-github-actions-t03` (o reutilizar el de T02 en una branch nueva).
 
 Agregar el mismo `index.html` y `Dockerfile` del lab anterior, más los archivos de infraestructura de S3.
 
-## 2.2 Crear los ambientes en GitHub
+## 4.2 Crear los ambientes en GitHub
 
 1. Ir a **Settings → Environments → New environment**
 2. Crear los tres ambientes:
@@ -29,7 +29,7 @@ Agregar el mismo `index.html` y `Dockerfile` del lab anterior, más los archivos
 
 Para `production`, activar **Required reviewers** y agregar tu usuario. Esto significa que el deploy a prod requiere aprobación manual.
 
-## 2.3 Crear los S3 buckets en AWS
+## 4.3 Crear los S3 buckets en AWS
 
 Generar 3 buckets en AWS con hosting estático habilitado:
 
@@ -43,7 +43,7 @@ Para cada bucket:
 1. Desactivar **Block all public access**
 2. En **Properties → Static website hosting**: activar, index document = `index.html`
 
-## 2.4 Agregar secrets por ambiente
+## 4.4 Agregar secrets por ambiente
 
 En cada ambiente de GitHub (**Settings → Environments → [nombre] → Add secret**):
 
@@ -55,7 +55,7 @@ En cada ambiente de GitHub (**Settings → Environments → [nombre] → Add sec
 
 > Los secrets de ambiente sobreescriben los del repositorio. Así cada ambiente deploya a su propio bucket automáticamente.
 
-## 2.5 Workflow con ambientes
+## 4.5 Workflow con ambientes
 
 Crear `.github/workflows/pipeline.yml`:
 
@@ -150,7 +150,7 @@ jobs:
           SOURCE_DIR: .
 ```
 
-## 2.6 Probar el flujo de promotion
+## 4.6 Probar el flujo de promotion
 
 ```bash
 # Deploy a dev
@@ -175,4 +175,4 @@ En el último push, ir a **Actions → el workflow en ejecución** y observar qu
 
 ## Próximos pasos
 
-Continuar con [03 - Optimización y Patrones Avanzados](03-Optimizacion.md)
+Continuar con [05 - Optimización y Patrones Avanzados](05-Optimizacion.md)
