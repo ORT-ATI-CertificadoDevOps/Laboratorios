@@ -117,7 +117,9 @@ jobs:
 
 ## 2.5 Artefactos
 
-Los **artefactos** son archivos generados durante un workflow que quedan disponibles para descarga desde la UI de Actions durante 90 días. Son útiles para:
+Los **artefactos** son archivos generados durante un workflow que quedan disponibles para descarga desde la UI de Actions durante un período configurable (90 días por defecto en repositorios públicos). Son útiles para:
+
+> **Fuente:** [GitHub Docs — Store and share data with workflow artifacts](https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/storing-and-sharing-data-from-a-workflow)
 
 - Reportes de tests y cobertura
 - Logs de escaneos de seguridad
