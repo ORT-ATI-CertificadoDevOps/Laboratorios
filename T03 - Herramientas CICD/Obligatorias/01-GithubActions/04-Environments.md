@@ -51,9 +51,12 @@ En cada ambiente de GitHub (**Settings → Environments → [nombre] → Add sec
 |--------|-------------|
 | `AWS_ACCESS_KEY_ID` | Credencial de AWS |
 | `AWS_SECRET_ACCESS_KEY` | Credencial de AWS |
+| `AWS_SESSION_TOKEN` | Solo para credenciales temporales (AWS Academy / STS) |
 | `S3_BUCKET` | Nombre del bucket correspondiente al ambiente |
 
 > Los secrets de ambiente sobreescriben los del repositorio. Así cada ambiente deploya a su propio bucket automáticamente.
+
+> **Nota:** Si usás credenciales de largo plazo (IAM user), no agregues `AWS_SESSION_TOKEN`. Si usás AWS Academy o credenciales temporales vía STS, es obligatorio.
 
 ## 4.5 Workflow con ambientes
 
@@ -100,16 +103,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Deploy a S3 (dev)
-        uses: jakejarvis/s3-sync-action@master
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
         with:
-          args: --delete
-        env:
-          AWS_S3_BUCKET: ${{ secrets.S3_BUCKET }}
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          SOURCE_DIR: .
-          DEST_DIR: ""
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+          aws-region: us-east-1
+
+      - name: Deploy a S3 (dev)
+        run: aws s3 sync ./ s3://${{ secrets.S3_BUCKET }} --delete
 
   deploy-staging:
     name: Deploy → staging
@@ -120,15 +123,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Deploy a S3 (staging)
-        uses: jakejarvis/s3-sync-action@master
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
         with:
-          args: --delete
-        env:
-          AWS_S3_BUCKET: ${{ secrets.S3_BUCKET }}
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          SOURCE_DIR: .
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+          aws-region: us-east-1
+
+      - name: Deploy a S3 (staging)
+        run: aws s3 sync ./ s3://${{ secrets.S3_BUCKET }} --delete
 
   deploy-production:
     name: Deploy → production
@@ -139,15 +143,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Deploy a S3 (production)
-        uses: jakejarvis/s3-sync-action@master
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
         with:
-          args: --delete
-        env:
-          AWS_S3_BUCKET: ${{ secrets.S3_BUCKET }}
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          SOURCE_DIR: .
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+          aws-region: us-east-1
+
+      - name: Deploy a S3 (production)
+        run: aws s3 sync ./ s3://${{ secrets.S3_BUCKET }} --delete
 ```
 
 ## 4.6 Probar el flujo de promotion
