@@ -1,6 +1,6 @@
 # GitHub Actions — Branch Protection y Pull Requests
 
-Hasta ahora el pipeline corre con cada push directo a `main`. El problema: si alguien pushea código con CVEs críticos o que falla el quality gate de SonarCloud, el pipeline falla *después* de que el código ya está en la rama principal.
+Hasta ahora el pipeline corre con cada push directo a `main`. El problema: si alguien pushea código con CVEs críticos o que falla el análisis de Semgrep, el pipeline falla *después* de que el código ya está en la rama principal.
 
 **Branch protection** invierte esa lógica: el código solo puede entrar a `main` si el pipeline pasó primero. Esto convierte el pipeline en un gate real, no un sistema de alertas post-hoc.
 
@@ -31,7 +31,7 @@ Después de activar **Require status checks**, aparece un campo de búsqueda. Gi
 Buscar y agregar:
 - `Build Docker Image`
 - `Scan de seguridad (Trivy)`
-- `Quality Gate (SonarCloud)`
+- `Quality Gate (Semgrep)`
 
 > Si los checks no aparecen, hacer un push a una branch (no a `main`) para que corran primero, y luego volver a configurar.
 
@@ -84,17 +84,18 @@ Para verificar que el gate funciona, introducir un fallo intencional:
 ```bash
 git checkout -b feature/test-block
 
-# Agregar código con credencial hardcodeada (SonarCloud lo detecta)
+# Agregar credencial hardcodeada (Semgrep p/secrets lo detecta como finding)
 cat >> credenciales.js << 'EOF'
-const password = "admin123";
+const awsKey = "AKIAIOSFODNN7EXAMPLE";
+const awsSecret = "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY";
 EOF
 
 git add credenciales.js
-git commit -m "test: trigger sonarcloud failure"
+git commit -m "test: trigger semgrep failure"
 git push origin feature/test-block
 ```
 
-Crear el PR. Observar que el job `Quality Gate (SonarCloud)` falla y el merge queda bloqueado con el mensaje:
+Crear el PR. Observar que el job `Quality Gate (Semgrep)` falla y el merge queda bloqueado con el mensaje:
 
 > **"Required status checks haven't passed yet"**
 
@@ -134,7 +135,7 @@ Developer → git push → PR → pipeline corre en PR
                               ↓
                     ┌─ build: imagen construida ─────────────────┐
                     ├─ scan: Trivy sin CVEs críticos ────────────┤ todos deben pasar
-                    └─ test: SonarCloud quality gate OK ─────────┘
+                    └─ test: Semgrep sin findings críticos ───────┘
                               ↓
                     Merge habilitado → push a main
                               ↓
@@ -143,7 +144,7 @@ Developer → git push → PR → pipeline corre en PR
 
 | Capa de protección | Herramienta | Cuándo actúa |
 |--------------------|-------------|--------------|
-| Análisis de código | SonarCloud | En el PR, antes del merge |
+| Análisis de código | Semgrep | En el PR, antes del merge |
 | Vulnerabilidades en imagen | Trivy | En el PR, antes del merge |
 | Build reproducible | Docker | En el PR, antes del merge |
 | Publicación del artefacto | Docker Hub | Solo en main, post-merge |

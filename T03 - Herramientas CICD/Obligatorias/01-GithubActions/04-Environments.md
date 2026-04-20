@@ -88,11 +88,12 @@ jobs:
           push: false
           tags: webapp:${{ github.sha }}
 
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      - name: Semgrep scan
+        uses: returntocorp/semgrep-action@v1
+        with:
+          config: >-
+            p/secrets
+            p/security-audit
 
   deploy-dev:
     name: Deploy → dev
