@@ -22,12 +22,7 @@ feature → [PR] → pipeline corre → [todos los checks OK] → merge habilita
 | **Require status checks to pass before merging** | Bloquea el merge hasta que los checks pasen |
 | **Require branches to be up to date before merging** | Obliga a que la branch tenga los últimos cambios de `main` |
 
-5. En la sección **Allow bypasses**, activar:
-   - **Merge without waiting for requirements to be met (bypass rules)** → marcar tu usuario
-
-   Esto permite que el owner del repo pueda mergear sin esperar el review, útil para trabajar en solitario durante el lab.
-
-6. Hacer clic en **Create**
+5. Hacer clic en **Create**
 
 ## 3.2 Agregar los status checks requeridos
 
@@ -80,7 +75,11 @@ git push origin feature/test-protection
 2. Base: `main`, compare: `feature/test-protection`
 3. Crear el PR
 
-GitHub va a mostrar en el PR los checks corriendo en tiempo real. El botón **Merge pull request** permanece gris hasta que todos los status checks requeridos pasen.
+GitHub va a mostrar en el PR los checks corriendo en tiempo real. El botón **Merge pull request** permanece gris hasta que todos los status checks requeridos pasen y haya un review del mismo.
+
+Para el laboratorio, hacer check en **Merge without waiting for requirements to be met (bypass rules)** para hacer un bypass de esto.
+
+<img src="/Extras/Imagenes/laboratorioGithubActions/mergeBypass.png" title="static">
 
 Una vez que todos los checks están en verde, el botón se habilita. Hacer merge.
 
@@ -114,7 +113,7 @@ git commit -m "test: remove test file"
 git push origin feature/test-block
 ```
 
-<img src="/Extras/Imagenes/laboratorioGithubActions/statusChecks.png" title="static">
+<img src="/Extras/Imagenes/laboratorioGithubActions/Gitleaks.png" title="static">
 
 ## 3.6 Protección adicional: CODEOWNERS
 
