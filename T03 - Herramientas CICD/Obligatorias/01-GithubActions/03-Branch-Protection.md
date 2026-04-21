@@ -1,6 +1,6 @@
 # GitHub Actions — Branch Protection y Pull Requests
 
-Hasta ahora el pipeline corre con cada push directo a `main`. El problema: si alguien pushea código con CVEs críticos o que falla el análisis de Semgrep, el pipeline falla *después* de que el código ya está en la rama principal.
+Hasta ahora el pipeline corre con cada push directo a `main`. El problema: si alguien pushea código con CVEs críticos o secrets hardcodeados, el pipeline falla *después* de que el código ya está en la rama principal.
 
 **Branch protection** invierte esa lógica: el código solo puede entrar a `main` si el pipeline pasó primero. Esto convierte el pipeline en un gate real, no un sistema de alertas post-hoc.
 
@@ -12,7 +12,7 @@ feature → [PR] → pipeline corre → [todos los checks OK] → merge habilita
 ## 3.1 Activar Branch Protection
 
 1. En el repositorio, ir a **Settings → Branches**
-2. Hacer clic en **Add branch protection rule**
+2. Hacer clic en **Add classic branch protection rule**
 3. En **Branch name pattern**, escribir `main`
 4. Activar las siguientes opciones:
 
@@ -22,7 +22,12 @@ feature → [PR] → pipeline corre → [todos los checks OK] → merge habilita
 | **Require status checks to pass before merging** | Bloquea el merge hasta que los checks pasen |
 | **Require branches to be up to date before merging** | Obliga a que la branch tenga los últimos cambios de `main` |
 
-5. Hacer clic en **Save changes**
+5. En la sección **Allow bypasses**, activar:
+   - **Merge without waiting for requirements to be met (bypass rules)** → marcar tu usuario
+
+   Esto permite que el owner del repo pueda mergear sin esperar el review, útil para trabajar en solitario durante el lab.
+
+6. Hacer clic en **Create**
 
 ## 3.2 Agregar los status checks requeridos
 
@@ -31,7 +36,9 @@ Después de activar **Require status checks**, aparece un campo de búsqueda. Gi
 Buscar y agregar:
 - `Build Docker Image`
 - `Scan de seguridad (Trivy)`
-- `Quality Gate (Semgrep)`
+- `Quality Gate (Gitleaks)`
+
+<img src="/Extras/Imagenes/laboratorioGithubActions/statusChecks.png" title="static">
 
 > Si los checks no aparecen, hacer un push a una branch (no a `main`) para que corran primero, y luego volver a configurar.
 
@@ -84,18 +91,17 @@ Para verificar que el gate funciona, introducir un fallo intencional:
 ```bash
 git checkout -b feature/test-block
 
-# Agregar credencial hardcodeada (Semgrep p/secrets lo detecta como finding)
+# Agregar credencial hardcodeada (Gitleaks lo detecta por el patrón AKIA...)
 cat >> credenciales.js << 'EOF'
-const awsKey = "AKIAIOSFODNN7EXAMPLE";
-const awsSecret = "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY";
+const awsKey = "AKIAIOSFODNN7ABCDEFG";
 EOF
 
 git add credenciales.js
-git commit -m "test: trigger semgrep failure"
+git commit -m "test: trigger gitleaks failure"
 git push origin feature/test-block
 ```
 
-Crear el PR. Observar que el job `Quality Gate (Semgrep)` falla y el merge queda bloqueado con el mensaje:
+Crear el PR. Observar que el job `Quality Gate (Gitleaks)` falla y el merge queda bloqueado con el mensaje:
 
 > **"Required status checks haven't passed yet"**
 
@@ -107,6 +113,8 @@ git add credenciales.js
 git commit -m "test: remove test file"
 git push origin feature/test-block
 ```
+
+<img src="/Extras/Imagenes/laboratorioGithubActions/statusChecks.png" title="static">
 
 ## 3.6 Protección adicional: CODEOWNERS
 
@@ -133,9 +141,9 @@ Con branch protection activa, el proceso CI completo queda así:
 ```
 Developer → git push → PR → pipeline corre en PR
                               ↓
-                    ┌─ build: imagen construida ─────────────────┐
-                    ├─ scan: Trivy sin CVEs críticos ────────────┤ todos deben pasar
-                    └─ test: Semgrep sin findings críticos ───────┘
+                    ┌─ build: imagen construida ───────────────────┐
+                    ├─ scan: Trivy sin CVEs críticos ──────────────┤ todos deben pasar
+                    └─ test: Gitleaks sin secrets detectados ──────┘
                               ↓
                     Merge habilitado → push a main
                               ↓
@@ -144,7 +152,7 @@ Developer → git push → PR → pipeline corre en PR
 
 | Capa de protección | Herramienta | Cuándo actúa |
 |--------------------|-------------|--------------|
-| Análisis de código | Semgrep | En el PR, antes del merge |
+| Detección de secrets | Gitleaks | En el PR, antes del merge |
 | Vulnerabilidades en imagen | Trivy | En el PR, antes del merge |
 | Build reproducible | Docker | En el PR, antes del merge |
 | Publicación del artefacto | Docker Hub | Solo en main, post-merge |

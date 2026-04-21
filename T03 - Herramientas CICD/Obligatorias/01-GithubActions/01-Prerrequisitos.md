@@ -6,7 +6,7 @@ Este laboratorio extiende el pipeline construido en **T02 — Lab 03 (GitHub Act
 
 - El repositorio `lab-github-actions-t02` funcionando con el pipeline Build → Test → Push
 - Cuenta en [Docker Hub](https://hub.docker.com/)
-- Cuenta en [Semgrep](https://semgrep.dev/) (opcional — el scanner corre sin cuenta, pero con cuenta se accede al dashboard)
+- No se requieren cuentas adicionales para el scanner de secrets (Gitleaks corre sin autenticación)
 - Cuenta en [AWS Academy](https://awsacademy.instructure.com/) activa (para el lab de deploy)
 
 ## ¿Qué vamos a agregar?

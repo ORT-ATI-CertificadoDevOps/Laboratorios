@@ -88,12 +88,10 @@ jobs:
           push: false
           tags: webapp:${{ github.sha }}
 
-      - name: Semgrep scan
-        uses: returntocorp/semgrep-action@v1
-        with:
-          config: >-
-            p/secrets
-            p/security-audit
+      - name: Detect secrets (Gitleaks)
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   deploy-dev:
     name: Deploy → dev

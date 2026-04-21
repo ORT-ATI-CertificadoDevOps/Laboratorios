@@ -245,19 +245,19 @@ jobs:
           severity: 'CRITICAL,HIGH'
 
   test:
-    name: Quality Gate (Semgrep)
+    name: Quality Gate (Gitleaks)
     runs-on: ubuntu-latest
     needs: scan
     steps:
       - name: Checkout código
         uses: actions/checkout@v4
-
-      - name: Semgrep scan
-        uses: returntocorp/semgrep-action@v1
         with:
-          config: >-
-            p/secrets
-            p/security-audit
+          fetch-depth: 0
+
+      - name: Detect secrets (Gitleaks)
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   push-artifact:
     name: Push a Docker Hub
