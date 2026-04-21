@@ -33,8 +33,6 @@ Buscar y agregar:
 - `Scan de seguridad (Trivy)`
 - `Quality Gate (Gitleaks)`
 
-<img src="/Extras/Imagenes/laboratorioGithubActions/statusChecks.png" title="static">
-
 > Si los checks no aparecen, hacer un push a una branch (no a `main`) para que corran primero, y luego volver a configurar.
 
 ## 3.3 Ajustar el workflow para PRs
@@ -55,6 +53,7 @@ on:
 ```
 
 Este trigger hace que el pipeline corra:
+
 - En PRs hacia `main` (todos los jobs excepto `push-artifact`)
 - En pushes directos a `main` (todos los jobs, incluyendo `push-artifact`)
 
@@ -79,8 +78,6 @@ GitHub va a mostrar en el PR los checks corriendo en tiempo real. El botón **Me
 
 Para el laboratorio, hacer check en **Merge without waiting for requirements to be met (bypass rules)** para hacer un bypass de esto.
 
-<img src="/Extras/Imagenes/laboratorioGithubActions/mergeBypass.png" title="static">
-
 Una vez que todos los checks están en verde, el botón se habilita. Hacer merge.
 
 ## 3.5 Probar el bloqueo
@@ -100,9 +97,9 @@ git commit -m "test: trigger gitleaks failure"
 git push origin feature/test-block
 ```
 
-Crear el PR. Observar que el job `Quality Gate (Gitleaks)` falla y el merge queda bloqueado con el mensaje:
+Crear el PR. Observar que el job `Quality Gate (Gitleaks)` falla y el merge queda bloqueado:
 
-> **"Required status checks haven't passed yet"**
+<img src="/Extras/Imagenes/laboratorioGithubActions/Gitleaks.png" title="static">
 
 Borrar el archivo y hacer push para que el PR se limpie:
 
@@ -113,7 +110,6 @@ git commit -m "test: remove test file"
 git push origin feature/test-block
 ```
 
-<img src="/Extras/Imagenes/laboratorioGithubActions/Gitleaks.png" title="static">
 
 ## 3.6 Protección adicional: CODEOWNERS
 
