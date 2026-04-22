@@ -11,7 +11,7 @@ El template base está disponible en:
 
 | Fase | Herramienta | Qué vas a hacer | Lab |
 |------|-------------|----------------|-----|
-| **1** | Git | Clonar el template, personalizar con tu info, primeros commits | [T01 Git](/T01%20-%20Nivelacion/Obligatorias/02-Git/Practico) |
+| **1** | Git | Clonar el template, personalizar con tu info, primeros commits | [T01 Git](/T01%20-%20Nivelacion/Obligatorias/02-Git/1-Configuracion-y-commits) |
 | **2** | Docker | Construir y correr el portfolio dentro de un contenedor nginx | [T02 Docker](/T02%20-%20Procesos%20DevOps/Obligatorias/01-Docker/3-Webapp_en_Docker) |
 | **3** | GitHub Actions | Publicar en GitHub Pages con deploy automático en cada push | [T02 GitHub Actions](/T02%20-%20Procesos%20DevOps/Obligatorias/03-GitHub-Actions/04-Pipeline-Completo) |
 | **4** | SonarCloud | Quality gate: el portfolio solo se publica si pasa el análisis | [T02 SonarCloud](/T02%20-%20Procesos%20DevOps/Obligatorias/02-SonarCloud/2-Generar_nuestro_primer_analisis_con_SonarCloud) |
@@ -23,7 +23,7 @@ Al final del curso vas a tener un portfolio real, con URL pública, pipeline de 
 
 ## Fase 1 — Git: Clonar y personalizar
 
-**Lab:** [T01 Git — Ejercicio Integrador](/T01%20-%20Nivelacion/Obligatorias/02-Git/Practico) (al final del laboratorio)
+**Lab:** [T01 Git — Ejercicio Integrador](/T01%20-%20Nivelacion/Obligatorias/02-Git/1-Configuracion-y-commits) (al final del laboratorio)
 
 Clonar el template del portfolio y adaptarlo con tu información:
 

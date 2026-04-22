@@ -1,5 +1,7 @@
 ## Shell-Bash
 
+> **Tiempo estimado:** 90 minutos
+
 ### Puntos a tener en consideración
 - Se deja un script de ejemplo en la carpeta del práctico, con la estructura necesaria para ser ejecutado como script. Verificar que los archivos que son scripts llevan la extensión `.sh`.
 - Todos los scripts deben tener permisos de ejecución para poder ser invocados. Para dar permisos y ejecutar un script:
@@ -328,7 +330,7 @@ Los más usados para validar rutas y archivos:
 
 ---
 
-## Bonus commands!
+## Bonus commands
 
 - `chmod` — permisos de ejecución
   ```bash
