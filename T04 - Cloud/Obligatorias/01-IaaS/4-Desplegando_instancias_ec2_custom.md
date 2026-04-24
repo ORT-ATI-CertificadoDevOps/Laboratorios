@@ -1,16 +1,24 @@
-## Trabajando con Instancias EC2
+## Instancias EC2 Customizadas y AMIs
 
-### Parte 4: Trabajando con Instancias Custom
+> **Tiempo estimado:** 25 minutos
 
-El objetivo de este práctico es aprender a crear instancias de EC2 customizadas, pasándole al momento de la creación un script que `cloud-init` va a ejecutar en el momento de la creación.
+### Contexto
 
-#### Parte A - Tareas
+`cloud-init` es el servicio que ejecuta scripts al arrancar una instancia EC2. El bloque `user-data` permite automatizar la configuración inicial: instalar paquetes, desplegar aplicaciones, configurar servicios. Una vez configurada la instancia, se puede crear una **AMI** (Amazon Machine Image) para reutilizarla como base en futuros despliegues, sin necesidad de repetir la configuración.
 
-* Desplegar una instancia de `EC2`
-  * Tipo: `t2.micro`
-  * Nombre: html-web-instance01
-  * AZ: us-east-1a
-* En el bloque `user-data` colocar el siguiente script:
+### Objetivos
+
+* Desplegar una instancia EC2 configurada automáticamente via user-data
+* Crear una AMI custom a partir de la instancia configurada
+
+### Parte A — Despliegue con user-data
+
+Desplegar una instancia de EC2:
+* Nombre: `html-web-instance01`
+* Tipo: `t2.micro`
+* AZ: `us-east-1a`
+* Security Group: permitir HTTP (80)
+* En **User data**, colocar el siguiente script:
 
 ```bash
 #!/bin/bash
@@ -21,13 +29,22 @@ curl -O https://gist.githubusercontent.com/mauricioamendola/9113b526ecb157724187
 sudo mv index.html /var/www/html
 sudo systemctl start httpd
 ```
-* Permitir el acceso al servicio web habilitando el puerto `HTTP 80`
 
-#### Parte B - Tareas
+Verificar que la aplicación carga accediendo a la IP pública de la instancia desde el browser.
 
-Ahora que tenemos nuestra instancia customizada, podemos crear una `AMI` a partir de la instancia creada. Dicha `AMI` la usaremos para desplegar instancias con el servicio ya configurado y la aplicación desplegada. De esta forma podemos generar imágenes de nuestros productos / software base / aplicativos configurados / etc.
+### Parte B — Crear una AMI custom
 
+Con la instancia en estado `Running`:
+* `EC2 > Instances` → seleccionar la instancia → `Actions > Image and templates > Create image`
+* Nombre: `html-web-ami`
 
-#### Spoiler Alert
+Esta AMI puede usarse en labs posteriores (Launch Templates, ASG) para desplegar instancias ya configuradas sin ejecutar el user-data nuevamente.
 
-En caso de trancarse, pueden consultar la ayuda [aquí](./soluciones/4-Solucion_desplegando_instancias_custom.md).
+### Limpieza de recursos
+
+* `EC2 > Instances` → terminar `html-web-instance01`
+* `EC2 > AMIs` → deregister la AMI *(opcional — no genera costo si no se lanza)*
+
+### Spoiler Alert
+
+En caso de trancarse, se puede consultar la [solución](./soluciones/4-Solucion_desplegando_instancias_custom.md).

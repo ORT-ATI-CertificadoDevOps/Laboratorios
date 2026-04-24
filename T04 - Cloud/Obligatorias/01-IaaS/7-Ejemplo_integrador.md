@@ -1,24 +1,50 @@
 ## Ejemplo Integrador
 
-### Parte 7a: Desplegando una arquitectura completa
+> **Tiempo estimado:** 60 minutos
 
-Bienvenidos al práctico "Desplegando una arquitectura completa". Esto es una recopilación de todos los prácticos y conceptos aprendidos hasta el momento.
+### Contexto
 
-* Lo que tendrán que hacer es:
-  * Desplegar `dos` instancias a partir de una AMI custom
-  * La instancia de EC2, debe desplegarse bajo un `Auto-scaling Group`
-  * Debe estar balanceada por un `Application Load Balancer`
-  * Ambas instancias deben estar en diferentes `subnets` y con un `vpc` dedicado
-  * La aplicación debe estar disponible (es decir, debe cargar)
-  
-Los recursos desplegados deben ser los siguientes:
+Este práctico integra los conceptos del módulo: AMIs custom, Auto Scaling Groups, Load Balancing y Networking. Se compone de dos partes que aumentan en complejidad.
 
-<p align = "center"></p>
+### Prerequisitos
+
+* AMI custom creada en el Lab 4 (Instancias EC2 Customizadas)
+* Conceptos de VPC, subnets y NAT Gateway (Labs de Networking)
+
+### Parte A: Arquitectura pública
+
+Desplegar la siguiente arquitectura usando la AMI del Lab 4:
+
+* Dos instancias EC2 bajo un **Auto Scaling Group**
+* Un **Application Load Balancer** balanceando las instancias
+* Ambas instancias en distintas subnets y AZs dentro de un **VPC dedicado**
+* La aplicación debe ser accesible desde internet
+
+<p align = "center">
 <img src="/Extras/Imagenes/laboratorioCloud_EC2/ec2/architecture02.png" alt="Arquitectura">
+</p>
 
-### Parte 7b: Desplegando una arquitectura segura
+### Parte B: Arquitectura con subnets privadas
 
-Ahora vamos a usar las redes privadas. La idea es desplegar las instancias en las redes privadas, conectándolas a internet a través de un `Nat Gateway` desplegado en la Red Pública (la que tiene conectividad con el `IGW`). Además, deben desplegar un bastión host para conectarse por SSH a las instancias privadas. 
+Extender la arquitectura para que las instancias EC2 queden en **subnets privadas**, sin IP pública directa:
 
-<p align = "center"></p>
-<img src ="Extras/Imagenes/laboratorioCloud_EC2/ec2/architecture-complete.png" alt="Arquitectura">
+* Subnets públicas: ALB y Bastion Host (con acceso al IGW)
+* Subnets privadas: instancias EC2 del ASG
+* **NAT Gateway** en la subnet pública para que las instancias privadas tengan salida a internet
+* **Bastion Host** para conectarse por SSH a las instancias privadas
+
+<p align = "center">
+<img src="Extras/Imagenes/laboratorioCloud_EC2/ec2/architecture-complete.png" alt="Arquitectura">
+</p>
+
+### Limpieza de recursos
+
+Eliminar en el siguiente orden para evitar errores de dependencia:
+
+1. Auto Scaling Group
+2. Application Load Balancer y Target Group
+3. NAT Gateway *(genera costo por hora aunque no haya tráfico)*
+4. Instancia EC2 (Bastion)
+5. Elastic IP asociada al NAT Gateway
+6. Subnets, Route Tables, Internet Gateway
+7. VPC

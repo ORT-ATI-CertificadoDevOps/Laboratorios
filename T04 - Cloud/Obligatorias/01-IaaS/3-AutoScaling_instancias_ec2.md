@@ -1,39 +1,50 @@
-## Trabajando con Instancias EC2
-
-### Parte 3: Auto-Scaling de Instancias EC2
-
-Vamos a crear instancias pero esta vez a partir de un Auto Scaling Group o ASG. Para esto tenemos que crear primero un `Launch Template` (`LT`). Los `LT` cumplen con:  
-
-* Se pueden versionar. Es decir, si queremos modificar algo, basta con editarlo y eso genera una nueva versión del `LT`.
-* Habilitan a tener múltiples tipos de instancia, por ejemplo, podemos correr algunas instancias de `EC2` usando instancias on-demand y otras usando SPOT instances.  
+## Auto Scaling Groups
 
 > **Tiempo estimado:** 25 minutos
 
-#### Ejercicios
+### Contexto
 
-* Crear un `LT`. (Se puede buscar en la barra de Servicios. Es un EC2 Feature)
-  * Nombre: `test-lt-devops`
-  * AMI: `ami-098e39bafa7e7303d` *(si no está disponible, buscar el ID actual de Amazon Linux)*
-  * Instance Type: `t3.micro`
-  * Key pair: el que crearon en el lab anterior
-  * Security Groups: Seleccionar uno que permita el tráfico SSH
-* Crear un `ASG`
-  * Nombre: asg-devops
-  * Launch Template: Seleccionar el creado en el paso anterior.
-  * Seleccionar subnets `us-east-1a` y `us-east-1b`
-  * Seleccionar opción `No Load Balancer`
-  * Dejar `Desired Capacity` y `Minimum capacity` en 1 y `Maximum Capacity` en 2
+Los Auto Scaling Groups (ASG) mantienen automáticamente la cantidad de instancias deseada. Si una instancia falla, el ASG la reemplaza; si la carga aumenta, puede agregar instancias hasta el máximo configurado.
 
-#### Para discutir en grupo
+Para crear un ASG se necesita primero un **Launch Template (LT)**: define las características de las instancias a lanzar y soporta versionado — modificar un LT genera una nueva versión sin perder la anterior.
 
-* Que pasa si eliminamos una de las intancias creadas?
-* Qué pasa si modificamos el valor de `Desired Capacity` a dos?
-* Cómo podemos generar una nueva versión del `LT`?
+### Prerequisitos
 
+* Par de claves SSH creado en el lab anterior
 
-#### Limpieza de recursos
+### Objetivos
 
-Para evitar consumo innecesario de créditos, eliminar en el siguiente orden:
+* Crear un Launch Template con la configuración de la instancia
+* Crear un Auto Scaling Group usando el Launch Template
+* Explorar el comportamiento de auto-healing y escalado
+
+### Tareas
+
+**1. Crear un Launch Template**
+
+* Nombre: `test-lt-devops`
+* AMI: `ami-098e39bafa7e7303d` *(si no está disponible, buscar Amazon Linux en el catálogo)*
+* Tipo: `t3.micro`
+* Key pair: el creado en el lab anterior
+* Security Groups: permitir SSH
+
+**2. Crear un Auto Scaling Group**
+
+* Nombre: `asg-devops`
+* Launch Template: el del paso anterior
+* Subnets: `us-east-1a` y `us-east-1b`
+* Load Balancer: `No Load Balancer`
+* Desired Capacity: `1` · Minimum: `1` · Maximum: `2`
+
+### Para discutir en grupo
+
+* ¿Qué pasa si se elimina manualmente una instancia creada por el ASG?
+* ¿Qué pasa si se modifica el `Desired Capacity` a 2?
+* ¿Cómo se genera una nueva versión del Launch Template?
+
+### Limpieza de recursos
+
+Eliminar en orden:
 
 1. `EC2 > Auto Scaling Groups` → eliminar `asg-devops`
 2. `EC2 > Launch Templates` → eliminar `test-lt-devops`
@@ -46,6 +57,6 @@ aws autoscaling delete-auto-scaling-group --auto-scaling-group-name asg-devops -
 aws ec2 delete-launch-template --launch-template-name test-lt-devops
 ```
 
-#### Spoiler Alert
+### Spoiler Alert
 
 En caso de trancarse, se puede consultar la [solución](./soluciones/3-Solucion_autoscaling_instancias_ec2.md).

@@ -1,40 +1,43 @@
-## Trabajando con Instancias EC2
-
-### Parte 1: Desplegando dos instancias EC2
+## Desplegando Instancias EC2
 
 > **Tiempo estimado:** 30 minutos
 
-Bienvenidos al práctico de EC2. Lo que tendrán que hacer es lo siguiente:  
+### Objetivos
 
-* Desplegar una instancia EC2 con las siguientes características:    
-  * Nombre: test-instance01 (Hint: para agregarle un nombre, hay que usar un Tag -> "Name: nombre_instancia")
-  * AMI: Amazon Linux
-  * Type: t3.micro
-  * AZ: us-east-1a
-* Crear un par de claves SSH  
-* Configurar un Security Group para permitir tráfico SSH
-* Probar acceder a la instancia desplegada
-* Repetir pasos para crear la instancia: 
-  * Name: test-instance02
-  * AMI: Amazon Linux
-  * Type: t3.micro
-  * AZ: us-east-1b
+* Desplegar dos instancias EC2 en distintas zonas de disponibilidad
+* Crear y usar un par de claves SSH
+* Configurar un Security Group para acceso SSH
+* Verificar conectividad entre instancias
 
-#### Discutir en el grupo
+### Tareas
 
-1. Qué IP privada tiene cada instancia?
-2. Por qué son ips de redes distintas
-3. Probar ping desde una instancia a la otra
-4. Por qué no funciona? Y si funciona...por qué les parece que funciona?
-5. Compartir conclusiones obtenidas
+Desplegar la primera instancia:
+* Nombre: `test-instance01` *(usar Tag `Name`)*
+* AMI: Amazon Linux
+* Tipo: `t3.micro`
+* AZ: `us-east-1a`
+* Key pair: crear uno nuevo
+* Security Group: permitir SSH (22)
 
+Desplegar la segunda instancia con los mismos parámetros:
+* Nombre: `test-instance02`
+* AZ: `us-east-1b`
+* Key pair y Security Group: reutilizar los del paso anterior
 
-#### Limpieza de recursos
+Conectarse vía SSH a ambas instancias para verificar el acceso.
 
-* `EC2 > Instances` → seleccionar `test-instance01` y `test-instance02` → `Instance State > Terminate instance`
+### Para discutir en grupo
+
+1. ¿Qué IP privada tiene cada instancia?
+2. ¿Por qué son IPs de redes distintas si están en la misma cuenta?
+3. Intentar hacer ping desde una instancia a la otra — ¿funciona? ¿por qué?
+
+### Limpieza de recursos
+
+* `EC2 > Instances` → seleccionar ambas instancias → `Instance State > Terminate instance`
 * `EC2 > Key Pairs` → eliminar el par de claves creado
-* `EC2 > Security Groups` → eliminar el SG `permitir-ssh` *(esperar a que las instancias terminen primero)*
+* `EC2 > Security Groups` → eliminar el SG creado *(esperar a que las instancias terminen primero)*
 
-#### Spoiler alert!!!
+### Spoiler Alert
 
-En caso de dudas, se puede consultar la [Solución](./soluciones/1-Solucion_desplegando_instancias_ec2.md)
+En caso de trancarse, se puede consultar la [solución](./soluciones/1-Solucion_desplegando_instancias_ec2.md).
