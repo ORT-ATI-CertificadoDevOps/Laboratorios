@@ -1,17 +1,61 @@
-## Práctico de Storage: EFS
+## EFS: Almacenamiento Compartido
+
+> **Tiempo estimado:** 25 minutos
 
 ### Objetivos
 
-* Crear una instancia con Ubuntu ó Amazon Linux
-* Crear un share EFS usando la interfaz web
-* Montar el share en la instancia y almacenar contenido
-* Crear una segunda instancia y comprobar que se puede acceder al contenido
+* Crear un File System EFS desde la consola
+* Lanzar dos instancias EC2 en la misma VPC
+* Montar el share en ambas y verificar que comparten el contenido
 
-#### Referencias
+### Requisitos previos
 
-* Usar el protocolo NFSv4
-* El puerto a habilitar es el tcp 2049
-* Es posible que se deba instalar el soporte para NFS:
-  * En ubuntu: `sudo apt install nfs-common`
-  * En Amazon Linux: `sudo yum install nfs-utils`
+* El EFS y las instancias deben estar en la **misma VPC**
+* El Security Group del EFS debe permitir **TCP 2049 (NFS)** desde las instancias EC2
+* Instalar soporte NFS antes de montar:
 
+```bash
+# Ubuntu / Debian
+sudo apt install -y nfs-common
+
+# Amazon Linux
+sudo yum install -y nfs-utils
+```
+
+### Pasos
+
+**1. Crear el File System EFS** (`EFS > Create file system`)
+  * Seleccionar la VPC correcta
+  * En la sección *Network*, asignar un SG que permita TCP 2049
+
+**2. Lanzar dos instancias EC2** en esa misma VPC
+
+**3. Montar el EFS en ambas instancias**
+
+```bash
+sudo mkdir /mnt/efs
+sudo mount -t nfs4 -o nfsvers=4.1 <efs-dns-name>:/ /mnt/efs
+```
+
+El DNS del EFS tiene la forma: `fs-xxxxxxxx.efs.us-east-1.amazonaws.com` (visible en la consola EFS bajo *Attach*)
+
+**4. Verificar acceso compartido**
+
+Desde instancia 1:
+```bash
+echo "hola desde instancia 1" | sudo tee /mnt/efs/test.txt
+```
+
+Desde instancia 2:
+```bash
+cat /mnt/efs/test.txt
+```
+
+### Limpieza de recursos
+
+* `EFS > File Systems` → eliminar el File System *(esperar a que no haya mount targets activos)*
+* `EC2 > Instances` → terminar las instancias
+
+### Spoiler Alert
+
+En caso de trancarse, se puede consultar la [solución](./soluciones/1-Solucion_efs.md).
