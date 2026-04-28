@@ -8,3 +8,5 @@
 - [04-RDS](/T04%20-%20Cloud/Obligatorias/04-RDS/1-Desplegando_RDS.md)
 
 ## Recomendadas
+
+* [Exploración autónoma: CloudWatch, Lambda, CloudFront](/T04%20-%20Cloud/Recomendadas/index.md)

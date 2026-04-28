@@ -2,17 +2,19 @@
 
 ### Parte 3: Auto-Scaling de Instancias EC2
 
-Vamos a crear instancias pero esta vez a partir de un Auto Scaling Group o ASG. Para esto tenemos que crear primero un `Lauch Configuration` (`LC`) o `Launch Template` (`LT`). Los `LC` y `LT` cumplen la misma función pero con algunas diferencias sutiles, como por ejemplo:  
+Vamos a crear instancias pero esta vez a partir de un Auto Scaling Group o ASG. Para esto tenemos que crear primero un `Launch Template` (`LT`). Los `LT` cumplen con:  
 
-* Los `LT` se pueden versionar. Es decir, si queremos modificar algo, basta con editarlo y eso genera una nueva versión del `LT`, en cambio, con los `LC`, debemos de generar un nuevo `LC`.
-* Los `LT` nos habilitan a tener múltiples tipos de instancia, por ejemplo, podemos correr algunas instancias de `EC2` usando instancias on-demand y otras usando SPOT instances.  
+* Se pueden versionar. Es decir, si queremos modificar algo, basta con editarlo y eso genera una nueva versión del `LT`.
+* Habilitan a tener múltiples tipos de instancia, por ejemplo, podemos correr algunas instancias de `EC2` usando instancias on-demand y otras usando SPOT instances.  
+
+> **Tiempo estimado:** 25 minutos
 
 #### Ejercicios
 
 * Crear un `LT`. (Se puede buscar en la barra de Servicios. Es un EC2 Feature)
   * Nombre: `test-lt-devops`
-  * AMI: `ami-0f88e80871fd81e91`
-  * Instance Type: `t2.micro`
+  * AMI: `ami-098e39bafa7e7303d` *(si no está disponible, buscar el ID actual de Amazon Linux)*
+  * Instance Type: `t3.micro`
   * Key pair: el que crearon en el lab anterior
   * Security Groups: Seleccionar uno que permita el tráfico SSH
 * Crear un `ASG`
@@ -29,7 +31,21 @@ Vamos a crear instancias pero esta vez a partir de un Auto Scaling Group o ASG. 
 * Cómo podemos generar una nueva versión del `LT`?
 
 
-Nota: No olvidar eliminar el `ASG` para poder terminar las instancias. 
+#### Limpieza de recursos
+
+Para evitar consumo innecesario de créditos, eliminar en el siguiente orden:
+
+1. `EC2 > Auto Scaling Groups` → eliminar `asg-devops`
+2. `EC2 > Launch Templates` → eliminar `test-lt-devops`
+
+> Las instancias se terminan automáticamente al eliminar el ASG.
+
+```bash
+# Alternativa vía CLI
+aws autoscaling delete-auto-scaling-group --auto-scaling-group-name asg-devops --force-delete
+aws ec2 delete-launch-template --launch-template-name test-lt-devops
+```
+
 #### Spoiler Alert
 
 En caso de trancarse, se puede consultar la [solución](./soluciones/3-Solucion_autoscaling_instancias_ec2.md).
