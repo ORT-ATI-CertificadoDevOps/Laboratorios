@@ -1,94 +1,130 @@
-# Terraform & AWS CLI Installation
+# Terraform CLI — Instalación
+
+> **Tiempo estimado:** 20 minutos
+
+En los laboratorios de Cloud ya instalamos y configuramos la AWS CLI. El único requisito pendiente para arrancar con Terraform es instalar el binario de Terraform CLI y el plugin de VS Code. Este laboratorio cubre eso para los tres sistemas operativos, con foco en Linux donde se usará principalmente durante el curso.
+
+### Puntos a tener en consideración
+- Verificar que las credenciales de AWS ya estén configuradas con `aws sts get-caller-identity` antes de continuar.
+- Las credenciales de AWS **nunca** deben subirse a un repositorio Git.
+- Verificar la instalación de Terraform con `terraform version` antes de pasar al siguiente lab.
+
+---
 
 ## 01 - Introducción
+
 - Instalar Terraform CLI
-- Instalar AWS CLI
-- Instalar VS Code Editor
-- Instalar HashiCorp Terraform plugin for VS Code
+- Instalar la extensión HashiCorp Terraform para VS Code
 
+---
 
-## 02 -  macOS: Instalar Terraform
-- [Download Terraform MAC](https://www.terraform.io/downloads.html)
-- [Install CLI](https://learn.hashicorp.com/tutorials/terraform/install-cli)
-- Descompromir el archivo
+## 02 - Linux: Instalar Terraform
 
-```
-# Copy binary zip file to a folder
-mkdir /Users/<YOUR-USER>/Documents/terraform-install
-COPY Package to "terraform-install" folder
+Este es el método principal para el curso. Terraform publica repositorios APT y YUM oficiales vía HashiCorp.
 
-# Unzip
-unzip <PACKAGE-NAME>
-unzip terraform_0.14.3_darwin_amd64.zip
+**Ubuntu / Debian:**
 
-# Copy terraform binary to /usr/local/bin
-echo $PATH
-mv terraform /usr/local/bin
+```bash
+# Agregar el repositorio oficial de HashiCorp
+sudo apt-get update && sudo apt-get install -y gnupg software-properties-common
 
-# Verify Version
+wget -O- https://apt.releases.hashicorp.com/gpg | \
+  sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+
+echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] \
+  https://apt.releases.hashicorp.com $(lsb_release -cs) main" | \
+  sudo tee /etc/apt/sources.list.d/hashicorp.list
+
+sudo apt-get update && sudo apt-get install -y terraform
+
+# Verificar
 terraform version
-
-# To Uninstall Terraform (NOT REQUIRED)
-rm -rf /usr/local/bin/terraform
-``` 
-
-## 03 - macOS: IDE para Terraform - VS Code Editor
-- [Microsoft Visual Studio Code Editor](https://code.visualstudio.com/download)
-- [Hashicorp Terraform Plugin for VS Code](https://marketplace.visualstudio.com/items?itemName=HashiCorp.terraform)
-
-
-### 04 - macOS: Instalar AWS CLI
-- [AWS CLI Install](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html)
-- [Install AWS CLI - MAC](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-mac.html#cliv2-mac-install-cmd)
-
-```
-# Install AWS CLI V2
-curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
-sudo installer -pkg AWSCLIV2.pkg -target /
-which aws
-aws --version
-
-# Uninstall AWS CLI V2 (NOT REQUIRED)
-which aws
-ls -l /usr/local/bin/aws
-sudo rm /usr/local/bin/aws
-sudo rm /usr/local/bin/aws_completer
-sudo rm -rf /usr/local/aws-cli
 ```
 
+**RHEL / Amazon Linux:**
 
-## 05 - macOS: Configure AWS Credentials 
-- **Pre-requisite:** Tener una cuenta de AWS.
-  - [Create an AWS Account](https://portal.aws.amazon.com/billing/signup?nc2=h_ct&src=header_signup&redirect_url=https%3A%2F%2Faws.amazon.com%2Fregistration-confirmation#/start)
-- Generate Security Credentials using AWS Management Console
-  - Go to Services -> IAM -> Users -> "Your-Admin-User" -> Security Credentials -> Create Access Key
-- Configure AWS credentials using SSH Terminal on your local desktop
+```bash
+sudo yum install -y yum-utils
+sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
+sudo yum install -y terraform
 
-```
-# Configure AWS Credentials in command line
-$ aws configure
-AWS Access Key ID [None]: AKIASUF7DEFKSIAWMZ7K
-AWS Secret Access Key [None]: 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
-Default region name [None]: us-east-1
-Default output format [None]: json
-
-# Verify if we are able list S3 buckets
-aws s3 ls
-```
-- Verify the AWS Credentials Profile
-```
-cat $HOME/.aws/credentials 
+# Verificar
+terraform version
 ```
 
-## 06 - Windows: Terraform & AWS CLI Install
-- [Download Terraform](https://www.terraform.io/downloads.html)
-- [Install CLI](https://learn.hashicorp.com/tutorials/terraform/install-cli)
-- Descomprimir el archivo
-- Crear directorio `terraform-bins`
-- Copiar `terraform.exe` a `terraform-bins`
-- Agregar PATH en windows (variable de ambiente)
-- Instalar [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html)
+> Para actualizar en el futuro: `sudo apt-get update && sudo apt-get install --only-upgrade terraform`
 
-## 07 -  LinuxOS: Terraform & AWS CLI Install
-- [Download Terraform](https://www.terraform.io/downloads.html)
-- [Linux OS - Terraform Install](https://learn.hashicorp.com/tutorials/terraform/install-cli)
+---
+
+## 03 - Linux: Autocompletado en la terminal
+
+```bash
+# Habilitar autocompletado (bash)
+terraform -install-autocomplete
+
+# Recargar la sesión
+source ~/.bashrc
+```
+
+Con esto, `terraform <Tab>` completa comandos y subcomandos en la terminal.
+
+---
+
+## 04 - IDE — VS Code + Extensión HashiCorp Terraform
+
+- Descargar [Visual Studio Code](https://code.visualstudio.com/download)
+- Instalar la extensión [HashiCorp Terraform](https://marketplace.visualstudio.com/items?itemName=HashiCorp.terraform)
+
+La extensión provee: sintaxis highlighting, autocompletado, `terraform fmt` al guardar, y validación inline de errores.
+
+---
+
+## 05 - macOS: Instalar Terraform
+
+El método recomendado en macOS es vía **Homebrew**:
+
+```bash
+brew tap hashicorp/tap
+brew install hashicorp/tap/terraform
+
+# Verificar versión
+terraform version
+```
+
+> Para actualizar en el futuro: `brew upgrade hashicorp/tap/terraform`
+
+---
+
+## 06 - Windows: Instalar Terraform
+
+- Descargar el binario desde [developer.hashicorp.com/terraform/downloads](https://developer.hashicorp.com/terraform/downloads)
+- Descomprimir y mover `terraform.exe` a un directorio como `C:\terraform-bins\`
+- Agregar ese directorio al `PATH` en las variables de entorno del sistema
+- Verificar: abrir una nueva terminal y ejecutar `terraform version`
+
+---
+
+## 07 - Verificar credenciales de AWS
+
+La AWS CLI ya está instalada y configurada de los laboratorios de Cloud. Verificar que sigue funcionando:
+
+```bash
+# Verificar identidad configurada
+aws sts get-caller-identity
+
+# Verificar que las credenciales están disponibles
+cat $HOME/.aws/credentials
+```
+
+Si las credenciales no están configuradas, ejecutar `aws configure` con las Access Keys del usuario IAM.
+
+---
+
+## Referencias
+
+- [Terraform Downloads](https://developer.hashicorp.com/terraform/downloads)
+- [Install Terraform CLI](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
+
+---
+
+Continuar con [01-02 — Terraform Command Basics](../01-02-TerraformCommandBasics/README.md)
