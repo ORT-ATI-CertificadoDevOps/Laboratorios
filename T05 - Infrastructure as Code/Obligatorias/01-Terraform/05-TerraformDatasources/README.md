@@ -1,9 +1,22 @@
 # Terraform Datasources
 
+> **Tiempo estimado:** 20 minutos
+
+Los Data Sources permiten leer información de recursos existentes en AWS (u otro proveedor) sin gestionarlos con Terraform. Son la forma de consultar el AMI más reciente de Amazon Linux, la VPC default, subnets existentes o cualquier recurso creado fuera de la configuración actual. En lugar de hardcodear IDs que cambian con el tiempo, los datasources los obtienen dinámicamente en cada ejecución.
+
+### Puntos a tener en consideración
+- Los datasources son de **solo lectura** — no crean ni modifican recursos.
+- Se referencian como `data.<tipo>.<nombre>.<atributo>`.
+- Amazon Linux 2 llegó a su fin de vida en junio de 2025. Usar Amazon Linux 2023 (AL2023) en adelante.
+
+---
+
 ## 01 - Introducción
 - Entender sobre Datasources en Terraform
-- Impelementar un pequeños ejemplo que utilice Datasources
-- Obtener la última imagen Amazon Linux 2 AMI ID utilizando Datasources y referenciar el valor al momento de crear la instancia EC2 `ami = data.aws_ami.amzlinux.id`
+- Implementar un pequeño ejemplo que utilice Datasources
+- Obtener el último AMI ID de **Amazon Linux 2023** dinámicamente usando Datasources, y referenciar el valor al crear la instancia EC2: `ami = data.aws_ami.amzlinux.id`
+
+> **Nota:** Este lab usa Amazon Linux 2023 (AL2023). Amazon Linux 2 llegó a su fin de vida en junio de 2025 y ya no recibe actualizaciones de seguridad.
 
 ## 02 - Crear datasource to fetch latest AMI ID
 - Crear or revisar manifest `c6-ami-datasource.tf`
@@ -49,3 +62,7 @@ terraform destroy -auto-approve
 
 ## Referencias
 - [AWS EC2 AMI Datasource](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ami)
+
+---
+
+Continuar con [06-01 — Remote State Storage & Locking](../06-TerraformState/06-01-TerraformRemoteStateStorageandLocking/README.md)
