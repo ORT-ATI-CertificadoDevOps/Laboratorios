@@ -1,5 +1,16 @@
 # Terraform Workspaces
 
+> **Tiempo estimado:** 40 minutos
+
+Los Workspaces de Terraform permiten gestionar múltiples instancias de la misma infraestructura desde la misma configuración — por ejemplo, ambientes `dev`, `qa` y `prod`. Cada workspace tiene su propio state file independiente, lo que evita que los cambios en un ambiente afecten a otro. En este laboratorio creamos workspaces locales y remotos (con S3 backend) para entender cómo funciona el aislamiento entre ambientes.
+
+### Puntos a tener en consideración
+- El workspace `default` existe siempre y no puede eliminarse.
+- La variable `terraform.workspace` devuelve el nombre del workspace activo — úsala para diferenciar nombres de recursos y evitar colisiones.
+- En producción, muchos equipos prefieren repositorios/directorios separados por ambiente en lugar de workspaces — evaluar cuál se adapta mejor al proyecto.
+
+---
+
 ## 01 - Introducción
 - Vamos a crear 2 workspaces (dev,qa) ademas del workspace que viene por defecto
 - Actualizar los terraform manifestst para que soporten `terraform workspace`
@@ -293,3 +304,7 @@ Go to S3 Bucket and delete files
 ## Referencias
 - [Terraform Workspaces](https://www.terraform.io/docs/language/state/workspaces.html)
 - [Managing Workspaces](https://www.terraform.io/docs/cli/workspaces/index.html)
+
+---
+
+Continuar con [08-01 — File Provisioner](../08-TerraformProvisioners/08-01-File-Provisioner/README.md)
