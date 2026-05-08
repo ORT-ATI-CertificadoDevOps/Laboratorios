@@ -7,10 +7,26 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="description" content="Description">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify-darklight-theme@latest/dist/style.min.css"
     title="docsify-darklight-theme" type="text/css" />
 
   <style>
+    /* ── Variables ───────────────────────────────────────────────── */
+    :root {
+      --font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+      --card-radius: 8px;
+    }
+
+    /* ── Base ────────────────────────────────────────────────────── */
+    body,
+    .sidebar,
+    .markdown-section {
+      font-family: var(--font-family);
+    }
+
     .markdown-section img {
       max-width: 65%;
       display: block;
@@ -22,7 +38,117 @@
       text-align: left;
     }
 
-    html[style*="color-scheme: dark"] .logo img {
+    /* ── Layout ──────────────────────────────────────────────────── */
+    .content {
+      padding-top: 30px !important;
+    }
+
+    /* ── Headings ────────────────────────────────────────────────── */
+    .markdown-section h1 {
+      font-size: 1.7rem;
+      font-weight: 700;
+      line-height: 1.2;
+      padding-bottom: 0.5rem;
+      border-bottom: 3px solid var(--theme-color);
+      margin-bottom: 1.25rem;
+    }
+
+    .markdown-section h2 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      padding-bottom: 0.3rem;
+      border-bottom: 1px solid var(--border-color, #e2e8f0);
+      margin-top: 1.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .markdown-section h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .markdown-section h4 {
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-top: 1.25rem;
+      margin-bottom: 0.4rem;
+    }
+
+    /* ── Card grid ───────────────────────────────────────────────── */
+    .module-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+      gap: 0.85rem;
+      margin: 1.25rem 0;
+    }
+
+    .module-card {
+      display: block;
+      padding: 0.9rem 1.1rem;
+      border: 1px solid var(--border-color, #e2e8f0);
+      border-radius: var(--card-radius);
+      color: inherit !important;
+      text-decoration: none !important;
+      transition: box-shadow 0.2s, border-color 0.2s, transform 0.15s;
+    }
+
+    .module-card:hover {
+      border-color: var(--theme-color);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .module-card .card-tag {
+      margin-bottom: 0.4rem;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--theme-color);
+    }
+
+    .module-card h3 {
+      margin: 0 0 0.35rem;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .module-card p {
+      margin: 0;
+      font-size: 0.83rem;
+      line-height: 1.4;
+      opacity: 0.65;
+    }
+
+    /* ── Sidebar ─────────────────────────────────────────────────── */
+    .sidebar ul li a {
+      font-size: 0.875rem;
+    }
+
+    .sidebar-nav > ul > li > a {
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .sidebar-nav ul li a {
+      display: block;
+      padding: 4px 8px;
+      margin-right: 8px;
+      border-radius: 6px;
+      text-decoration: none !important;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .sidebar-nav ul li a:hover {
+      background: rgba(0, 0, 0, 0.05);
+      font-weight: 600;
+    }
+
+    /* ── Theme overrides ─────────────────────────────────────────── */
+    html[style*="color-scheme: dark"] .logo img,
+    html[style*="color-scheme: dark"] .markdown-section img[src*="ortLogo_dark"] {
       content: url('Extras/Imagenes/ortLogo_white.svg');
     }
 
@@ -30,14 +156,38 @@
       content: url('Extras/Imagenes/ortLogo_dark.svg');
     }
 
-    /*
-    ── Paleta personalizada — PASO 1 de 2 ──────────────────────────
-    Descomentar el bloque de abajo para aplicar el sidebar oscuro.
-
     html[style*="color-scheme: dark"] .sidebar {
-      background-color: #2a263f !important;
+      background-color: #1e293b !important;
+      border-right: 1px solid #334155 !important;
     }
-    ─────────────────────────────────────────────────────────────── */
+
+    .sidebar-nav ul li.active,
+    .sidebar-nav ul li.active > a,
+    .sidebar-nav ul li a.active {
+      border-right: none !important;
+    }
+
+    .sidebar-nav ul li.active > a,
+    .sidebar-nav ul li a.active {
+      font-weight: 700 !important;
+    }
+
+    html[style*="color-scheme: light"] .sidebar-nav ul li.active > a,
+    html[style*="color-scheme: light"] .sidebar-nav ul li a.active {
+      background: #e0f2fe;
+      color: #0369a1 !important;
+    }
+
+    html[style*="color-scheme: dark"] .sidebar-nav ul li.active > a,
+    html[style*="color-scheme: dark"] .sidebar-nav ul li a.active {
+      background: rgba(56, 189, 248, 0.12);
+      color: #38bdf8 !important;
+    }
+
+    html[style*="color-scheme: dark"] .sidebar-nav ul li a:hover {
+      background: rgba(255, 255, 255, 0.05);
+      font-weight: 600;
+    }
   </style>
 </head>
 
@@ -83,7 +233,35 @@
       name: 'DevOps - Labs',
       repo: '',
       loadSidebar: true,
-      // darklightTheme: { defaultTheme: 'dark', dark: { ... }, light: { ... } },
+      darklightTheme: {
+        defaultTheme: 'light',
+        dark: {
+          background:          '#0f172a',
+          toogleBackground:    '#1e293b',
+          textColor:           '#e2e8f0',
+          accent:              '#38bdf8',
+          highlightColor:      '#38bdf8',
+          sidebarSublink:      '#94a3b8',
+          codeTextColor:       '#e2e8f0',
+          codeBackgroundColor: '#1e293b',
+          codeTypeColor:       '#7dd3fc',
+          borderColor:         '#334155',
+          blockQuoteColor:     '#64748b',
+        },
+        light: {
+          background:          '#f8fafc',
+          toogleBackground:    '#1e293b',
+          textColor:           '#0f172a',
+          accent:              '#0369a1',
+          highlightColor:      '#0369a1',
+          sidebarSublink:      '#475569',
+          codeTextColor:       '#0f172a',
+          codeBackgroundColor: '#f1f5f9',
+          codeTypeColor:       '#0284c7',
+          borderColor:         '#e2e8f0',
+          blockQuoteColor:     '#64748b',
+        },
+      },
       relativePath: true,
       auto2top: true,
       alias: {
@@ -121,32 +299,32 @@
         startOnLoad: false,
         theme: 'base',
         themeVariables: {
-          background:          '#282a36',
-          mainBkg:             '#44475a',
-          primaryColor:        '#44475a',
-          primaryTextColor:    '#f8f8f2',
-          primaryBorderColor:  '#bd93f9',
-          lineColor:           '#6272a4',
-          secondaryColor:      '#383a59',
-          edgeLabelBackground: '#44475a',
-          clusterBkg:          '#383a59',
-          nodeTextColor:       '#f8f8f2',
+          background:          '#0f172a',
+          mainBkg:             '#1e293b',
+          primaryColor:        '#1e293b',
+          primaryTextColor:    '#e2e8f0',
+          primaryBorderColor:  '#38bdf8',
+          lineColor:           '#475569',
+          secondaryColor:      '#0f172a',
+          edgeLabelBackground: '#1e293b',
+          clusterBkg:          '#1e293b',
+          nodeTextColor:       '#e2e8f0',
         }
       },
       light: {
         startOnLoad: false,
         theme: 'base',
         themeVariables: {
-          background:          '#f8f8f2',
-          mainBkg:             '#f0eef8',
-          primaryColor:        '#f0eef8',
-          primaryTextColor:    '#282a36',
-          primaryBorderColor:  '#bd93f9',
-          lineColor:           '#6272a4',
-          secondaryColor:      '#e4e2f0',
-          edgeLabelBackground: '#f8f8f2',
-          clusterBkg:          '#e4e2f0',
-          nodeTextColor:       '#282a36',
+          background:          '#f8fafc',
+          mainBkg:             '#f1f5f9',
+          primaryColor:        '#f1f5f9',
+          primaryTextColor:    '#0f172a',
+          primaryBorderColor:  '#0369a1',
+          lineColor:           '#64748b',
+          secondaryColor:      '#e2e8f0',
+          edgeLabelBackground: '#f8fafc',
+          clusterBkg:          '#e2e8f0',
+          nodeTextColor:       '#0f172a',
         }
       }
     };
