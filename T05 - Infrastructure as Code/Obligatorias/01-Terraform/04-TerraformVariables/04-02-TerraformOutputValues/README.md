@@ -1,10 +1,21 @@
 # Terraform Output Values
 
+> **Tiempo estimado:** 25 minutos
+
+Los Output Values exponen atributos de recursos creados por Terraform — la IP pública de una instancia, el endpoint de una base de datos, el ARN de un rol. Se pueden consultar desde la CLI con `terraform output`, consumir desde módulos hijos o integrar en pipelines CI/CD como artefactos del deploy. Son el mecanismo de "retorno" de una configuración Terraform.
+
+### Puntos a tener en consideración
+- Los outputs se recalculan después de cada `terraform apply`.
+- Marcar outputs como `sensitive = true` los oculta del log de Terraform, pero el valor sigue estando en el `terraform.tfstate`.
+- El formato `-json` es útil para consumir outputs desde scripts de automatización.
+
+---
+
 ## 01 - Introducción
-- Entender sobre Output Value y como se implementam
+- Entender sobre Output Value y como se implementan
 - Query outputs usando `terraform output`
 - Entender como utilizar secure attributes en output values
-- Generar machin-readable output
+- Generar machine-readable output
 
 ## 02 - Basics of Output Values
 - **Directorio:** terraform-manifests
@@ -85,3 +96,7 @@ rm -rf terraform.tfstate*
 
 ## Referencias
 - [Terraform Output Values](https://www.terraform.io/docs/language/values/outputs.html)
+
+---
+
+Continuar con [04-03 — Terraform Local Values](../04-03-TerraformLocalValues/README.md)

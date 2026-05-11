@@ -1,5 +1,16 @@
 # Terraform Resource Meta-Argument for_each
 
+> **Tiempo estimado:** 25 minutos
+
+Mientras `count` crea recursos por índice numérico, `for_each` los crea por clave. Esto permite trabajar con colecciones (maps, sets) y acceder a cada instancia por nombre en lugar de por posición. La ventaja principal: agregar o eliminar elementos no afecta a los demás recursos del conjunto, a diferencia de `count` donde un cambio en el índice puede desencadenar recreaciones en cadena.
+
+### Puntos a tener en consideración
+- `for_each` acepta `map(any)` o `set(string)` — no acepta listas directamente (usar `toset()` para convertir).
+- Dentro del bloque, `each.key` es la clave y `each.value` es el valor.
+- Los recursos se identifican como `resource_type.name["clave"]` en el state.
+
+---
+
 ## 01 - Introducción
 - Entender sobre Meta-Argument `for_each`
 - Implementar `for_each` con **Maps**
@@ -122,3 +133,7 @@ rm -rf terraform.tfstate*
 - [Resource Meta-Argument: for_each](https://www.terraform.io/docs/language/meta-arguments/for_each.html)
 - [Resource: AWS S3 Bucket](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket)
 - [Resource: AWS IAM User](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user)
+
+---
+
+Continuar con [03-05 — Meta-Argument lifecycle](../03-05-MetaArgumentLifecycle/README.md)

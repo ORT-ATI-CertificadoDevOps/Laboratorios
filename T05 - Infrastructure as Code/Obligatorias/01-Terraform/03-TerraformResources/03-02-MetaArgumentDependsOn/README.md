@@ -1,6 +1,17 @@
 # Terraform Resource Meta-Argument depends_on
 
-## 01 - Introduction
+> **Tiempo estimado:** 40 minutos
+
+Terraform construye automáticamente un grafo de dependencias entre recursos usando referencias implícitas (`resource_type.name.attribute`). Pero a veces dos recursos se relacionan por una razón que Terraform no puede inferir del código — por ejemplo, una Elastic IP que necesita que el Internet Gateway esté activo antes de asociarse. Para esos casos existe `depends_on`, que fuerza un orden de creación explícito.
+
+### Puntos a tener en consideración
+- Usar `depends_on` solo cuando la dependencia no se puede expresar como referencia implícita.
+- En este lab creamos 9 recursos en una VPC custom: VPC, Subnet, Internet Gateway, Route Table, Route, Association, Security Group, EC2 Instance y Elastic IP.
+- Tener el par de claves `terraform-key` creado en AWS antes de comenzar.
+
+---
+
+## 01 - Introducción
 - Crear 9 aws resources paso por paso
 - Crear Terraform Block
 - Crear Provider Block
@@ -13,7 +24,7 @@
   - Asociar Route Table en Subnet
   - Crear Security Group en la VPC con los puertos 80, 22 como entrantes open
   - Crear instancia EC2 en la nueva vpc, nueva subnet creada anteriormente con static key pair, asociar Security group creado anteriormente
-  - Crear Elastic IP Address y asociarla a la instancoa EC2
+  - Crear Elastic IP Address y asociarla a la instancia EC2
   - Usar `depends_on` Resource Meta-Argument cuando creamos Elastic IP  
 
 ## 02: Pre-requisito - Crear a EC2 Key Pair
@@ -229,3 +240,7 @@ rm -rf terraform.tfstate*
 - [Resource: aws_security_group](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group)
 - [Resource: aws_instance](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance)
 - [Resource: aws_eip](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eip)
+
+---
+
+Continuar con [03-03 — Meta-Argument count](../03-03-MetaArgumentCount/README.md)

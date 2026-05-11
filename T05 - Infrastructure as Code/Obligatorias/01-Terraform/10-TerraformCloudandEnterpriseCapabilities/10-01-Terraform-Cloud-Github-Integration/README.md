@@ -1,13 +1,25 @@
-# Terraform Cloud & Github Integration
+# HCP Terraform & GitHub Integration
+
+> **Nota:** Terraform Cloud fue renombrado a **HCP Terraform** en 2024. Las URLs y la interfaz son las mismas (`app.terraform.io`), solo cambió el nombre del producto.
+
+> **Tiempo estimado:** 40 minutos
+
+HCP Terraform ejecuta los planes en infraestructura remota de HashiCorp, con historial de runs, variables cifradas y state locking sin necesidad de configurar S3 + DynamoDB manualmente. La integración con GitHub convierte cada `git push` en un trigger de plan automático, implementando el flujo GitOps para infraestructura: el repositorio es la fuente de verdad y los cambios se aplican via pull request.
+
+### Puntos a tener en consideración
+- La cuenta gratuita de HCP Terraform incluye hasta 500 recursos gestionados — más que suficiente para laboratorios.
+- Las variables de entorno (`AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`) se configuran como **sensitive** en HCP Terraform para que nunca aparezcan en los logs.
+- Los planes se ejecutan en la nube de HashiCorp — las credenciales AWS configuradas deben tener permisos suficientes.
+
+---
 
 ## 01 - Introducción
-- Crear Github Repository en github.com
-- Clonar Github Repository a ambiente local
-- Copiar & Check-In Terraform Configurations sobre Github Repository
-- Crear Terraform Cloud Account
-- Crear Organization
-- Crear Workspace integrando with Github.com Git Repo creado anteriormente
-- Aprender sobre Workspace relacioanado a Queu Plan, Runs, States, Variales y Settings
+- Crear GitHub Repository en github.com
+- Clonar GitHub Repository al ambiente local
+- Copiar y hacer Check-In de las configuraciones Terraform en el repositorio
+- Crear cuenta en HCP Terraform (ex Terraform Cloud)
+- Crear Organization y Workspace con VCS workflow
+- Aprender sobre Queue Plans, Runs, States, Variables y Settings
 
 ## 02 - Crear new github Repository
 - **URL:** github.com
@@ -70,7 +82,7 @@ git push
 https://github.com/<YOUR_GITHUB_ID>/<YOUR_REPO>.git
 ```
 
-## 06 - Sign-Up en Terraform Cloud - Free Account & Login
+## 06 - Sign-Up en HCP Terraform - Free Account & Login
 - **SignUp URL:** https://app.terraform.io/signup/account
 - **Username:**
 - **Email:**

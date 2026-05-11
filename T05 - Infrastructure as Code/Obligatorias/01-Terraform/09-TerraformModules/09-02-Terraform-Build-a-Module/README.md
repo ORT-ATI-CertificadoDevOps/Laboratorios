@@ -1,5 +1,16 @@
 # Build a Terraform Module
 
+> **Tiempo estimado:** 45 minutos
+
+Crear módulos propios transforma configuraciones únicas en componentes reutilizables con una interfaz clara. En este laboratorio construimos un módulo para hostear sitios estáticos en S3, siguiendo un ciclo progresivo: primero manual desde la consola de AWS, luego automatizado con Terraform directo, y finalmente encapsulado en un módulo reutilizable. Este patrón es aplicable a cualquier tipo de infraestructura que se repita entre proyectos.
+
+### Puntos a tener en consideración
+- Un módulo bien diseñado expone solo los parámetros que varían entre instancias y mantiene valores razonables como defaults.
+- Los módulos locales son referenciados con `source = "./ruta/al/modulo"` — Terraform detecta cambios automáticamente sin necesidad de `terraform init -upgrade`.
+- Los módulos remotos (Registry, Git) se cachean en `.terraform/modules/` — usar `terraform get` para actualizarlos sin reinicializar todo.
+
+---
+
 ## 01: Introducción
 - Build a Terraform Module
     - Crear a Terraform module
@@ -249,6 +260,10 @@ ls -lrt .terraform/modules
 - Usamos local Terraform modules en nuestra configuración
 - Configuramos modules con variables
 - Usamos module outputs
+
+---
+
+Continuar con [10-01 — HCP Terraform & GitHub Integration](../../10-TerraformCloudandEnterpriseCapabilities/10-01-Terraform-Cloud-Github-Integration/README.md)
 
 
 

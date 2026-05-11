@@ -1,5 +1,16 @@
 # Terraform Local Values
 
+> **Tiempo estimado:** 20 minutos
+
+Los Local Values son variables intermedias dentro de un módulo: asignan un nombre a una expresión de Terraform para poder reutilizarla en múltiples lugares sin repetirla. Aplican el principio DRY (Don't Repeat Yourself) a las configuraciones y son especialmente útiles para construir nombres de recursos compuestos, combinar tags estándar o acortar referencias largas.
+
+### Puntos a tener en consideración
+- A diferencia de las Input Variables, los Local Values no son configurables desde afuera del módulo.
+- Si un local value se usa en un solo lugar, probablemente no vale la pena crearlo.
+- El bloque `locals {}` puede definir múltiples valores y puede aparecer en varios archivos del mismo módulo.
+
+---
+
 ## 01 - Introducción
 - Entender el principio de DRY
 - ¿Qué es un local value en Terraform?
@@ -27,7 +38,7 @@ Utilice los local values solo con moderación, en situaciones en las que se util
 
 Actualmente, Terraform no permite la sustitución de variables dentro de las variables. La forma de Terraform de hacer esto es mediante el uso de valores locales o locales donde de alguna manera puede mantener su código DRY.
 
-Otro caso de uso (al menos para mí, Federico) para los locales es acortar las referencias en proyectos de Terraform ascendentes como se ve a continuación. Esto hará que sus plantillas / módulos de Terraform sean más legibles.
+Otro caso de uso para los locales es acortar las referencias en proyectos de Terraform más grandes como se ve a continuación. Esto hará que sus plantillas / módulos de Terraform sean más legibles.
 
 ```
 
@@ -59,4 +70,8 @@ terraform apply -auto-approve
 ```
 
 ## Referencias
-- [Terraform Local values](https://www.terraform.io/docs/language/values/locals.html)
+- [Terraform Local Values](https://www.terraform.io/docs/language/values/locals.html)
+
+---
+
+Continuar con [05 — Terraform Datasources](../../05-TerraformDatasources/README.md)

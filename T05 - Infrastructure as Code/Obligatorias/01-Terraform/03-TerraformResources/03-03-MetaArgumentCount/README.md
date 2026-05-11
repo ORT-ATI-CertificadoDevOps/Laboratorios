@@ -1,5 +1,16 @@
 # Terraform Resource Meta-Argument count
 
+> **Tiempo estimado:** 20 minutos
+
+El meta-argumento `count` permite crear múltiples instancias de un recurso con una sola declaración. En lugar de copiar el mismo bloque N veces, basta con indicar cuántas copias se necesitan. Además, `count.index` permite diferenciarlas asignando nombres únicos basados en su posición (0, 1, 2...).
+
+### Puntos a tener en consideración
+- Cuando se usa `count`, Terraform maneja los recursos como una lista: `aws_instance.web[0]`, `aws_instance.web[1]`, etc.
+- Agregar o eliminar elementos en el medio de la lista puede causar recreaciones innecesarias — para esos casos es preferible `for_each`.
+- Siempre destruir los recursos al terminar el laboratorio para evitar costos inesperados.
+
+---
+
 ## 01 - Introducción
 - Entender Resource Meta-Argument `count`.
 - Además implementar count y count index de manera practica.
@@ -87,3 +98,7 @@ rm -rf terraform.tfstate*
 
 ## Referencias
 - [Resources: Count Meta-Argument](https://www.terraform.io/docs/language/meta-arguments/count.html)
+
+---
+
+Continuar con [03-04 — Meta-Argument for_each](../03-04-MetaArgumentForEach/README.md)

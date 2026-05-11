@@ -1,5 +1,16 @@
 # Terraform Provider Block
 
+> **Tiempo estimado:** 25 minutos
+
+El Provider Block es el puente entre Terraform y la API del proveedor de infraestructura (AWS, Azure, GCP, etc.). Sin él, Terraform no sabe cómo autenticarse ni contra qué región trabajar. Los providers son plugins descargados del Terraform Registry durante el `terraform init`, y cada uno expone recursos y data sources específicos de esa plataforma.
+
+### Puntos a tener en consideración
+- La autenticación con Static Credentials (hardcoded en el `.tf`) **nunca** debe usarse en producción ni subirse a Git.
+- El método recomendado es el archivo `~/.aws/credentials` generado por `aws configure`.
+- Si no se especifica `profile`, Terraform usa el perfil `default` automáticamente.
+
+---
+
 ## 01 - Introducción
 - Qué son los Terraform Providers?
 - Qué hacen los Providers?
@@ -18,11 +29,11 @@
 ```
 # Terraform Block
 terraform {
-  required_version = "~> 0.14.4"
+  required_version = "~> 1.0"
   required_providers {
-    aws = { 
-      source = "hashicorp/aws"
-      version = "~> 3.0"
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
     }
   }
 }
@@ -58,7 +69,7 @@ terraform validate
 terraform plan
 ```  
 
-## 04 - Agrear un Reosource Block para crear una AWS VPC
+## 04 - Agregar un Resource Block para crear una AWS VPC
 - [AWS VPC Resource](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc)
 
 ```
@@ -102,3 +113,7 @@ rm -rf terraform.tfstate*
 - [Terraform Providers](https://www.terraform.io/docs/configuration/providers.html)
 - [AWS Provider Documentation](https://registry.terraform.io/providers/hashicorp/aws/latest/docs)
 - [AWS VPC](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc)
+
+---
+
+Continuar con [02-03 — Multiple Provider Configurations](../02-03-MultipleProviderConfigurations/README.md)

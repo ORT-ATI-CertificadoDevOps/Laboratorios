@@ -1,5 +1,16 @@
 # Terraform Resource Syntax & Behavior
 
+> **Tiempo estimado:** 40 minutos
+
+El bloque `resource` es el núcleo de Terraform: representa un objeto de infraestructura real (una instancia EC2, una VPC, un bucket S3). Terraform mantiene un archivo de estado (`terraform.tfstate`) que mapea cada recurso declarado con su contraparte real en la nube. En este laboratorio analizamos los cuatro comportamientos posibles al ejecutar `terraform apply`: crear, actualizar en lugar, destruir y recrear, y destruir.
+
+### Puntos a tener en consideración
+- El archivo `terraform.tfstate` es la fuente de verdad de Terraform — nunca editarlo manualmente.
+- **Desired State** = los archivos `.tf` locales. **Current State** = el estado real en la nube almacenado en `terraform.tfstate`.
+- Cuando Terraform planifica, compara el Desired State contra el Current State para determinar qué acciones tomar.
+
+---
+
 ## 01 - Introducción
 - Entender la sintaxis de los Resource.
 - Entender el comportamiento de los Resource.
@@ -160,3 +171,7 @@ rm -rf terraform.tfstate*
 ## Referencias
 - [Terraform State](https://www.terraform.io/docs/language/state/index.html)
 - [Manipulating Terraform State](https://www.terraform.io/docs/cli/state/index.html)
+
+---
+
+Continuar con [03-02 — Meta-Argument depends_on](../03-02-MetaArgumentDependsOn/README.md)

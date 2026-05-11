@@ -1,5 +1,17 @@
 # Terraform Module Basics
 
+> **Tiempo estimado:** 30 minutos
+
+Los módulos son el mecanismo de reutilización de Terraform: agrupan recursos relacionados en una unidad cohesiva con su propia interfaz (variables de entrada y outputs). En lugar de copiar bloques de recursos entre proyectos, se encapsulan en un módulo que puede instanciarse con distintos parámetros. El Terraform Registry ofrece módulos oficiales y de la comunidad para los casos de uso más comunes.
+
+### Puntos a tener en consideración
+- **Root Module:** el directorio de trabajo desde donde se ejecuta Terraform.
+- **Child Module:** cualquier módulo referenciado desde el Root Module via bloque `module {}`.
+- Los módulos del Registry se versionan — siempre especificar `version` para garantizar reproducibilidad.
+- Crear el par de claves `terraform-key` en AWS y actualizar el `vpc_security_group_ids` y `subnet_id` con valores reales de la cuenta.
+
+---
+
 ## 01: Introducción
 1. Introducción - Module Basics  
   - Root Module
@@ -120,7 +132,7 @@ rm -rf terraform.tfstate*
 ```
 
 ## 07 - Meta-Arguments para Modules
-- Meta-Argument concepts are going to be same as how we learned during Resources section.
+- Los meta-arguments funcionan igual que en recursos:
   - count
   - for_each
   - providers
@@ -130,3 +142,7 @@ rm -rf terraform.tfstate*
 
 ## Referencias
 - [Terraform EC2 Instance Module](https://registry.terraform.io/modules/terraform-aws-modules/ec2-instance/aws/latest)
+
+---
+
+Continuar con [09-02 — Build a Terraform Module](../09-02-Terraform-Build-a-Module/README.md)

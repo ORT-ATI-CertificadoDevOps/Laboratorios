@@ -1,15 +1,24 @@
 # Terraform remote-exec Provisioner
 
-## 00: Prerequisitos
-- Crear una EC2 Key pain con el nombre `terraform-key` y copiar el archivo `terraform-key.pem` el la subcarpeta `private-key` en el directorio `terraform-manifest` 
-- El bloque de conexión para provisioners usa esto para conectarse a la instancia EC2 recién creada para copiar archivos usando `file provisioner`, execute scripts using `remote-exec provisioner`
+> **Tiempo estimado:** 25 minutos
 
-## 01 - Introduction
+El `remote-exec` provisioner ejecuta comandos directamente en el recurso recién creado via SSH. Permite automatizar la configuración del servidor (instalar software, copiar archivos, iniciar servicios) como parte del ciclo de vida del recurso. En este laboratorio copiamos un archivo HTML con el `file provisioner` y luego lo movemos al directorio de Apache usando `remote-exec`.
+
+### Puntos a tener en consideración
+- Crear el par de claves EC2 `terraform-key` y copiar `terraform-key.pem` a la subcarpeta `private-key/` antes de comenzar.
+- El provisioner requiere conectividad SSH — la instancia necesita tener el puerto 22 abierto en su Security Group.
+- Si el servidor tarda en iniciar, agregar un `sleep` al comienzo del bloque `inline` para esperar que esté listo.
+
+---
+
+## 00 - Prerequisitos
+- Crear el par de claves EC2 con el nombre `terraform-key` y copiar el archivo `terraform-key.pem` en la subcarpeta `private-key` del directorio `terraform-manifests`.
+- El bloque de conexión para provisioners usa estas credenciales para conectarse a la instancia EC2 recién creada.
+
+## 01 - Introducción
 - Entender sobre **remote-exec** Provisioner
-- El `remote-exec` provisioner invoca un script en un remote resource despues que el recurso se creo.
-- Esto puede usarse para correr un configuration management tool, 
-- invokes a script on a remote resource after it is created. 
-- This can be used to run a configuration management tool.
+- El `remote-exec` provisioner invoca comandos en un recurso remoto después de que el recurso fue creado.
+- Puede usarse para correr herramientas de configuration management o ejecutar scripts de bootstrap.
 
 ## 02 - Crear / Revisar Provisioner configuration
 1. Copiar el archivo `file-copy.html` usando `File Provisioner` al directorio "/tmp"
@@ -67,3 +76,6 @@ rm -rf .terraform*
 rm -rf terraform.tfstate*
 ```
 
+---
+
+Continuar con [08-03 — local-exec Provisioner](../08-03-local-exec-provisioner/README.md)

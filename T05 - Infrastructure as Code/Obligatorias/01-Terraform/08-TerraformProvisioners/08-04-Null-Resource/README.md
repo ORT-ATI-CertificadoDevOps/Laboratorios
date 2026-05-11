@@ -1,18 +1,39 @@
 # Terraform Null Resource
 
+> **Tiempo estimado:** 30 minutos
+
+El `null_resource` no crea infraestructura real — es un contenedor para provisioners que necesitan ejecutarse de forma independiente o en respuesta a triggers. Es ideal para sincronizar contenido estático a un servidor, ejecutar scripts de post-deploy, o cualquier tarea que no corresponde al ciclo de vida de un recurso concreto. El campo `triggers` permite forzar la re-ejecución cuando cambia algún valor (como un `timestamp()` para ejecutar siempre).
+
+> **Nota:** Desde Terraform 1.4, el recurso built-in `terraform_data` reemplaza a `null_resource` sin necesitar el provider `null`. Si empezás un proyecto nuevo, preferir `terraform_data`.
+
+### Puntos a tener en consideración
+- Crear el par de claves EC2 `terraform-key` y copiar `terraform-key.pem` a la subcarpeta `private-key/` antes de comenzar.
+- El `time_sleep` resource permite agregar una espera explícita para que el servidor esté listo antes de ejecutar los provisioners.
+- El trigger `timestamp()` hace que el `null_resource` se re-ejecute en **cada** `terraform apply` — úsarlo conscientemente.
+
+---
+
 ## 01 - Introducción
 - Entender sobre [Null Provider](https://registry.terraform.io/providers/hashicorp/null/latest/docs)
-- Entender sobre  [Null Resource](https://www.terraform.io/docs/language/resources/provisioners/null_resource.html)
-- Entender sobre  [Time Provider](https://registry.terraform.io/providers/hashicorp/time/latest/docs)
-- **Caso de uso:** Forzar un recurso a que se actualize basado en un null_resource
+- Entender sobre [Null Resource](https://developer.hashicorp.com/terraform/language/resources/provisioners/null_resource)
+- Entender sobre [Time Provider](https://registry.terraform.io/providers/hashicorp/time/latest/docs)
+- **Caso de uso:** Forzar un recurso a que se actualice basado en un `null_resource`
 - Crear `time_sleep` resource para esperar 90 segundos luego que la instancia EC2 fue creada.
-- Crear null resource con los proovisioners requeridos
-  - Provisioner: copiar apps/app1 a /tmp
+- Crear null resource con los provisioners requeridos
+  - File Provisioner: copiar apps/app1 a /tmp
   - Remote Exec Provisioner: Copiar app1 desde /tmp a /var/www/html
 - Durante todo el proceso vamos a aprender
-  - null_resource
-  - time_sleep resource
-  - También aprenderemos a forzar un recurso para actualizarse en base a cambios en un null_resource usando `timestamp function` y `triggers` en `null_resource`
+  - `null_resource` y `time_sleep resource`
+  - Cómo funciona el trigger basado en la función `timestamp()`
+
+> **Alternativa moderna (Terraform 1.4+):** `terraform_data` es un recurso built-in que reemplaza a `null_resource` sin necesitar el provider `null`. Tiene el mismo comportamiento pero con sintaxis actualizada: usa `triggers_replace` en lugar de `triggers`.
+>
+> ```hcl
+> resource "terraform_data" "sync_app1_static" {
+>   triggers_replace = timestamp()
+>   # ... mismos provisioners que en null_resource
+> }
+> ```
 
 
 ## 02 - Definir null provider en Terraform Settings Block
@@ -160,3 +181,9 @@ rm -rf terraform.tfstate*
 ## Referencias
 - [Resource: time_sleep](https://registry.terraform.io/providers/hashicorp/time/latest/docs/resources/sleep)
 - [Time Provider](https://registry.terraform.io/providers/hashicorp/time/latest/docs)
+- [Null Resource](https://developer.hashicorp.com/terraform/language/resources/provisioners/null_resource)
+- [terraform_data (reemplazo moderno)](https://developer.hashicorp.com/terraform/language/resources/terraform-data)
+
+---
+
+Continuar con [09-01 — Terraform Module Basics](../../09-TerraformModules/09-01-Terraform-Modules-Basics/README.md)

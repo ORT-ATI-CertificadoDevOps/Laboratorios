@@ -1,5 +1,16 @@
 # Terraform Remote State Storage & Locking
 
+> **Tiempo estimado:** 35 minutos
+
+Por defecto, Terraform guarda el state localmente en `terraform.tfstate`. Esto funciona para trabajo individual, pero en equipos o pipelines CI/CD genera dos problemas críticos: conflictos cuando dos personas aplican cambios simultáneamente, y pérdida del state si la máquina local falla. La solución es almacenar el state en S3 con versionado y usar DynamoDB para bloqueo (locking), garantizando que solo una ejecución modifique el state a la vez.
+
+### Puntos a tener en consideración
+- El nombre del S3 bucket debe ser **único globalmente** en AWS.
+- Habilitar el versionado del bucket permite recuperar versiones anteriores del state ante errores.
+- El locking via DynamoDB requiere una tabla con partition key `LockID` de tipo String.
+
+---
+
 ## 01 - Introducción
 - Entender sobre Terraform Backends
 - Entender sobre Remote State Storage y sus ventajas
@@ -167,3 +178,7 @@ rm -rf terraform.tfstate*  # This step not needed as e are using remote state st
 - [Terraform State Storage](https://www.terraform.io/docs/language/state/backends.html)
 - [Terraform State Locking](https://www.terraform.io/docs/language/state/locking.html)
 - [Remote Backends - Enhanced](https://www.terraform.io/docs/language/settings/backends/remote.html)
+
+---
+
+Continuar con [06-02 — Terraform State Commands](../06-02-TerraformStateCommands/README.md)

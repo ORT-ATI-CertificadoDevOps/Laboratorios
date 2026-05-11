@@ -1,4 +1,15 @@
-# Terraform Provisioners
+# Terraform Provisioners — File Provisioner
+
+> **Tiempo estimado:** 30 minutos
+
+Los Provisioners son el mecanismo de escape de Terraform: cuando un recurso necesita configuración adicional después de su creación (copiar archivos, ejecutar scripts), se usan provisioners. Son el **último recurso** — preferir `user_data`, `cloud-init` o herramientas de configuration management (Ansible, Chef) cuando sea posible, ya que los provisioners no son idempotentes y pueden dejar recursos en estado inconsistente si fallan.
+
+### Puntos a tener en consideración
+- Crear el par de claves EC2 `terraform-key` y copiar `terraform-key.pem` a la subcarpeta `private-key/` antes de comenzar.
+- Los provisioners de creación solo se ejecutan **una vez** al crear el recurso — no al actualizarlo.
+- Si un provisioner falla, el recurso queda marcado como `tainted` y será destruido y recreado en el próximo `terraform apply`.
+
+---
 
 ## 00 - Conceptos sobre Provisioners
 - Generic Provisioners
@@ -196,8 +207,8 @@ rm -rf terraform.tfstate*
 ## 07 - Destroy Time Provisioners
 - Discutir sobre el concepto
 - [Destroy Time Provisioners](https://www.terraform.io/docs/language/resources/provisioners/syntax.html#destroy-time-provisioners)
-- Dentro de un provisioner cuando agrega esta declaración `when    = destroy` proporcionará esto durante el tiempo de destrucción de recursos
-```t
+- Dentro de un provisioner, agregar `when = destroy` hace que se ejecute durante la destrucción del recurso (en lugar de durante la creación).
+```hcl
 resource "aws_instance" "web" {
   # ...
 
@@ -207,3 +218,7 @@ resource "aws_instance" "web" {
   }
 }
 ```
+
+---
+
+Continuar con [08-02 — remote-exec Provisioner](../08-02-remote-exec-provisioner/README.md)

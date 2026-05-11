@@ -1,7 +1,18 @@
 # Terraform Resource Meta-Argument lifecycle
 
+> **Tiempo estimado:** 30 minutos
+
+El bloque `lifecycle` cambia el comportamiento por defecto de Terraform al actualizar o destruir recursos. Es esencial para evitar downtime en producción (`create_before_destroy`), proteger recursos críticos contra eliminación accidental (`prevent_destroy`), o permitir cambios manuales en la nube sin que Terraform los revierta (`ignore_changes`).
+
+### Puntos a tener en consideración
+- `create_before_destroy`: útil cuando el recurso tiene dependencias que deben resolverse antes de destruir la versión anterior.
+- `prevent_destroy`: protege el recurso mientras está en el código — si se elimina el bloque completo, la protección desaparece.
+- `ignore_changes`: listar solo los atributos específicos a ignorar, no usar `all` salvo casos muy justificados.
+
+---
+
 ## 01 - Introducción
-- lifecyle Meta-Argument block contiene 3 argumentos
+- El bloque `lifecycle` contiene 3 argumentos
   - create_before_destroy
   - prevent_destroy
   - ignore_changes
@@ -215,4 +226,8 @@ rm -rf terraform.tfstate*
 ```
 
 ## Referencias
-- [Resource Meat-Argument: Lifecycle](https://www.terraform.io/docs/language/meta-arguments/lifecycle.html)
+- [Resource Meta-Argument: Lifecycle](https://www.terraform.io/docs/language/meta-arguments/lifecycle.html)
+
+---
+
+Continuar con [04-01 — Terraform Input Variables](../../04-TerraformVariables/04-01-TerraformInputVariables/README.md)

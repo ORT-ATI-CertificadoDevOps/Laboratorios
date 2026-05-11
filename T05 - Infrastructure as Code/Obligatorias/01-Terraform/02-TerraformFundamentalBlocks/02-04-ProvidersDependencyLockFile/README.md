@@ -1,7 +1,18 @@
 # Providers - Dependency Lock File
 
+> **Tiempo estimado:** 20 minutos
+
+El archivo `.terraform.lock.hcl` registra las versiones exactas y los hashes de los providers descargados. Esto garantiza que un `terraform init` en otra máquina o en CI/CD instale exactamente las mismas versiones, sin importar que hayan salido versiones nuevas del provider. En este laboratorio experimentamos qué pasa cuando se actualiza un provider mayor y cómo el lock file protege la configuración.
+
+### Puntos a tener en consideración
+- El archivo `.terraform.lock.hcl` **debe** commitearse al repositorio Git.
+- Para actualizar versiones intencionalmente se usa `terraform init -upgrade`.
+- Las actualizaciones de versiones mayores pueden romper recursos existentes — siempre probar en ambientes inferiores primero.
+
+---
+
 ## 01 - Introducción
-- Entender la importancia de Dependency Lock File que aparece a partir de la versión de Terraforn 0.14.
+- Entender la importancia de Dependency Lock File que aparece a partir de la versión de Terraform 0.14.
 
 ## 02 - Revisar los Terraforn Manifests
 - Ver que la información en los archivos de la carpeta [terraform-manifest](https://github.com/ORT-ATI-CertificadoDevOps/Laboratorios/tree/main/T05%20-%20Infrastructure%20as%20Code/Obligatorias/01-Terraform/02-TerraformFundamentalBlocks/02-03-MultipleProviderConfigurations/terraform-manifests) y validar en que difieren de los ejercicios anteriores. 
@@ -91,3 +102,7 @@ rm -rf terraform.tfstate*
 - [Dependency Lock File](https://www.terraform.io/docs/configuration/dependency-lock.html)
 - [Terraform New Features in v0.14](https://learn.hashicorp.com/tutorials/terraform/provider-versioning?in=terraform/0-14)
 - [AWS S3 Bucket Region - Read Only in AWS Provider V3.x](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/guides/version-3-upgrade#region-attribute-is-now-read-only)
+
+---
+
+Continuar con [03-01 — Resource Syntax & Behavior](../../03-TerraformResources/03-01-ResourceSyntaxAndBehavior/README.md)

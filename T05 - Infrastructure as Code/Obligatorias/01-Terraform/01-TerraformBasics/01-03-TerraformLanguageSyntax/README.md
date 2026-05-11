@@ -1,5 +1,16 @@
 # Terraform Configuration Language Syntax
 
+> **Tiempo estimado:** 15 minutos
+
+La configuración de Terraform se escribe en HCL (HashiCorp Configuration Language), un lenguaje declarativo diseñado específicamente para describir infraestructura. En este laboratorio exploramos la sintaxis fundamental del lenguaje: bloques, argumentos, atributos, identificadores y comentarios. Estos conceptos son la base de toda configuración Terraform, sin importar qué recursos se estén creando.
+
+### Puntos a tener en consideración
+- HCL es **declarativo**: describís el estado deseado, no los pasos para llegar a él.
+- Los archivos de configuración Terraform tienen extensión `.tf`.
+- El comando `terraform fmt` formatea automáticamente los archivos siguiendo las convenciones del lenguaje.
+
+---
+
 ## 01 - Introducción
 - Entender Terraform Language Basics
   - Entender Blocks
@@ -17,7 +28,7 @@
 - [Terraform Configuration](https://www.terraform.io/docs/configuration/index.html)
 - [Terraform Configuration Syntax](https://www.terraform.io/docs/configuration/syntax.html)
 
-```
+```hcl
 # Template
 <BLOCK TYPE> "<BLOCK LABEL>" "<BLOCK LABEL>"   {
   # Block body
@@ -52,3 +63,12 @@ resource "aws_instance" "ec2demo" { # BLOCK
   - Data Sources Block
   - Modules Block
 
+Cada uno de estos bloques se verá en detalle en los laboratorios siguientes. La idea aquí es familiarizarse con qué tipos de bloques existen antes de usarlos.
+
+## Referencias
+- [Terraform Configuration](https://www.terraform.io/docs/configuration/index.html)
+- [Terraform Configuration Syntax](https://www.terraform.io/docs/configuration/syntax.html)
+
+---
+
+Continuar con [02-01 — Terraform Block](../../02-TerraformFundamentalBlocks/02-01-Block/README.md)

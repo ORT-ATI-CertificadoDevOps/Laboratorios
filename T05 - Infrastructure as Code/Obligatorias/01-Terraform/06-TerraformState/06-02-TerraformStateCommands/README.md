@@ -1,15 +1,24 @@
 # Terraform State Commands
 
-## 01  Introducción
+> **Tiempo estimado:** 45 minutos
+
+Los comandos de Terraform State permiten inspeccionar, mover y manipular el state file de la infraestructura. Son herramientas avanzadas para situaciones especiales: renombrar recursos sin recrearlos, remover recursos del state sin destruirlos, recuperar el state ante un lock bloqueado, o forzar la recreación de un recurso específico. Este laboratorio cubre los comandos más relevantes con casos de uso reales.
+
+### Puntos a tener en consideración
+- Algunos de estos comandos (`state mv`, `state rm`) son **irreversibles** sin backup. Terraform crea automáticamente un backup antes de cada operación, verificar que existe antes de continuar.
+- `terraform taint` fue **deprecado en Terraform 1.2**. Usar `terraform apply -replace="<recurso>"` en su lugar.
+- Requiere el S3 bucket y DynamoDB table del laboratorio anterior (06-01) configurados.
+
+---
+
+## 01 - Introducción
 - Terraform Commands
   - terraform show
   - terraform refresh
   - terraform plan
   - terraform state
-  - terraform force-unlock   
-  - terraform taint
-  - terraform untaint
-  - terraform apply target command  
+  - terraform force-unlock
+  - terraform apply -replace (reemplazo de terraform taint)
 
 ## Prerequisitos: c1-versions.tf
 - Actualizar el backend block con tu nombre de bucket s3, key y region
@@ -17,11 +26,11 @@
 ```t
 # Terraform Block
 terraform {
-  required_version = "~> 0.14" # which means any version equal & above 0.14 like 0.15, 0.16 etc and < 1.xx
+  required_version = "~> 1.0"
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 3.0"
+      version = "~> 5.0"
     }
   }
   # Adding Backend as S3 for Remote State Storage
@@ -276,37 +285,25 @@ terraform state push
 terraform force-unlock LOCK_ID
 ```
 
-## Step-07: Terraform taint & untaint commands
+## Step-07: Forzar recreación de recursos — terraform apply -replace
+
 - Este comando viene de **Terraform Forcing Re-creation of Resources**
-- Cuando se modifica una declaración de recurso, Terraform generalmente intenta actualizar el recurso existente en su lugar (aunque algunos cambios pueden requerir destrucción y recreación, generalmente debido a limitaciones de API).
-- **Ejemplo:** Es posible que una máquina virtual que se configura con cloud-init al inicio ya no satisfaga sus necesidades si cambia la configuración de cloud-init.
-- **terraform taint:** El comando `terraform taint` marca manualmente un recurso administrado por Terraform como contaminado/defectuoso/innecesario, lo que obliga a ser destruido y recreado en la siguiente aplicación.
-- **terraform untaint:** 
-  - El comando terraform untaint desmarca manualmente un recurso administrado por Terraform como contaminado/defectuoso/innecesario, restaurándolo como la instancia principal en el state.
-  - Esto revierte una alteración de terraformación manual o el resultado de que los aprovisionadores fallan en un recurso.
-  - Este comando no modificará la infraestructura, pero modificará el archivo de state para desmarcar un recurso como contaminado/defectuoso/innecesario.
+- Cuando se modifica una declaración de recurso, Terraform generalmente intenta actualizar el recurso existente en su lugar (aunque algunos cambios pueden requerir destrucción y recreación).
+- **Ejemplo:** Una instancia EC2 configurada con `user_data` al inicio ya no refleja los cambios si se modifica ese script — hay que recrearla.
+- **`terraform apply -replace`:** Fuerza la destrucción y recreación de un recurso específico en el próximo apply. Es el reemplazo moderno de `terraform taint` (deprecado desde Terraform 1.2).
+
 ```t
-# List Resources from state
+# Listar recursos en el state
 terraform state list
 
-# Taint a Resource
-terraform taint <RESOURCE_NAME_IN_TERRAFORM_LOCALLY>
-terraform taint aws_instance.my-ec2-vm-new
+# Forzar recreación de un recurso
+terraform apply -replace="aws_instance.my-ec2-vm-new"
 
-# Terraform Plan
-terraform plan
-Observation: 
-Message: "-/+ destroy and then create replacement"
-
-# Untaint a Resource
-terraform untaint <RESOURCE_NAME_IN_TERRAFORM_LOCALLY>
-terraform untaint aws_instance.my-ec2-vm-new
-
-# Terraform Plan
-terraform plan
-Observation: 
-Message: "No changes. Infrastructure is up-to-date."
+# También se puede combinar con -target para solo afectar ese recurso
+terraform plan -replace="aws_instance.my-ec2-vm-new"
 ```
+
+> ⚠️ `terraform taint` y `terraform untaint` fueron **deprecados en Terraform 1.2** y eliminados en versiones posteriores. Usar siempre `terraform apply -replace="<recurso>"` en su lugar.
 
 
 ## 08 - Terraform Resource Targeting - Plan, Apply (-target) Option
@@ -355,7 +352,7 @@ terraform apply -target=aws_instance.my-ec2-vm-new
 
 ## 09 - Terraform Destroy & Clean-Up
 ```t
-# Destory Resources
+# Destroy Resources
 terraform destroy -auto-approve
 
 # Clean-Up Files
@@ -363,12 +360,16 @@ rm -rf .terraform*
 rm -rf v1plan.out
 ```
 
-Referencias
-- [Terraform State Command](https://www.terraform.io/docs/cli/commands/state/index.html)
-- [Terraform Inspect State](https://www.terraform.io/docs/cli/state/inspect.html)
-- [Terraform Moving Resources](https://www.terraform.io/docs/cli/state/move.html)
-- [Terraform Disaster Recovery](https://www.terraform.io/docs/cli/state/recover.html)
-- [Terraform Taint](https://www.terraform.io/docs/cli/state/taint.html)
-- [Terraform State](https://www.terraform.io/docs/language/state/index.html)
-- [Manipulating Terraform State](https://www.terraform.io/docs/cli/state/index.html)
+## Referencias
+- [Terraform State Command](https://developer.hashicorp.com/terraform/cli/commands/state)
+- [Terraform Inspect State](https://developer.hashicorp.com/terraform/cli/state/inspect)
+- [Terraform Moving Resources](https://developer.hashicorp.com/terraform/cli/state/move)
+- [Terraform Disaster Recovery](https://developer.hashicorp.com/terraform/cli/state/recover)
+- [Terraform Taint](https://developer.hashicorp.com/terraform/cli/commands/apply#replace-address)
+- [Terraform State](https://developer.hashicorp.com/terraform/language/state)
+- [Manipulating Terraform State](https://developer.hashicorp.com/terraform/cli/state)
 - [Additional Reference](https://www.hashicorp.com/blog/detecting-and-managing-drift-with-terraform)
+
+---
+
+Continuar con [07 — Terraform Workspaces](../../07-TerraformWorkspaces/README.md)

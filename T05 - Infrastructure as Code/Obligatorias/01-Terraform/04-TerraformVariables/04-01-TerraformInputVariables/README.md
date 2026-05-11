@@ -1,5 +1,16 @@
 # Terraform Input Variables
 
+> **Tiempo estimado:** 60 minutos
+
+Las Input Variables parametrizan la configuración de Terraform, permitiendo que el mismo código se despliegue en distintos ambientes (dev, qa, prod) sin modificar los archivos `.tf`. Este laboratorio cubre las múltiples formas de definir y pasar variables — desde valores por defecto hasta archivos `.tfvars`, variables de entorno y tipos complejos como listas y maps.
+
+### Puntos a tener en consideración
+- Las variables sensibles (passwords, keys) nunca deben tener `default` en el código — pasarlas por `secrets.tfvars` o variables de entorno.
+- El orden de precedencia es importante: CLI `-var` > `*.auto.tfvars` > `terraform.tfvars` > variables de entorno > default.
+- Crear el par de claves `terraform-key` en AWS antes de comenzar (requerido por todos los templates v1 a v11).
+
+---
+
 ## 00 - Introducción
 - **v1:** Input Variables - Basics
 - **v2:** Provide Input Variables when prompted during terraform plan or apply
@@ -414,6 +425,10 @@ terraform destroy -auto-approve
 - [Resource: AWS EC2 Instance](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance)
 - [Resource: AWS Security Group](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group)
 - [Sensitive Variables - Additional Reference](https://learn.hashicorp.com/tutorials/terraform/sensitive-variables)
+
+---
+
+Continuar con [04-02 — Terraform Output Values](../04-02-TerraformOutputValues/README.md)
 
 
 
