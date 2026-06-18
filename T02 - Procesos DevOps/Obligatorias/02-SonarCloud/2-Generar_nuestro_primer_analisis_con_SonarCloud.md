@@ -19,7 +19,7 @@ Ya con todo configurado en el ambiente, es hora de ensuciarnos las manos 💪. E
 
 1. Descarga el archivo:
 
-<a href="Extras/lab-sonarqube.zip" download>
+<a href="/Extras/lab-sonarqube.zip" download>
   <span>lab-sonarqube.zip</span>
   <img src="/Extras/Imagenes/zip.png" style="vertical-align: middle; margin-left: 5px;width: 30px;height: 30px;">
 </a>

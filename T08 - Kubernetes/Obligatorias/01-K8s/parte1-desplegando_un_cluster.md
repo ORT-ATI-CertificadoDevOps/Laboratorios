@@ -1,5 +1,7 @@
 ## Kubernetes - Parte 1
 
+> **Scope del lab:** Este lab está diseñado para **AWS Academy Learner Labs**. El rol `LabRole` ya está preconfigurado con los permisos necesarios para EKS, EC2 y VPC. No se requiere crear roles IAM ni configurar credenciales adicionales.
+
 ### Instalar cliente kubectl
 
 

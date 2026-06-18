@@ -5,45 +5,54 @@
 - Vamos a crear los ECS task definitions y services para ambas aplicaciones aprovechando el balanceador de carga de una sola aplicación y haciendo enrutamiento basado en URI.
 - Implementaremos autoscaling para ECS tasks.
 
-## 02: Pre-requisite - Create Docker Images required
-### Build two container images with their context paths as /app1 and /app2.
-- nginxapp1 - /app1
-- nginxapp2 - /app2
+## 02: Pre-requisite - Construir las imágenes Docker
 
+Construir dos imágenes con los contextos `/app1` y `/app2`. Los Dockerfiles y el contenido estático están en las carpetas `Application-1/` y `Application-2/`.
+
+Definir la URL del registry ECR (se obtiene desde la consola de ECR):
+
+```bash
+ECR_REGISTRY=<account-id>.dkr.ecr.us-east-1.amazonaws.com
 ```
-cd ../Application-1
-docker build -t <replace-with-your-docker-registry-id> || <ecr-registry-aws>/nginxapp1 .
-docker build -t <replace-with-your-docker-registry-id> ||<ecr-registry-aws>/nginxapp1 .
+
+Autenticarse en ECR:
+
+```bash
+aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $ECR_REGISTRY
+```
+
+### Build
+
+```bash
+cd Application-1
+docker build -t $ECR_REGISTRY/nginxapp1:latest .
 
 cd ../Application-2
-docker build -t <replace-with-your-docker-registry-id> ||<ecr-registry-aws>/nginxapp2 .
-docker build -t <replace-with-your-docker-registry-id> ||<ecr-registry-aws>/nginxapp2 .
-```    
-### Run the docker images and test those containers locally  
+docker build -t $ECR_REGISTRY/nginxapp2:latest .
+```
+
+### Probar localmente
+
 - **App1:** http://localhost:81/app1
 - **App2:** http://localhost:82/app2
-```
-docker run --name nginxapp1 -p 81:80 --rm -d <replace-with-your-docker-registry-id> ||<ecr-registry-aws>/nginxapp1
-docker run --name nginxapp2 -p 82:80 --rm -d <replace-with-your-docker-registry-id> ||<ecr-registry-aws>/nginxapp2
 
-docker run --name nginxapp1 -p 81:80 --rm -d <replace-with-your-docker-hub-id> || <ecr-registry-aws>/nginxapp1
-docker run --name nginxapp2 -p 82:80 --rm -d <replace-with-your-docker-hub-id> || <ecr-registry-aws>/nginxapp2
+```bash
+docker run --name nginxapp1 -p 81:80 --rm -d $ECR_REGISTRY/nginxapp1:latest
+docker run --name nginxapp2 -p 82:80 --rm -d $ECR_REGISTRY/nginxapp2:latest
 ```
-### Stop the docker containers
-```
-docker ps
+
+### Detener los contenedores
+
+```bash
 docker stop nginxapp1
 docker stop nginxapp2
-docker ps -a
-```    
-### Push these two containers to your Docker Hub Repository
 ```
-docker images
-docker push <replace-with-your-docker-registry-id> || <ecr-registry-aws>/nginxapp1
-docker push <replace-with-your-docker-registry-id> ||<ecr-registry-aws>/nginxapp2
 
-docker push <replace-with-your-docker-hub-id> ||<ecr-registry-aws>/nginxapp1
-docker push <replace-with-your-docker-hub-id> ||<ecr-registry-aws>/nginxapp2
+### Push a ECR
+
+```bash
+docker push $ECR_REGISTRY/nginxapp1:latest
+docker push $ECR_REGISTRY/nginxapp2:latest
 ```
 
 ## 03: Create Application Load Balancer

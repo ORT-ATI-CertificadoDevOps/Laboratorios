@@ -35,15 +35,15 @@ Bienvenidos al repositorio oficial de laboratorios. Encontrarán prácticos **ob
     <h3>Infrastructure as Code</h3>
     <p>Terraform y Ansible para gestión declarativa de infraestructura</p>
   </a>
-  <a class="module-card" href="#/T06 - Containers/index">
+  <a class="module-card" href="#/T06 - DevSecOps/index">
     <div class="card-tag">T06</div>
-    <h3>Containers</h3>
-    <p>Docker, imágenes, volúmenes y composición de servicios</p>
-  </a>
-  <a class="module-card" href="#/T07 - DevSecOps/index">
-    <div class="card-tag">T07</div>
     <h3>DevSecOps</h3>
     <p>Seguridad integrada en el pipeline de CI/CD</p>
+  </a>
+  <a class="module-card" href="#/T07 - Containers/index">
+    <div class="card-tag">T07</div>
+    <h3>Containers</h3>
+    <p>Docker, imágenes, volúmenes y composición de servicios</p>
   </a>
   <a class="module-card" href="#/T08 - Kubernetes/index">
     <div class="card-tag">T08</div>
@@ -55,14 +55,14 @@ Bienvenidos al repositorio oficial de laboratorios. Encontrarán prácticos **ob
     <h3>Serverless</h3>
     <p>AWS Lambda, API Gateway, triggers por eventos y despliegue con SAM</p>
   </a>
-  <a class="module-card" href="#/T10 - Arquitectura y Microservicios/index">
+  <a class="module-card" href="#/T10 - Observabilidad/index">
     <div class="card-tag">T10</div>
-    <h3>Arquitectura y Microservicios</h3>
-    <p>Patrones de diseño distribuido y descomposición de servicios</p>
-  </a>
-  <a class="module-card" href="#/T11 - Observabilidad/index">
-    <div class="card-tag">T11</div>
     <h3>Observabilidad</h3>
     <p>Métricas, logs, trazas y alertas en producción</p>
+  </a>
+  <a class="module-card" href="#/T11 - Arquitectura y Microservicios/index">
+    <div class="card-tag">T11</div>
+    <h3>Arquitectura y Microservicios</h3>
+    <p>Patrones de diseño distribuido y descomposición de servicios</p>
   </a>
 </div>

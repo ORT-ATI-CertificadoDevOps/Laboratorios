@@ -217,7 +217,7 @@ curl -X POST http://localhost:9093/api/v2/silences \
 | Revisar y depurar alertas regularmente | Las alertas que nadie atiende se vuelven ruido de fondo |
 | `group_wait` y `group_interval` | Agrupar alertas relacionadas evita inundar el canal de Slack |
 
-## 4.6 Resumen del módulo T11
+## 4.6 Resumen del módulo T10
 
 ```
 CloudWatch    → observabilidad nativa AWS (métricas, logs, alarmas, dashboards)

@@ -2,6 +2,6 @@
 
 ## Obligatorias
 
-- [01-ECS](/T06%20-%20Containers/Obligatorias/01-ECS/01-Conceptos/Readme.md)
+- [01-ECS](/T07%20-%20Containers/Obligatorias/01-ECS/01-Conceptos/Readme.md)
 
 ## Recomendadas

@@ -1,4 +1,4 @@
-# T11 Observabilidad — Recomendadas
+# T10 Observabilidad — Recomendadas
 
 ## ELK Stack / OpenSearch
 
