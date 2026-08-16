@@ -1,4 +1,4 @@
-# T06 - DevSecOps
+# T09 - DevSecOps
 
 DevSecOps integra la seguridad en cada etapa del ciclo de vida del software — no como un control final, sino como parte del pipeline desde el primer commit.
 
@@ -6,14 +6,14 @@ Este módulo cubre las herramientas y prácticas que permiten detectar vulnerabi
 
 ## Obligatorias
 
-- [01-SAST: Análisis estático de código](/T06%20-%20DevSecOps/Obligatorias/01-SAST/1-Introduccion-SAST.md)
-- [02-Secret Scanning: Gitleaks](/T06%20-%20DevSecOps/Obligatorias/02-SecretScanning/1-Gitleaks.md)
-- [03-Container Scanning: Trivy](/T06%20-%20DevSecOps/Obligatorias/03-ContainerScanning/1-Trivy.md)
-- [04-Dependency Scanning: Dependabot](/T06%20-%20DevSecOps/Obligatorias/04-DependencyScanning/1-Dependabot.md)
-- [05-IaC Security: Checkov](/T06%20-%20DevSecOps/Obligatorias/05-IaCSecurity/1-Checkov.md)
-- [06-DAST: OWASP ZAP](/T06%20-%20DevSecOps/Obligatorias/06-DAST/1-OWASP-ZAP.md)
-- [07-Secrets Management: AWS Secrets Manager](/T06%20-%20DevSecOps/Obligatorias/07-SecretsManagement/1-AWS-Secrets-Manager.md)
+- [01-SAST: Análisis estático de código](/T09%20-%20DevSecOps/Obligatorias/01-SAST/1-Introduccion-SAST.md)
+- [02-Secret Scanning: Gitleaks](/T09%20-%20DevSecOps/Obligatorias/02-SecretScanning/1-Gitleaks.md)
+- [03-Container Scanning: Trivy](/T09%20-%20DevSecOps/Obligatorias/03-ContainerScanning/1-Trivy.md)
+- [04-Dependency Scanning: Dependabot](/T09%20-%20DevSecOps/Obligatorias/04-DependencyScanning/1-Dependabot.md)
+- [05-IaC Security: Checkov](/T09%20-%20DevSecOps/Obligatorias/05-IaCSecurity/1-Checkov.md)
+- [06-DAST: OWASP ZAP](/T09%20-%20DevSecOps/Obligatorias/06-DAST/1-OWASP-ZAP.md)
+- [07-Secrets Management: AWS Secrets Manager](/T09%20-%20DevSecOps/Obligatorias/07-SecretsManagement/1-AWS-Secrets-Manager.md)
 
 ## Recomendadas
 
-- [Exploración autónoma: GuardDuty, Security Hub, Vault, OPA](/T06%20-%20DevSecOps/Recomendadas/index.md)
+- [Exploración autónoma: GuardDuty, Security Hub, Vault, OPA](/T09%20-%20DevSecOps/Recomendadas/index.md)

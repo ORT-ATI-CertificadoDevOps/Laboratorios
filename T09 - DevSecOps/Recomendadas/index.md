@@ -1,4 +1,4 @@
-# T06 DevSecOps — Recomendadas
+# T09 DevSecOps — Recomendadas
 
 Temas para exploración autónoma que complementan el módulo obligatorio.
 

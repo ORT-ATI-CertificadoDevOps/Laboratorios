@@ -35,25 +35,25 @@ Bienvenidos al repositorio oficial de laboratorios. Encontrarán prácticos **ob
     <h3>Infrastructure as Code</h3>
     <p>Terraform y Ansible para gestión declarativa de infraestructura</p>
   </a>
-  <a class="module-card" href="#/T06 - DevSecOps/index">
+  <a class="module-card" href="#/T06 - Containers/index">
     <div class="card-tag">T06</div>
-    <h3>DevSecOps</h3>
-    <p>Seguridad integrada en el pipeline de CI/CD</p>
-  </a>
-  <a class="module-card" href="#/T07 - Containers/index">
-    <div class="card-tag">T07</div>
     <h3>Containers</h3>
     <p>Docker, imágenes, volúmenes y composición de servicios</p>
   </a>
-  <a class="module-card" href="#/T08 - Kubernetes/index">
-    <div class="card-tag">T08</div>
+  <a class="module-card" href="#/T07 - Kubernetes/index">
+    <div class="card-tag">T07</div>
     <h3>Kubernetes</h3>
     <p>Orquestación de contenedores, deployments y gestión de clústeres</p>
   </a>
-  <a class="module-card" href="#/T09 - Serverless/index">
-    <div class="card-tag">T09</div>
+  <a class="module-card" href="#/T08 - Serverless/index">
+    <div class="card-tag">T08</div>
     <h3>Serverless</h3>
     <p>AWS Lambda, API Gateway, triggers por eventos y despliegue con SAM</p>
+  </a>
+  <a class="module-card" href="#/T09 - DevSecOps/index">
+    <div class="card-tag">T09</div>
+    <h3>DevSecOps</h3>
+    <p>Seguridad integrada en el pipeline de CI/CD</p>
   </a>
   <a class="module-card" href="#/T10 - Observabilidad/index">
     <div class="card-tag">T10</div>

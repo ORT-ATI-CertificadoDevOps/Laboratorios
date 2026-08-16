@@ -1,4 +1,4 @@
-# T09 - Serverless
+# T08 - Serverless
 
 El modelo serverless elimina la gestión de servidores: no hay EC2 que provisionar, no hay OS que parchear, no hay capacidad que planificar. El código corre en funciones que se invocan bajo demanda y escalan automáticamente a cero cuando no hay tráfico.
 
@@ -6,12 +6,12 @@ El modelo serverless elimina la gestión de servidores: no hay EC2 que provision
 
 ## Obligatorias
 
-- [01-Lambda: Primera función](/T09%20-%20Serverless/Obligatorias/01-Lambda/1-Primera-Funcion-Lambda.md)
-- [02-Lambda y API Gateway: API REST serverless](/T09%20-%20Serverless/Obligatorias/02-Lambda-y-API-Gateway/1-API-REST-Serverless.md)
-- [03-Lambda y Eventos: Triggers desde S3 y SQS](/T09%20-%20Serverless/Obligatorias/03-Lambda-y-Eventos/1-Triggers-y-Eventos.md)
-- [04-SAM: Infrastructure as Code para Serverless](/T09%20-%20Serverless/Obligatorias/04-SAM/1-AWS-SAM.md)
-- [05-Lambda en Pipeline: Deploy automatizado](/T09%20-%20Serverless/Obligatorias/05-Lambda-en-Pipeline/1-Deploy-desde-GitHub-Actions.md)
+- [01-Lambda: Primera función](/T08%20-%20Serverless/Obligatorias/01-Lambda/1-Primera-Funcion-Lambda.md)
+- [02-Lambda y API Gateway: API REST serverless](/T08%20-%20Serverless/Obligatorias/02-Lambda-y-API-Gateway/1-API-REST-Serverless.md)
+- [03-Lambda y Eventos: Triggers desde S3 y SQS](/T08%20-%20Serverless/Obligatorias/03-Lambda-y-Eventos/1-Triggers-y-Eventos.md)
+- [04-SAM: Infrastructure as Code para Serverless](/T08%20-%20Serverless/Obligatorias/04-SAM/1-AWS-SAM.md)
+- [05-Lambda en Pipeline: Deploy automatizado](/T08%20-%20Serverless/Obligatorias/05-Lambda-en-Pipeline/1-Deploy-desde-GitHub-Actions.md)
 
 ## Recomendadas
 
-- [Exploración autónoma: Serverless Framework, Lambda Layers, Step Functions](/T09%20-%20Serverless/Recomendadas/index.md)
+- [Exploración autónoma: Serverless Framework, Lambda Layers, Step Functions](/T08%20-%20Serverless/Recomendadas/index.md)

@@ -40,7 +40,7 @@ Ansible complementa a Terraform: Terraform provisiona la infraestructura (qué r
 
 ## Checkov — IaC Security
 
-Checkov escanea archivos Terraform (y otros formatos de IaC) en busca de malas configuraciones de seguridad: buckets S3 públicos, security groups abiertos, encryption deshabilitada, etc. Está cubierto en el módulo T06-DevSecOps, pero es especialmente relevante practicarlo aquí sobre el código que generaron en estos labs.
+Checkov escanea archivos Terraform (y otros formatos de IaC) en busca de malas configuraciones de seguridad: buckets S3 públicos, security groups abiertos, encryption deshabilitada, etc. Está cubierto en el módulo T09-DevSecOps, pero es especialmente relevante practicarlo aquí sobre el código que generaron en estos labs.
 
 **Para explorar:**
 - `pip install checkov`
