@@ -117,7 +117,7 @@ cat output.json
 
 **Memory:** entre 128 MB y 10 GB. La CPU se escala proporcionalmente a la memoria — aumentar memoria también aumenta CPU y puede hacer la función más rápida aunque no use más RAM.
 
-**Environment variables:** en la pestaña **Configuration → Environment variables**. Usar para configuración que cambia entre entornos (URLs, nombres de recursos). Para secretos, usar Secrets Manager (ver T06).
+**Environment variables:** en la pestaña **Configuration → Environment variables**. Usar para configuración que cambia entre entornos (URLs, nombres de recursos). Para secretos, usar Secrets Manager (ver T09).
 
 ## 1.8 Ver logs en CloudWatch
 

@@ -1,6 +1,6 @@
 # Deploy automatizado de Lambda desde GitHub Actions
 
-Con SAM configurado, el siguiente paso es automatizar el deploy: cada merge a `main` construye la aplicación, corre los tests y la despliega en AWS sin intervención manual. Este pipeline es el equivalente serverless del CD de contenedores visto en T07.
+Con SAM configurado, el siguiente paso es automatizar el deploy: cada merge a `main` construye la aplicación, corre los tests y la despliega en AWS sin intervención manual. Este pipeline es el equivalente serverless del CD de contenedores visto en T06.
 
 ```
 PR → tests → merge a main → sam build → sam deploy → Lambda actualizada
@@ -189,7 +189,7 @@ smoke test contra la API
 
 ---
 
-## Resumen del módulo T09
+## Resumen del módulo T08
 
 | Lab | Concepto clave |
 |-----|----------------|

@@ -202,7 +202,7 @@ Para credenciales de base de datos y API keys que deben rotar: Secrets Manager. 
 
 ---
 
-## Resumen del módulo T06
+## Resumen del módulo T09
 
 ```
 Código        → SAST (SonarCloud)         → vulnerabilidades en código fuente
