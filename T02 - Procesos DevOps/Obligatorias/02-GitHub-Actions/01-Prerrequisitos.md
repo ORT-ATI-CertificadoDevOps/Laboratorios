@@ -50,8 +50,7 @@ Para realizar este laboratorio necesitás:
 
 - Cuenta en [GitHub](https://github.com/)
 - Cuenta en [Docker Hub](https://hub.docker.com/) (gratuita)
-- Cuenta en [SonarCloud](https://sonarcloud.io/) (gratuita con repositorio público)
-- Haber completado los labs **01-Docker** y **02-SonarCloud** de este topic
+- Haber completado el lab **01-Docker** de este topic
 
 ## Próximos pasos
 

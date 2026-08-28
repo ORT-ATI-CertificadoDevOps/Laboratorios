@@ -482,3 +482,7 @@ docker rm mi-portfolio
 ```
 
 > **Próxima fase:** En el laboratorio de GitHub Actions vas a automatizar el deploy del portfolio a GitHub Pages para que quede disponible en internet con cada push a `main`.
+
+## Próximos pasos
+
+Continuar con [02-GitHub-Actions — Prerrequisitos](/T02%20-%20Procesos%20DevOps/Obligatorias/02-GitHub-Actions/01-Prerrequisitos)

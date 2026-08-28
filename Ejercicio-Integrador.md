@@ -1,21 +1,21 @@
 # Ejercicio Integrador — Portfolio DevOps
 
-A lo largo del curso vas a construir y publicar tu propio **portfolio/CV online**. Este portfolio es el hilo conductor del ciclo completo: lo containerizarás con Docker, desplegarás automáticamente con GitHub Actions y analizarás su calidad con SonarCloud.
+A lo largo del curso vas a construir y publicar tu propio **portfolio/CV online**. Este portfolio es el hilo conductor del ciclo completo: lo containerizarás con Docker, desplegarás automáticamente con GitHub Actions, escanearás la imagen con Trivy y analizarás la calidad del código con SonarCloud.
 
 El template base está disponible en:
 `git@github.com:ORT-ATI-CertificadoDevOps/portfolio-template.git`
 
 ---
 
-## Las 4 fases
+## Las 5 fases
 
 | Fase | Herramienta | Qué vas a hacer | Lab |
 |------|-------------|----------------|-----|
 | **1** | Git | Clonar el template, personalizar con tu info, primeros commits | [T01 Git](/T01%20-%20Nivelacion/Obligatorias/02-Git/1-Configuracion-y-commits) |
-| **2** | Docker | Construir y correr el portfolio dentro de un contenedor nginx | [T02 Docker](/T02%20-%20Procesos%20DevOps/Obligatorias/01-Docker/3-Webapp_en_Docker) |
-| **3** | GitHub Actions | Publicar en GitHub Pages con deploy automático en cada push | [T02 GitHub Actions](/T02%20-%20Procesos%20DevOps/Obligatorias/03-GitHub-Actions/04-Pipeline-Completo) |
-| **4** | SonarCloud | Quality gate: el portfolio solo se publica si pasa el análisis | [T02 SonarCloud](/T02%20-%20Procesos%20DevOps/Obligatorias/02-SonarCloud/2-Generar_nuestro_primer_analisis_con_SonarCloud) |
-| **5** | Trivy | Security gate: escanear la imagen Docker en busca de CVEs antes del deploy | [T02 GitHub Actions](/T02%20-%20Procesos%20DevOps/Obligatorias/03-GitHub-Actions/04-Pipeline-Completo) |
+| **2** | Docker | Construir y correr el portfolio dentro de un contenedor nginx | [T02 Docker](/T02%20-%20Procesos%20DevOps/Obligatorias/01-Docker/3-Webapp_en_docker) |
+| **3** | GitHub Actions | Publicar en GitHub Pages con deploy automático en cada push | [T02 GitHub Actions](/T02%20-%20Procesos%20DevOps/Obligatorias/02-GitHub-Actions/03-Pipeline-con-Docker) |
+| **4** | Trivy | Security gate: escanear la imagen Docker en busca de CVEs antes del deploy | [T02 Trivy](/T02%20-%20Procesos%20DevOps/Obligatorias/03-Trivy/2-Scan-en-el-Pipeline) |
+| **5** | SonarCloud | Quality gate: el portfolio solo se publica si pasa el análisis del código | [T02 SonarCloud](/T02%20-%20Procesos%20DevOps/Obligatorias/04-SonarCloud/2-Generar_nuestro_primer_analisis_con_SonarCloud) |
 
 Al final del curso vas a tener un portfolio real, con URL pública, pipeline de CI/CD completo, análisis de calidad y escaneo de seguridad automatizados.
 
@@ -43,7 +43,7 @@ Personalizar los 8 puntos marcados con `<!-- TODO: -->` en `index.html` (nombre,
 
 ## Fase 2 — Docker: Containerizar el portfolio
 
-**Lab:** [T02 Docker — Ejercicio Integrador](/T02%20-%20Procesos%20DevOps/Obligatorias/01-Docker/3-Webapp_en_Docker) (al final del laboratorio)
+**Lab:** [T02 Docker — Ejercicio Integrador](/T02%20-%20Procesos%20DevOps/Obligatorias/01-Docker/3-Webapp_en_docker) (al final del laboratorio)
 
 El template ya incluye un `Dockerfile` que sirve el portfolio con `nginx:alpine`:
 
@@ -64,7 +64,7 @@ docker compose up
 
 ## Fase 3 — GitHub Actions: Deploy automático a GitHub Pages
 
-**Lab:** [T02 GitHub Actions — Ejercicio Integrador](/T02%20-%20Procesos%20DevOps/Obligatorias/03-GitHub-Actions/04-Pipeline-Completo) (al final del laboratorio)
+**Lab:** [T02 GitHub Actions — Ejercicio Integrador](/T02%20-%20Procesos%20DevOps/Obligatorias/02-GitHub-Actions/03-Pipeline-con-Docker) (al final del laboratorio)
 
 Habilitar GitHub Pages en **Settings → Pages → Source: GitHub Actions** y agregar `.github/workflows/deploy.yml`:
 
@@ -106,9 +106,86 @@ Resultado: portfolio disponible en `https://TU_USUARIO.github.io/portfolio-devop
 
 ---
 
-## Fase 4 — SonarCloud: Quality gate
+## Fase 4 — Trivy: Security Gate
 
-**Lab:** [T02 SonarCloud — Ejercicio Integrador](/T02%20-%20Procesos%20DevOps/Obligatorias/02-SonarCloud/2-Generar_nuestro_primer_analisis_con_SonarCloud) (al final del laboratorio)
+**Lab:** [T02 Trivy — Ejercicio Integrador](/T02%20-%20Procesos%20DevOps/Obligatorias/03-Trivy/2-Scan-en-el-Pipeline) (al final del laboratorio)
+
+El portfolio usa `nginx:alpine` como imagen base. Trivy va a escanear esa imagen antes del deploy para detectar CVEs conocidos. Si encuentra vulnerabilidades `CRITICAL` o `HIGH` con fix disponible, el deploy queda bloqueado.
+
+Extender `.github/workflows/deploy.yml` con un job `scan` que corre antes del deploy:
+
+```yaml
+name: Deploy Portfolio
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  scan:
+    name: Security Gate (Trivy)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build imagen para escaneo
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: false
+          load: true
+          tags: portfolio-devops:${{ github.sha }}
+
+      - name: Escaneo Trivy
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: portfolio-devops:${{ github.sha }}
+          format: table
+          exit-code: '1'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
+
+  deploy:
+    name: Deploy a GitHub Pages
+    runs-on: ubuntu-latest
+    needs: scan
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+      - id: deployment
+        uses: actions/deploy-pages@v4
+```
+
+Orden de ejecución: `scan → deploy`. Si Trivy falla, el deploy no se ejecuta.
+
+> **¿Qué hacer si Trivy falla?** Ver la sección [2.3 del laboratorio](/T02%20-%20Procesos%20DevOps/Obligatorias/03-Trivy/2-Scan-en-el-Pipeline#23-corregir-la-imagen-base) — las opciones incluyen cambiar la imagen base a `cgr.dev/chainguard/nginx` (cero CVEs), usar `.trivyignore` para CVEs aceptados, o bajar el umbral de bloqueo.
+
+> **¿Por qué escanear una imagen de portfolio estático?** La imagen base `nginx:alpine` tiene dependencias del sistema operativo que pueden tener CVEs conocidos. Trivy los detecta aunque el código fuente sea solo HTML/CSS/JS. Es una buena práctica escanear siempre la imagen completa, no solo el código propio.
+
+---
+
+## Fase 5 — SonarCloud: Quality gate
+
+**Lab:** [T02 SonarCloud — Ejercicio Integrador](/T02%20-%20Procesos%20DevOps/Obligatorias/04-SonarCloud/2-Generar_nuestro_primer_analisis_con_SonarCloud) (al final del laboratorio)
+
+Ya tenés el deploy automático (Fase 3) y el security gate de Trivy (Fase 4). Ahora agregás SonarCloud como último gate: analiza el código fuente y bloquea el deploy si no pasa.
 
 Conectar el repositorio `portfolio-devops` a SonarCloud y agregar `sonar-project.properties`:
 
@@ -119,17 +196,7 @@ sonar.sources=.
 sonar.exclusions=**/*.md,**/.github/**,**/node_modules/**
 ```
 
-Extender el workflow para que SonarCloud actúe como quality gate: si falla, el deploy no se ejecuta.
-
----
-
-## Fase 5 — Trivy: Security Gate
-
-**Lab:** [T02 GitHub Actions — Ejercicio Integrador](/T02%20-%20Procesos%20DevOps/Obligatorias/03-GitHub-Actions/04-Pipeline-Completo) (al final del laboratorio)
-
-El portfolio usa `nginx:alpine` como imagen base. Trivy va a escanear esa imagen antes del deploy para detectar CVEs conocidos. Si encuentra vulnerabilidades `CRITICAL` o `HIGH` con fix disponible, el deploy queda bloqueado.
-
-Reemplazar `.github/workflows/deploy.yml` con la versión final que incluye todos los gates:
+Reemplazar `.github/workflows/deploy.yml` con la versión final que incluye los dos gates antes del deploy:
 
 ```yaml
 name: Deploy Portfolio
@@ -204,11 +271,7 @@ jobs:
         uses: actions/deploy-pages@v4
 ```
 
-Orden de ejecución: `scan → quality-gate → deploy`. Si Trivy falla, ni SonarCloud ni el deploy se ejecutan.
-
-> **¿Qué hacer si Trivy falla?** Ver la sección [4.9 del laboratorio](/T02%20-%20Procesos%20DevOps/Obligatorias/03-GitHub-Actions/04-Pipeline-Completo#49-qué-hacer-si-trivy-falla) — las opciones incluyen cambiar la imagen base a `cgr.dev/chainguard/nginx` (cero CVEs), usar `.trivyignore` para CVEs aceptados, o bajar el umbral de bloqueo.
-
-> **¿Por qué escanear una imagen de portfolio estático?** La imagen base `nginx:alpine` tiene dependencias del sistema operativo que pueden tener CVEs conocidos. Trivy los detecta aunque el código fuente sea solo HTML/CSS/JS. Es una buena práctica escanear siempre la imagen completa, no solo el código propio.
+Orden de ejecución: `scan → quality-gate → deploy`. Si Trivy o SonarCloud fallan, el deploy no se ejecuta.
 
 ---
 

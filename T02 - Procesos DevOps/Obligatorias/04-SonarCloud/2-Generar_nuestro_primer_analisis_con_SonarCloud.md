@@ -73,7 +73,7 @@ Si todo salió bien, deberías llegar a una pantalla similar a esta:
 
 Vamos a configurar la integración entre SonarCloud y [GitHub Actions](https://github.com/features/actions) para automatizar el análisis de código.
 
-> 📋 **¿Qué son las GitHub Actions?** Son herramientas de automatización que permiten ejecutar pipelines de CI/CD. En nuestro caso, las usaremos para analizar el código automáticamente cada vez que se hagan cambios en ciertas ramas.
+> 📋 **GitHub Actions** ya lo viste en el módulo **02-GitHub-Actions**. Acá lo usamos para disparar el análisis de SonarCloud automáticamente en cada cambio a las ramas configuradas.
 
 ### Paso 1: Configurar el token secreto
 
@@ -186,11 +186,15 @@ Si llegaste hasta aquí y ves resultados similares a las imágenes, has configur
 
 > 💡 **Para seguir aprendiendo**: Dedica unos minutos a navegar por ambas interfaces (GitHub Actions y SonarCloud) para familiarizarte con todas las opciones disponibles.
 
+## Próximos pasos
+
+Continuar con [3 - Quality Gate y Pipeline Completo](3-Quality-Gate-y-Pipeline-Completo.md), donde se integra este análisis como job dentro del pipeline de `02-GitHub-Actions` y se arma la versión final que une los cuatro módulos de T02.
+
 ---
 
-## Ejercicio Integrador — Fase 4: Análisis de Calidad del Portfolio
+## Ejercicio Integrador — Fase 5: Análisis de Calidad del Portfolio
 
-Ya tenés tu portfolio publicado en GitHub Pages (Fase 3). Ahora vas a conectar SonarCloud al repositorio del portfolio para analizar automáticamente su calidad en cada push.
+Ya tenés tu portfolio publicado en GitHub Pages (Fase 3) con un security gate de Trivy (Fase 4). Ahora vas a conectar SonarCloud al repositorio del portfolio para analizar automáticamente su calidad en cada push, como último gate antes del deploy.
 
 El portfolio incluye lógica JavaScript en `theme.js` con sus tests en `theme.test.js`. SonarCloud puede detectar bugs, vulnerabilidades y code smells en ese código, igual que lo hizo con el proyecto de ejemplo de este laboratorio.
 
@@ -216,7 +220,7 @@ sonar.exclusions=**/*.md,**/.github/**,**/node_modules/**
 
 ### Integrar SonarCloud como quality gate en el workflow de deploy
 
-Modificar `.github/workflows/deploy.yml` para agregar un job de análisis **antes** del deploy:
+Modificar `.github/workflows/deploy.yml` para agregar el job de análisis **después** del `scan` de Trivy (Fase 4) y **antes** del deploy. El orden final de gates queda `scan → quality → deploy`:
 
 ```yaml
 name: Portfolio CI/CD
@@ -288,7 +292,8 @@ Con esto el pipeline del portfolio queda completo:
 
 | Etapa | Herramienta | Qué hace |
 |-------|-------------|----------|
+| Security Gate | Trivy (Fase 4) | Escanea la imagen Docker en busca de CVEs |
 | Quality Gate | SonarCloud | Analiza bugs, vulnerabilidades y code smells |
-| Deploy | GitHub Pages | Publica el portfolio solo si pasa el análisis |
+| Deploy | GitHub Pages | Publica el portfolio solo si pasan ambos gates |
 
-> Si SonarCloud detecta una vulnerabilidad, el job `deploy` **no se ejecuta**. El portfolio no se publica hasta que el código esté limpio — igual que en un pipeline profesional.
+> Si Trivy o SonarCloud detectan un problema, el job `deploy` **no se ejecuta**. El portfolio no se publica hasta que la imagen y el código estén limpios — igual que en un pipeline profesional.

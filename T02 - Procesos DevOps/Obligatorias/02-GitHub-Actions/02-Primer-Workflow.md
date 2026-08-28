@@ -5,7 +5,7 @@ El objetivo de este paso es entender la estructura de un workflow creando uno si
 ## 2.1 Crear el repositorio
 
 1. En GitHub, crear un nuevo repositorio llamado `lab-github-actions-t02`
-2. Marcarlo como **Public** (necesario para SonarCloud gratuito)
+2. Marcarlo como **Public** (lo vas a necesitar para el plan gratuito de SonarCloud en el módulo 04)
 3. Inicializarlo con un `README.md`
 4. Clonarlo localmente:
 
