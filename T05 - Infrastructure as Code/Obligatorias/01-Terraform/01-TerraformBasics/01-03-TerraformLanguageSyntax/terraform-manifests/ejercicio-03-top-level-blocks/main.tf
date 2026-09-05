@@ -1,3 +1,7 @@
+# Ejercicio 03 - Top-Level Blocks
+# Este archivo contiene los 8 tipos de bloques de nivel superior y NO valida.
+# Objetivo: identificar cada bloque y repararlo hasta que `terraform validate` pase.
+
 #####################################################################
 # Block-1: Terraform Settings Block
 terraform {

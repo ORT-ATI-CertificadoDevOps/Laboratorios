@@ -42,7 +42,8 @@ argument `-var-file`
   - aws_region es una variable de tipo `string`
   - ec2_ami_id es una variable de tipo `string`
   - ec2_instance_count es una variable de tipo `number`
-```t
+
+```terraform
 # Initialize Terraform
 terraform init
 
@@ -72,7 +73,7 @@ rm -rf terraform.tfstate*
 - Agregar una nueva variable en `variables.tf` y `ec2_instance_type` con ningun default value
 - Como la variable no tiene ningún valor por defecto al momento de ejecutar `terraform plan` o `terraform apply` se v a alanzar el prompt para asignarle valores.
 
-```
+```terraform
 # Initialize Terraform
 terraform init
 
@@ -89,7 +90,8 @@ terraform plan
 ## 03 - Input Variables Override default value with cli argument `-var`
 - **Directorio:** v3-Input-Variables-Override-default-with-cli
 - Modificar las variables por defecto definidas en `variables.tf` pasando los nuevos vaores utilizando el flag `-var` utilizando la CLI.
-```
+
+```terraform
 # Initialize Terraform
 terraform init
 
@@ -117,7 +119,8 @@ terraform apply v3out.plan
 ## 04 - Input Variables Override with Environment Variables
 - **Directorio:** v4-Input-Variables-Override-with-Environment-Variables
 - Setear las variables de ambiente y ejecutar `terraform plan` y verificar si las variables se sobrescriben.
-```
+
+```terraform
 # Sample
 export TF_VAR_variable_name=value
 
@@ -148,7 +151,8 @@ echo $TF_VAR_ec2_instance_count, $TF_VAR_ec2_instance_type
 - **Directorio:** v5-Input-Variables-Assign-with-terraform-tfvars
 - Crear archivo llamada `terraform.tfvars` y definir variables
 - En el archivo creado `terraform.tfvars`, Terraform va a cargar de manera automatica las variables presentes en este archivo sobreescribiendo los variables `default` existentes en `variables.tf`
-```
+
+```terraform
 # Initialize Terraform
 terraform init
 
@@ -176,7 +180,8 @@ http://<Elastic-IP-Address>
   - **terraform.tfvars:** Varible ec2_instance_count sera tomada desde este archivo.
   - **web.tfvars:** Variable ec2_instance_type sera tomada desde este archivo.
   - **app.tfvars:** Variable ec2_instance_type sera tomada desde este archivo.
-```
+
+```terraform
 # Initialize Terraform
 terraform init
 
@@ -195,7 +200,8 @@ terraform plan -var-file="app.tfvars"
 - **Direcotiro:** v7-Input-Variables-Assign-with-auto-tfvars
 - Crear archivo con la extensión `.auto.tfvars`. 
 - Con esta extensión, sin importar como se llame el archivo, las variables que se encuentran en el mismo van a ser cargadas durante `terraform plan o apply`
-```
+
+```terraform
 # Initialize Terraform
 terraform init
 
@@ -208,13 +214,15 @@ terraform fmt
 # Review the terraform plan
 terraform plan 
 ```
+
 ## 08 - Implement complex type cosntructors like `list` and `maps`
 - **Directorio:** v8-Input-Variables-Lists-Maps
 - [Type Constraints](https://www.terraform.io/docs/language/expressions/types.html)
 ### 08-01 - Implement Vairable Type as List
 - **list (or tuple):** una secuencia de valores, como ["us-west-1a", "us-west-1c"]. Los elementos de una lista o tupla se identifican mediante números enteros consecutivos que comienzan con cero.
 - Implementar la función Lista para variables `ec2_instance_type`
-```
+
+```terraform
 # Implement List Function in variables.tf
 variable "ec2_instance_type" {
   description = "EC2 Instance Type"
@@ -243,7 +251,8 @@ terraform plan
 ### 08-02 - Implement Vairable Type as Map
 - **map (or object):** un grupo de valores identificados por etiquetas con nombre, como  {name = "Mabel", age = 52}.
 - Implementar Map function para variables `ec2_instance_tags`
-```
+
+```terraform
 # Implement Map Function for tags
 variable "ec2_instance_tags" {
   description = "EC2 Instance Tags"
@@ -292,10 +301,11 @@ terraform plan
 - Entender y implementar validaciones para las variables
 - [Terraform Console](https://www.terraform.io/docs/cli/commands/console.html)
 - El comando `terraform console` provee una consola interactiva para evaluar las expresiones.
-- 
+
 ### 09-01 - Learn Terraform Length Function
 - [Terraform Length Function](https://www.terraform.io/docs/language/functions/length.html)
-```t
+
+```terraform
 # Go to Terraform Console
 terraform console
 
@@ -310,7 +320,8 @@ length({"key1" = "value1", "key2" = "value2" }) #Map
 
 ### 09-02: Learn Terraform SubString Function
 - [Terraform Sub String Function](https://www.terraform.io/docs/language/functions/substr.html)
-```t
+
+```terraform
 # Go to Terraform Console
 terraform console
 
@@ -324,7 +335,8 @@ substr("Lab", 0, 10)
 ```
 
 ### 09-03: Implement Validation Rule for ec2_ami_id variable
-```
+
+```terraform
 variable "ec2_ami_id" {
   description = "AMI ID"
   type = string  
@@ -335,8 +347,10 @@ variable "ec2_ami_id" {
   }
 }
 ```
+
 - **Run Terraform commands**
-```
+
+```terraform
 # Initialize Terraform
 terraform init
 
@@ -360,7 +374,8 @@ terraform plan
 - Terraform "redactará" estos valores en los archivos de registro y de salida del comando, y generará un error cuando detecte que se expondrán de otras formas.
 - **Nota importante-1:** Nunca guarde archivos `secrets.tfvars` en repositorios git.
 - **Nota importante-2:** El archivo de estado de Terraform contiene valores para estas variables sensibles  `terraform.tfstate`. Debe mantener seguro su archivo estatal para evitar exponer estos datos.
-```
+
+```terraform
 # Initialize Terraform
 terraform init
 
@@ -396,7 +411,7 @@ rm -rf terraform.tfstate*
 - **Directorio:** v11-File-Function
 - Entender sobre [Terraform File Function](https://www.terraform.io/docs/language/functions/file.html)
 
-```t
+```terraform
 # Initialize Terraform
 terraform init
 
@@ -429,6 +444,3 @@ terraform destroy -auto-approve
 ---
 
 Continuar con [04-02 — Terraform Output Values](../04-02-TerraformOutputValues/README.md)
-
-
-
