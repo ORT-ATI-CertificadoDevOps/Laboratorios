@@ -6,59 +6,41 @@
 
 ---
 
-## Contexto: qué tiene que poder demostrar Tero ante el auditor
-
-Tero es un marketplace con **seis microservicios** (tienda, carrito, checkout, órdenes, panel de administración, etc.), una base de datos y Redis. Hoy solo corre con `docker compose` en las máquinas del equipo de desarrollo. El objetivo no es "pasar la auditoría con maquillaje": el equipo de Tero tiene que poder **entender, repetir y mantener** lo que ustedes construyan.
-
-Observaciones preliminares del auditor y dónde se resuelve cada una en este plan:
-
-| Observación del auditor | Dónde se resuelve |
-|---|---|
-| Contraseñas de la base de datos y credenciales del panel de admin en archivos del repositorio | Semana 1 (detección) · Semana 3 (remediación + detector de secretos en CI) |
-| Imágenes construidas en un solo paso, sobre imágenes base completas, corriendo como root | Semana 3 (containerización) |
-| Base de datos y Redis publicados en puertos de la máquina anfitriona | Semana 2 (red privada / security groups) · Semana 3 (compose) · Semana 4 (orquestación) |
-| Sin pruebas automatizadas, ni análisis de código ni de dependencias | Semana 3 (SAST, SCA, escaneo de imágenes) · Semana 4 (testing y quality gates) |
-| No se sabe qué versión corre ni se puede repetir un despliegue | Semana 2 (IaC) · Semana 3 (versionado de imágenes) · Semana 4–5 (CD reproducible) |
-| Algunos servicios exponen métricas pero nadie las recolecta | Semana 5 (observabilidad) |
-
----
-
 ## Semana 1: Planificación y configuración inicial
 
 1. **Planificación del proyecto**
-   - Inscribirse al obligatorio y registrar el equipo en el [Listado de Alumnos DevOps - 2026 (Agosto)](COMPLETAR_URL)
-   - Estudio detallado de la letra y de las observaciones del auditor
+   - Inscribirse al obligatorio y registrar el equipo en el [Listado de Alumnos DevOps - 2026 (Agosto)](https://docs.google.com/spreadsheets/d/12axQTgXXWl5j1zkNsuz_BJ3p-1hCdKBjWuRe148kuME/edit?gid=461278557#gid=461278557)
+   - Estudio detallado de la letra, incluyendo las observaciones preliminares del auditor
    - Creación del tablero Kanban o Scrum (documentar **primer estado** con screenshot)
    - El tablero debe reflejar **la totalidad** de las tareas: infraestructura, seguridad, testing y observabilidad
-   - Decidir roles y responsabilidades — teniendo en cuenta que en la defensa **todos** deben poder ejecutar y explicar cualquier parte
+   - Decidir roles y responsabilidades — en la defensa **todos** deben poder ejecutar y explicar cualquier parte
 
 2. **Análisis del repositorio Tero**
    - Clonar y explorar el repositorio de `Tero`
-   - Relevar los seis microservicios: lenguaje, dependencias, puertos, variables de entorno, dependencia de base de datos/Redis
-   - Levantar la solución con el `docker compose` actual para entender cómo arranca hoy
-   - Identificar Dockerfiles existentes y su estado (single-stage, imagen base completa, usuario root)
-   - Detectar **secretos hardcodeados** (contraseñas de BD, credenciales del panel de admin, etc.)
-   - Identificar qué servicios **ya exponen métricas** y en qué endpoint/formato
+   - Analizar la arquitectura de microservicios y sus dependencias (base de datos, Redis)
+   - Levantar la solución tal como funciona hoy
+   - Contrastar el estado del repositorio con las observaciones preliminares del auditor
+   - Identificar otras deudas técnicas o de seguridad que el auditor no haya mencionado
 
 3. **Investigación y selección de herramientas**
    - Herramienta de gestión de repositorios Git (GitHub, GitLab, Bitbucket)
    - Herramienta de CI/CD (GitHub Actions, GitLab CI/CD, Jenkins, CircleCI)
-   - Herramienta de análisis de código estático / calidad (SonarQube, ESLint, Semgrep o similar)
-   - Herramienta SAST (Semgrep, Bandit, GoSec, NodeJsScan, SonarQube) — según los lenguajes de los servicios
+   - Herramienta de análisis de código estático (SonarQube, ESLint, Semgrep o similar)
+   - Herramienta SAST (Semgrep, Bandit, GoSec, NodeJsScan, SonarQube)
    - Herramienta de SCA para dependencias (Trivy filesystem, Snyk, OWASP Dependency-Check)
    - Herramienta de escaneo de imágenes (Trivy image, Anchore Grype, Clair)
    - Detector de secretos (git-secrets, detect-secrets, TruffleHog, Gitleaks)
    - Herramienta de testing (Postman/Newman, REST-assured, Pact, Selenium, k6, JMeter, Locust)
 
 4. **Configuración de repositorios y estrategia Git**
-   - Crear estructura de repositorios (app, infraestructura, pipelines) con separación clara de componentes
+   - Crear estructura de repositorios
    - Definir y **justificar** la estrategia de ramificación (Git Flow, Trunk-Based con feature flags o GitHub Flow) en función del equipo y del contexto del proyecto
    - Configurar protección de ramas: ninguna feature se fusiona a main/develop sin aprobación de **al menos un revisor distinto al autor**
 
-5. **Exploración de la nube (AWS u otra)**
-   - Familiarización con la consola
-   - Exploración de servicios a utilizar: VPC, ECS/EKS, ECR, S3, Lambda, API Gateway, CloudWatch, Secrets Manager / SSM Parameter Store
-   - Creación de cuentas de servicio y configuración de permisos IAM (mínimo privilegio)
+5. **Exploración de la nube**
+   - Familiarización con la consola del proveedor elegido
+   - Exploración de los servicios a utilizar
+   - Creación de cuentas de servicio y configuración de permisos
 
 ---
 
@@ -66,15 +48,15 @@ Observaciones preliminares del auditor y dónde se resuelve cada una en este pla
 
 1. **Desarrollo de infraestructura como código (Terraform)**
    - **Toda** la infraestructura en Terraform, salvo el bucket del estado
-   - Configuración de **backend remoto** (S3, Terraform Cloud u otro)
-   - Estructura **modular**: al menos un módulo reutilizable (red, contenedores o base de datos)
+   - Configuración de **backend remoto** para el estado (S3, Terraform Cloud u otro)
+   - Estructura **modular**: al menos un módulo reutilizable
    - **Archivos `.tfvars` diferenciados** por ambiente: Dev, Test y Prod
-   - Módulo de red (VPC, subnets públicas/privadas, security groups) — la base de datos y Redis **no** deben quedar expuestos públicamente
-   - Outputs relevantes documentados con `description`
-   - Estrategia para **manejo seguro de secretos**: no almacenar valores sensibles en el estado sin cifrar
+   - Implementar la red
+   - Outputs relevantes documentados con descripción
+   - Definir la estrategia de **manejo seguro de secretos** (sin valores sensibles en el estado sin cifrar)
 
 2. **Configuración inicial de CI**
-   - Pipeline básico para validación de Terraform (`fmt`, `validate`, `plan`)
+   - Pipeline básico para validación de Terraform
    - Proceso de Pull Request con revisión de código (se necesitan **mínimo 2 PRs documentados** con comentarios a lo largo del proyecto)
    - Despliegue automatizado de la infraestructura base
 
@@ -87,37 +69,29 @@ Observaciones preliminares del auditor y dónde se resuelve cada una en este pla
 ## Semana 3: Containerización y CI con seguridad
 
 1. **Containerización de Tero**
-   - Rehacer los Dockerfiles de los seis servicios aplicando **buenas prácticas**:
+   - Optimizar la construcción de las imágenes aplicando **buenas prácticas**, por ejemplo:
      - Imágenes base mínimas (distroless, alpine o similares)
-     - Construcción **multi-stage** para reducir el tamaño final
+     - Construcción **multi-stage**
      - Usuario **no-root** dentro del contenedor
      - Archivo `.dockerignore` adecuado
-   - Ajustar el `docker-compose` local: base de datos y Redis sin puertos publicados en el host (solo red interna)
-   - Comparar tamaños de imagen antes/después (sirve como evidencia para el auditor)
+   - Pruebas de construcción de imágenes localmente
+   - Pruebas de integración local
 
-2. **Remediación de secretos**
-   - Sacar del repositorio las contraseñas de la base de datos y las credenciales del panel de admin
-   - Mover los secretos a variables de entorno / gestor de secretos; `.env` en `.gitignore` y un `.env.example` sin valores reales
-   - **Rotar** las credenciales que estuvieron expuestas (quedaron en el historial de Git)
-
-3. **Versionado y trazabilidad**
-   - Etiquetar las imágenes con una versión trazable (por ejemplo el SHA del commit y/o versión semántica), no solo `latest`
-   - Que sea posible responder "¿qué versión está corriendo en cada ambiente?" y volver a una versión anterior
-
-4. **Configuración de CI con DevSecOps integrado**
+2. **Configuración de CI con DevSecOps integrado**
    - Pipeline con las etapas mínimas:
      - Build / compilación de artefactos
      - Ejecución de pruebas automatizadas
      - Análisis de calidad de código
      - SAST (al menos una herramienta)
-     - SCA — **fallar ante CVEs CRITICAL o HIGH sin parche disponible**
+     - SCA — quality gate que bloquee ante vulnerabilidades **CRITICAL o HIGH sin parche disponible**
      - **Detección de secretos expuestos** — fallar el build si se detectan credenciales
      - Escaneo de cada imagen **antes** de publicarla en el registry
-     - Publicación de imagen en registry (ECR, Docker Hub, GHCR u otro)
+     - Publicación de imagen en un container registry
      - Despliegue al ambiente correspondiente
-   - Pipeline completamente definido como código (YAML o formato declarativo) y reproducible
+   - Pipeline completamente definido como código y reproducible
+   - Verificar que **ningún secreto** quede hardcodeado en el código fuente ni en los archivos de configuración del repositorio
 
-5. **Primer PR documentado**
+3. **Primer PR documentado**
    - Al menos un PR con comentarios de revisión entre integrantes del equipo
 
 ---
@@ -125,9 +99,8 @@ Observaciones preliminares del auditor y dónde se resuelve cada una en este pla
 ## Semana 4: Orquestación, CD y Testing
 
 1. **Orquestación de contenedores**
-   - Despliegue en **ECS o EKS** (o equivalente en Azure/GCP)
-   - Servicios y tareas para cada microservicio de Tero, con base de datos y Redis en red privada
-   - Balanceo de carga y escalado automático
+   - Despliegue en un servicio de orquestación en la nube (ECS, EKS o equivalente en Azure/GCP)
+   - Configuración de los servicios de Tero en la plataforma elegida
 
 2. **Configuración de entornos múltiples**
    - Despliegue de infraestructura para el ambiente **Dev**
@@ -137,10 +110,10 @@ Observaciones preliminares del auditor y dónde se resuelve cada una en este pla
 
 3. **Testing y Calidad**
    - Implementar **al menos uno** de estos tipos (alcanza con un par de tests):
-     - Pruebas funcionales / de integración entre microservicios (Postman/Newman, REST-assured, Pact, Selenium, etc.)
-     - Pruebas de carga y rendimiento (k6, JMeter, Locust, etc.)
+     - Pruebas funcionales / de integración entre microservicios
+     - Pruebas de carga y rendimiento
    - Integrar la herramienta de análisis de código estático en el pipeline de CI
-   - Definir umbrales de calidad (coverage mínimo, máximo de code smells, etc.) como quality gate
+   - Definir umbrales de calidad que actúen como quality gate
    - Comenzar a recolectar resultados para el informe
 
 4. **Segundo PR documentado**
@@ -155,23 +128,19 @@ Observaciones preliminares del auditor y dónde se resuelve cada una en este pla
 1. **Ambientes Test y Prod**
    - Despliegue de **Test** y **Prod** con Terraform usando los `.tfvars` diferenciados
    - Pipelines completos para todos los ambientes
-   - Aprobaciones y controles de seguridad entre ambientes
-   - Verificar configuraciones de alta disponibilidad
+   - Controles entre ambientes
 
 2. **Servicio Serverless (elegir al menos uno)**
-   - **AWS Lambda**: automatizaciones o procesamiento de eventos (alertas automáticas, análisis de logs de seguridad, notificaciones de vulnerabilidades, rotación de secretos, etc.)
-   - **API Gateway**: gestión de acceso y seguridad a APIs (rate limiting, autenticación, WAF básico)
+   - **AWS Lambda** para automatizaciones y/o procesamiento de eventos
+   - **API Gateway** para gestión de acceso y seguridad a APIs
    - Integrarlo con el resto de la arquitectura y documentar su propósito
    - Se valora especialmente que el propósito esté relacionado con **seguridad u observabilidad**
 
 3. **Observabilidad**
-   - Recolectar **métricas de infraestructura** (CPU, memoria, red) o **de aplicación** (latencia, tasa de errores, throughput) — aprovechar los servicios que **ya exponen métricas**
+   - Recolectar **métricas de infraestructura** (CPU, memoria, red) o **de aplicación** (latencia, tasa de errores, throughput)
    - Centralizar los **logs** de todos los servicios en una plataforma única, con formato estructurado que permita búsquedas y filtros
    - Configurar al menos **1 dashboard** con métricas relevantes para la operación
-   - Establecer al menos **2 alertas** (disponibilidad, rendimiento, seguridad y/o uso de recursos), cada una con:
-     - Condición de disparo (trigger)
-     - Procedimiento básico de respuesta (runbook)
-   - Herramientas sugeridas: CloudWatch, Prometheus, Grafana, Loki, OpenTelemetry
+   - Establecer al menos **2 alertas** (disponibilidad, rendimiento, seguridad y/o uso de recursos), cada una con condición de disparo y procedimiento básico de respuesta
 
 ---
 
@@ -188,29 +157,20 @@ Observaciones preliminares del auditor y dónde se resuelve cada una en este pla
      - Estrategia de Git (branching model) adoptada
    - Documentar **decisiones de diseño relevantes** (ADRs o formato libre) y **lecciones aprendidas**
    - **Informe de testing y análisis estático**: un párrafo que interprete los resultados, hallazgos significativos y recomendaciones de mejora
-   - Reportar hallazgos de seguridad (SAST, SCA, escaneo de imágenes) y documentar remediaciones o excepciones justificadas
-   - **Uso de IA generativa**: indicar las herramientas utilizadas y el contexto de uso (código, documentación, corrección de errores, etc.)
+   - Reportar hallazgos de seguridad y documentar remediaciones o excepciones justificadas
+   - **Uso de IA generativa**: indicar las herramientas utilizadas y el contexto de uso
 
 2. **Pruebas finales e iteraciones**
    - Pruebas end-to-end del sistema completo
-   - Verificar que los quality gates **bloqueen** artefactos con vulnerabilidades críticas
-   - Revisar cada observación del auditor y confirmar que hay **evidencia concreta** de su resolución
+   - Verificar que los quality gates bloqueen lo que tienen que bloquear
+   - Verificar que cada observación del auditor tenga **evidencia concreta** de su resolución
    - Verificación de todos los puntos de la rúbrica
    - **Documentar tercer estado del tablero** (screenshot de cierre)
 
 3. **Preparación para la defensa (~25 min, con el "auditor")**
-
-   La defensa es **obligatoria y eliminatoria**. El auditor decide quién responde o ejecuta en cada parte, así que **todos** deben poder hacerlo. Se puede consultar la documentación propia y la oficial de las herramientas.
-
-   - **Hacer (10 min)** — practicar tareas breves sobre la propia solución, por ejemplo:
-     - Volver a una versión anterior (rollback)
-     - Rotar una credencial
-     - Interpretar un cambio de infraestructura (por ejemplo, leer un `terraform plan`)
-   - **Resolver (8 min)** — practicar diagnosticar en voz alta:
-     - Un pipeline que falló (¿en qué etapa? ¿por qué? ¿qué harían?)
-     - Una alerta disparada (seguir el procedimiento de respuesta documentado)
-   - **Explicar (7 min)** — cada integrante debe poder justificar cualquier decisión y responder "¿qué pasaría si cambiaran las condiciones?"
-   - Hacer ensayos rotando quién ejecuta cada parte
+   - La defensa es **obligatoria y eliminatoria**, y tiene tres partes: **Hacer** (10 min), **Resolver** (8 min) y **Explicar** (7 min) — ver detalle en la letra
+   - El auditor decide quién responde o ejecuta en cada parte: **todos** deben poder hacerlo
+   - Ensayar rotando quién ejecuta y quién explica
 
 4. **Entrega**
    - Preparar un único archivo `.zip` o `.rar` con todo el contenido (repositorio git, documentación, imágenes, etc.) — documentos de texto en PDF dentro del archivo — **máximo 40MB**
@@ -246,8 +206,7 @@ Observaciones preliminares del auditor y dónde se resuelve cada una en este pla
 - **Enfoque de MVP**: Primero versiones mínimas funcionales, luego mejorar
 - **Seguridad desde el día 1**: No dejar SCA, SAST y detección de secretos para el final
 - **Pruebas continuas**: No dejar todas las pruebas para el final
-- **Evidencia, no maquillaje**: Para cada observación del auditor, guardar evidencia concreta (capturas, logs de pipeline, PRs, outputs)
-- **Practicar la defensa**: Rollback, rotación de credenciales y diagnóstico de fallas tienen que salir con fluidez para cualquier integrante
+- **Evidencia, no maquillaje**: Guardar evidencia concreta de cada control que se implemente
 - **Revisar rúbrica**: Verificar periódicamente el cumplimiento de todos los puntos
 - **PRs obligatorios**: Documentar mínimo **2 Pull Requests** con comentarios de revisión entre integrantes
 - **Uso de IA**: Citar herramientas y contexto de uso; cada integrante es responsable de entender y poder defender todo lo entregado
