@@ -130,5 +130,5 @@
 
 <hr style="border:none;border-top:1px solid rgba(0,0,0,.1);margin:1rem 0">
 
-- [Plan de Trabajo](/Help/Planning.md)
+- [Plan de Trabajo](/Help/Planning-ago2026.md)
 
